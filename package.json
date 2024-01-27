@@ -1,0 +1,25 @@
+{
+  "name": "enhance-js",
+  "version": "1.0.0",
+  "description": "EnhanceJS is a library dedicated to extending the capabilities of native JavaScript, aiming to address common data structures, methods, and frequently used algorithms that are not natively supported in JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JunLiangWangX/EnhanceJS.git"
+  },
+  "keywords": [
+    "javascript",
+    "enhance-js",
+    "native",
+    "library"
+  ],
+  "author": "JunLiangWang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JunLiangWangX/EnhanceJS/issues"
+  },
+  "homepage": "https://github.com/JunLiangWangX/EnhanceJS#readme"
+}
