@@ -1,4 +1,4 @@
 const main=require('../dist/main')
-const heap=require('../dist/heap')
+const heap=require('../dist/PriorityQueue')
 console.log(main)
 console.log(heap)

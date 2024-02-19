@@ -5,7 +5,6 @@ const findExportFiles=require('./utils/findExportFiles');
 
 module.exports = {
     entry: {
-        main: './src/main',
         ...findExportFiles(__dirname,'./src')
     },
     mode: 'production',

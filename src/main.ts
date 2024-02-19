@@ -1,5 +1,5 @@
-export * as date from './date/index';
-export * as heap from './heap/heap.export';
+export * as date from './date';
+export * as PriorityQueue from './priority-queue';
 export function main(){
     console.info('这是主函数')
 }

@@ -8,7 +8,7 @@ module.exports=function findIndexFiles(dirname,dir) {
   const indexFiles = {
 
   };
-  const regex = /\.export\.ts$/,directory=path.resolve(dirname,dir);
+  const regex = /\.ts$/,directory=path.resolve(dirname,dir);
 
   function traverse(currentDir) {
     const files = fs.readdirSync(currentDir);
@@ -25,5 +25,6 @@ module.exports=function findIndexFiles(dirname,dir) {
   }
 
   traverse(directory);
+  console.log(indexFiles)
   return indexFiles;
 }
