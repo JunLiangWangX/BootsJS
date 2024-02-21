@@ -25,6 +25,5 @@ module.exports=function findIndexFiles(dirname,dir) {
   }
 
   traverse(directory);
-  console.log(indexFiles)
   return indexFiles;
 }
