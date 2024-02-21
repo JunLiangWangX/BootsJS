@@ -1,1 +1,1 @@
-export * as PriorityQueue from './priority-queue';
+export { PriorityQueue}  from './priority-queue';

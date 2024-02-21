@@ -3,7 +3,6 @@ const path = require('path');
 const fs = require('fs');
 
 
-// 递归遍历目录并获取所有 index.js 文件的路径
 module.exports=function findIndexFiles(dirname,dir) {
   const indexFiles = {
 

@@ -1,18 +1,21 @@
 const path = require('path');
-const findExportFiles=require('./utils/findExportFiles');
-
+const findExportFiles = require('./utils/find-export-files');
 
 
 module.exports = {
     entry: {
-        ...findExportFiles(__dirname,'./src')
+        ...findExportFiles(__dirname, './src')
     },
-    mode: 'production',
+    mode:'none',
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, './dist'),
         clean: true,
-        library: '[name]',
+        library:{
+            root: 'EnhanceJS',
+            amd: 'EnhanceJS',
+            commonjs: '[name]',
+        },
         libraryTarget: 'umd',
         globalObject: 'this',
     },
