@@ -4,21 +4,18 @@ const EnhanceJS=require('../dist/index');
 
 test('test PriorityQueue class', () => {
     /**
-     * 浏览器环境
+     * ---- Node
+     * -------- Global Import(全局引入)
+     * const { PriorityQueue } = require('enhance-js');
+     * -------- Import on Demand(按需引入)
+     * const { PriorityQueue } = require('enhance-js/priority-queue');
      * 
-     * 按需
-     * <script src='priority-queue.js'></script>
-     * 全局
-     * <script src='enhance-js.js'></script>
-     * <script>
-     * let priorityQueue = new window.EnhanceJS.PriorityQueue();
-     * </script>
+     * ---- Es6 Module
+     * -------- Global Import(全局引入)
+     * import { PriorityQueue } = from 'enhance-js'
+     * -------- Import on Demand(按需引入)
+     * import { PriorityQueue } = from 'enhance-js/priority-queue'
      * 
-     * node环境
-     * 按需
-     * const { PriorityQueue } = require('../dist/priority-queue');
-     * 全局导入
-     * const EnhanceJS=require('../dist/index');
      */
 
     let priorityQueue = new PriorityQueue();
