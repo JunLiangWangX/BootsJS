@@ -1,6 +1,6 @@
 # EnhanceJS
 
-[EN](./README,md) | [中文](./README(zh).md)
+[EN](./README.md) | [中文](./README(zh).md)
 
 EnhanceJS is a library dedicated to extending the capabilities of native JavaScript, aiming to address common data structures, methods, and frequently used algorithms that are not natively supported in JavaScript.
 
