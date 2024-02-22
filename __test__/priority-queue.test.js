@@ -6,13 +6,13 @@ test('test PriorityQueue class', () => {
     /**
      * ---- Node
      * -------- Global Import(全局引入)
-     * const { PriorityQueue } = require('enhance-js');
+     * const EnhanceJS = require('enhance-js');
      * -------- Import on Demand(按需引入)
      * const { PriorityQueue } = require('enhance-js/priority-queue');
      * 
      * ---- Es6 Module
      * -------- Global Import(全局引入)
-     * import { PriorityQueue } = from 'enhance-js'
+     * import EnhanceJS = from 'enhance-js'
      * -------- Import on Demand(按需引入)
      * import { PriorityQueue } = from 'enhance-js/priority-queue'
      * 
