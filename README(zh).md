@@ -26,9 +26,47 @@ None yet
 
 ## 使用
 
-| 提供的API | 说明 | 使用示例 |
-| --------- | ---- | -------- |
-|           |      |          |
-|           |      |          |
-|           |      |          |
+### CommonJS
+
+```javascript
+// 全局导入
+const EnhanceJS=require('enhance-js');
+let ascPriorityQueue = new EnhanceJS.PriorityQueue(true);
+ascPriorityQueue.enqueue('1', 1)
+ascPriorityQueue.length
+// 按需导入
+const { PriorityQueue } = require('enhance-js/priority-queue');
+let priorityQueue = new PriorityQueue();
+priorityQueue.enqueue('1', 1)
+priorityQueue.length
+```
+
+### Browser
+
+```
+None yet
+```
+
+### ES6 Module
+
+```js
+// 全局导入
+import EnhanceJS from 'enhance-js'
+let ascPriorityQueue = new EnhanceJS.PriorityQueue(true);
+ascPriorityQueue.enqueue('1', 1)
+ascPriorityQueue.length
+// 按需导入
+import { PriorityQueue } = from 'enhance-js/priority-queue'
+let priorityQueue = new PriorityQueue();
+priorityQueue.enqueue('1', 1)
+priorityQueue.length
+```
+
+## 所有特性
+
+| 特性 | 介绍 | 示例 | 详情 |
+| ---- | ---- | ---- | ---- |
+|      |      |      |      |
+|      |      |      |      |
+|      |      |      |      |
 

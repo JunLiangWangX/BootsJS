@@ -26,9 +26,46 @@ None yet
 
 ## Usage
 
-| API Provided | Explain | Example |
-| ------------ | ------- | ------- |
-|              |         |         |
-|              |         |         |
-|              |         |         |
+### CommonJS
 
+```javascript
+// Global Import
+const EnhanceJS=require('enhance-js');
+let ascPriorityQueue = new EnhanceJS.PriorityQueue(true);
+ascPriorityQueue.enqueue('1', 1)
+ascPriorityQueue.length
+// Import on Demand
+const { PriorityQueue } = require('enhance-js/priority-queue');
+let priorityQueue = new PriorityQueue();
+priorityQueue.enqueue('1', 1)
+priorityQueue.length
+```
+
+### Browser
+
+```
+None yet
+```
+
+### ES6 Module
+
+```js
+// Global Import
+import EnhanceJS from 'enhance-js'
+let ascPriorityQueue = new EnhanceJS.PriorityQueue(true);
+ascPriorityQueue.enqueue('1', 1)
+ascPriorityQueue.length
+// Import on Demand
+import { PriorityQueue } = from 'enhance-js/priority-queue'
+let priorityQueue = new PriorityQueue();
+priorityQueue.enqueue('1', 1)
+priorityQueue.length
+```
+
+## All Features
+
+| Features | Introduce | Example | Detail |
+| -------- | --------- | ------- | ------ |
+|          |           |         |        |
+|          |           |         |        |
+|          |           |         |        |
