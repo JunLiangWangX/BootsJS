@@ -7,7 +7,7 @@ module.exports=function findIndexFiles(dirname,dir) {
   const indexFiles = {
 
   };
-  const regex = /\.ts$/,directory=path.resolve(dirname,dir);
+  const regex = /\.ts$/,directory=path.resolve(dirname,dir),excludeFile=['index.ts'];
 
   function traverse(currentDir) {
     const files = fs.readdirSync(currentDir);
@@ -17,7 +17,7 @@ module.exports=function findIndexFiles(dirname,dir) {
 
       if (stat.isDirectory()) {
         traverse(filePath);
-      } else if (regex.test(file)) {
+      } else if (regex.test(file)&&!excludeFile.includes(file)) {
         indexFiles[file.split('.')[0]]=('./'+path.relative(dirname, filePath))
       }
     });
