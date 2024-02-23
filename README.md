@@ -1,21 +1,21 @@
-# EnhanceJS
+# BootsJS
 
 [EN](./README.md) | [中文](./README(zh).md)
 
-EnhanceJS is a library dedicated to extending the capabilities of native JavaScript, aiming to address common data structures, methods, and frequently used algorithms that are not natively supported in JavaScript.
+BootsJS is a library dedicated to extending the capabilities of native JavaScript, aiming to address common data structures, methods, and frequently used algorithms that are not natively supported in JavaScript.
 
 ## Installation
 
 **npm:**
 
 ```
-npm install enhance-js
+npm install boots-js
 ```
 
 **yarn:**
 
 ```
-yarn add enhance-js
+yarn add boots-js
 ```
 
 **cdn:**
@@ -30,12 +30,12 @@ None yet
 
 ```javascript
 // Global Import
-const EnhanceJS=require('enhance-js');
-let ascPriorityQueue = new EnhanceJS.PriorityQueue(true);
+const BootsJS=require('boots-js');
+let ascPriorityQueue = new BootsJS.PriorityQueue(true);
 ascPriorityQueue.enqueue('1', 1)
 ascPriorityQueue.length
 // Import on Demand
-const { PriorityQueue } = require('enhance-js/priority-queue');
+const { PriorityQueue } = require('boots-js/priority-queue');
 let priorityQueue = new PriorityQueue();
 priorityQueue.enqueue('1', 1)
 priorityQueue.length
@@ -51,12 +51,12 @@ None yet
 
 ```js
 // Global Import
-import EnhanceJS from 'enhance-js'
-let ascPriorityQueue = new EnhanceJS.PriorityQueue(true);
+import BootsJS from 'boots-js'
+let ascPriorityQueue = new BootsJS.PriorityQueue(true);
 ascPriorityQueue.enqueue('1', 1)
 ascPriorityQueue.length
 // Import on Demand
-import { PriorityQueue } = from 'enhance-js/priority-queue'
+import { PriorityQueue } = from 'boots-js/priority-queue'
 let priorityQueue = new PriorityQueue();
 priorityQueue.enqueue('1', 1)
 priorityQueue.length

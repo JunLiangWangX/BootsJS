@@ -1,21 +1,21 @@
-# EnhanceJS
+# BootsJS
 
 [EN](./README.md) | [中文](./README(zh).md)
 
-EnhanceJS 是一个致力于扩展原生 JavaScript 功能的库，旨在解决 JavaScript 原生不支持的常见数据结构、方法和常用算法。
+BootsJS 是一个致力于扩展原生 JavaScript 功能的库，旨在解决 JavaScript 原生不支持的常见数据结构、方法和常用算法。
 
 ## 安装
 
 **npm:**
 
 ```
-npm install enhance-js
+npm install boots-js
 ```
 
 **yarn:**
 
 ```
-yarn add enhance-js
+yarn add boots-js
 ```
 
 **cdn:**
@@ -30,12 +30,12 @@ None yet
 
 ```javascript
 // 全局导入
-const EnhanceJS=require('enhance-js');
-let ascPriorityQueue = new EnhanceJS.PriorityQueue(true);
+const BootsJS=require('boots-js');
+let ascPriorityQueue = new BootsJS.PriorityQueue(true);
 ascPriorityQueue.enqueue('1', 1)
 ascPriorityQueue.length
 // 按需导入
-const { PriorityQueue } = require('enhance-js/priority-queue');
+const { PriorityQueue } = require('boots-js/priority-queue');
 let priorityQueue = new PriorityQueue();
 priorityQueue.enqueue('1', 1)
 priorityQueue.length
@@ -51,12 +51,12 @@ None yet
 
 ```js
 // 全局导入
-import EnhanceJS from 'enhance-js'
-let ascPriorityQueue = new EnhanceJS.PriorityQueue(true);
+import BootsJS from 'boots-js'
+let ascPriorityQueue = new BootsJS.PriorityQueue(true);
 ascPriorityQueue.enqueue('1', 1)
 ascPriorityQueue.length
 // 按需导入
-import { PriorityQueue } = from 'enhance-js/priority-queue'
+import { PriorityQueue } = from 'boots-js/priority-queue'
 let priorityQueue = new PriorityQueue();
 priorityQueue.enqueue('1', 1)
 priorityQueue.length

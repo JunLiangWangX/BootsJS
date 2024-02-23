@@ -1,20 +1,20 @@
 const { PriorityQueue } = require('../dist/priority-queue');
-const EnhanceJS=require('../dist/index');
+const BootsJS=require('../dist/index');
 
 
 test('test PriorityQueue class', () => {
     /**
      * ---- Node
      * -------- Global Import(全局引入)
-     * const EnhanceJS = require('enhance-js');
+     * const BootsJS = require('boots-js');
      * -------- Import on Demand(按需引入)
-     * const { PriorityQueue } = require('enhance-js/priority-queue');
+     * const { PriorityQueue } = require('boots-js/priority-queue');
      * 
      * ---- Es6 Module
      * -------- Global Import(全局引入)
-     * import EnhanceJS = from 'enhance-js'
+     * import BootsJS = from 'boots-js'
      * -------- Import on Demand(按需引入)
-     * import { PriorityQueue } = from 'enhance-js/priority-queue'
+     * import { PriorityQueue } = from 'boots-js/priority-queue'
      * 
      */
 
@@ -27,7 +27,7 @@ test('test PriorityQueue class', () => {
     expect(priorityQueue.dequeue())
     expect(priorityQueue.top.priority).toBe(5)
 
-    let ascPriorityQueue = new EnhanceJS.PriorityQueue(true);
+    let ascPriorityQueue = new BootsJS.PriorityQueue(true);
     ascPriorityQueue.enqueue('1', 1)
     ascPriorityQueue.enqueue('1', 5)
     ascPriorityQueue.enqueue('1', 9)

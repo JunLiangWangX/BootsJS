@@ -9,7 +9,7 @@ module.exports = {
         index: {
             import: './src/index.ts',
             library: {
-                name: 'EnhanceJS',
+                name: 'BootsJS',
                 type: 'umd',
                 umdNamedDefine: true,
             },
@@ -21,8 +21,8 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         clean: true,
         library: {
-            root: 'EnhanceJS',
-            amd: 'EnhanceJS',
+            root: 'BootsJS',
+            amd: 'BootsJS',
             commonjs: '[name]',
         },
         libraryTarget: 'umd',
