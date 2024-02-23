@@ -27,3 +27,11 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           
+      - if: ${{ github.event_name == 'push' && success() }}
+        name: Publish HTML to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GIT_TOKEN }}
+          publish_dir: ./docs
+          enable_jekyll: false
+          
