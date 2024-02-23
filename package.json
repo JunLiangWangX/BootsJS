@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "npx webpack --mode=production",
-    "test": "npx jest"
+    "test": "npx jest",
+    "doc":"npx typedoc"
   },
   "repository": {
     "type": "git",
