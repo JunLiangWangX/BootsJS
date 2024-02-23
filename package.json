@@ -12,10 +12,13 @@
     "url": "git+https://github.com/JunLiangWangX/BootsJs.git"
   },
   "keywords": [
+    "boots-js",
     "javascript",
-    "enhance-js",
     "native",
-    "library"
+    "library",
+    "lib",
+    "node",
+    "browser"
   ],
   "author": "JunLiangWang",
   "license": "MIT",
