@@ -64,3 +64,6 @@ priorityQueue.length
 
 ## 所有特性
 [点击查看](https://junliangwangx.github.io/BootsJS/)
+
+## 参与贡献
+[点击查看](https://github.com/JunLiangWangX/BootsJS/blob/main/CONTRIBUTING(zh).md)

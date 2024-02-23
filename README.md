@@ -65,3 +65,7 @@ priorityQueue.length
 ## All Features
 
 [Click to view](https://junliangwangx.github.io/BootsJS/)
+
+## Contribute
+
+[Click to view](https://github.com/JunLiangWangX/BootsJS/blob/main/CONTRIBUTING.md)
