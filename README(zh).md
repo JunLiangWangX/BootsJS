@@ -63,4 +63,4 @@ priorityQueue.length
 ```
 
 ## 所有特性
-
+[点击查看](https://junliangwangx.github.io/BootsJS/)
