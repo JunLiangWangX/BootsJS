@@ -10,14 +10,13 @@ Before you start contributing, please make sure your local environment is proper
 ## Contribution Process
 
 1. Fork the dev branch of this repository to your GitHub account.
-2. Clone your forked repository to your local environment.
-3. Create a new branch for your contribution. It is recommended to use a descriptive name for the branch.
-4. Make your changes and work on the branch.
-5. Write test cases for your added content in the \__test__ directory.
-6. Commit your changes. Ensure that your commit messages are clear, concise, and follow the code submission guidelines (refer to the next section).
-7. Submit a Pull Request to the dev branch of the original repository.
-8. Wait for code review and feedback. Make any necessary modifications and adjustments as required.
-9. Once your contribution is approved, it will be merged into the dev branch.
+2. Create a new branch for your contributions. It is recommended to use a descriptive name for the branch.
+3. Make your modifications and work on the branch.
+4. If you add new content, import your additions in the src/index.ts file and write test cases for your additions in the _*test*_ directory.
+5. Commit your changes. Make sure your commit message is clear, concise, and follows the code submission guidelines (refer to the guidelines below).
+6. Submit a Pull Request to the dev branch of the original repository.
+7. Wait for code review and feedback. Make any necessary modifications and adjustments as required.
+8. Once your contributions are approved, they will be merged into the dev branch.
 
 ## Version Control and Branch Management
 
