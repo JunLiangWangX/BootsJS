@@ -27,7 +27,7 @@ jobs:
         uses: selenehyun/gh-push@master
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-          COMMIT_FILES: dist/*
+          COMMIT_FILES: ./dist/*
           REPO_FULLNAME: JunLiangWangX/BootsJS
           BRANCH: dist
           
