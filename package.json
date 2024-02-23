@@ -1,7 +1,7 @@
 {
-  "name": "power-js",
+  "name": "boots-js",
   "version": "0.0.0-beta",
-  "description": "PowerJS is a library dedicated to extending the capabilities of native JavaScript, aiming to address common data structures, methods, and frequently used algorithms that are not natively supported in JavaScript.",
+  "description": "BootsJS is a library dedicated to extending the capabilities of native JavaScript, aiming to address common data structures, methods, and frequently used algorithms that are not natively supported in JavaScript.",
   "main": "index.js",
   "scripts": {
     "build": "npx webpack --mode=production",
