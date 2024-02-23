@@ -3,12 +3,9 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-21 14:40:51
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-02-22 17:26:56
+ * @LastEditTime: 2024-02-23 15:24:00
  */
 
-/**
- * Queue element data structure(队列元素数据结构)
- */
 interface queueItem {
   /**
    * Enqueued elements(入队的元素)
@@ -19,9 +16,23 @@ interface queueItem {
    */
   priority: number;
 }
-
-export  class PriorityQueue {
-  #isAsc: boolean ;
+/**
+ * 优先级队列
+ * 
+ * ```ts
+ * // -------- Global Import(全局引入)
+ * const BootsJS = require('boots-js'); // Node
+ * import BootsJS = from 'boots-js' // Es6 Module
+ * let ascPriorityQueue = new BootsJS.PriorityQueue(true);
+ * 
+ * // -------- Import on Demand(按需引入)
+ * const { PriorityQueue } = require('boots-js/priority-queue'); // Node
+ * import { PriorityQueue } = from 'boots-js/priority-queue' // Es6 Module
+ * let priorityQueue = new PriorityQueue();
+ *  ```
+ */
+export class PriorityQueue {
+  #isAsc: boolean;
   #heap: any[];
   /**
    * @description: constructor(构造函数)
@@ -102,10 +113,10 @@ export  class PriorityQueue {
         this.#heap[rightChildIndex] != undefined &&
         ((this.#isAsc &&
           this.#heap[rightChildIndex].priority <
-            this.#heap[minChildIndex].priority) ||
+          this.#heap[minChildIndex].priority) ||
           (!this.#isAsc &&
             this.#heap[rightChildIndex].priority >
-              this.#heap[minChildIndex].priority))
+            this.#heap[minChildIndex].priority))
       ) {
         minChildIndex = rightChildIndex;
       }

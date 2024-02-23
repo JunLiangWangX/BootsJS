@@ -3,21 +3,6 @@ const BootsJS=require('../dist/index');
 
 
 test('test PriorityQueue class', () => {
-    /**
-     * ---- Node
-     * -------- Global Import(全局引入)
-     * const BootsJS = require('boots-js');
-     * -------- Import on Demand(按需引入)
-     * const { PriorityQueue } = require('boots-js/priority-queue');
-     * 
-     * ---- Es6 Module
-     * -------- Global Import(全局引入)
-     * import BootsJS = from 'boots-js'
-     * -------- Import on Demand(按需引入)
-     * import { PriorityQueue } = from 'boots-js/priority-queue'
-     * 
-     */
-
     let priorityQueue = new PriorityQueue();
     priorityQueue.enqueue('1', 1)
     priorityQueue.enqueue('1', 5)

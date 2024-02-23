@@ -1,6 +1,6 @@
 # BootsJS
 
-[EN](./README.md) | [中文](./README(zh).md)
+[EN](https://github.com/JunLiangWangX/BootsJS/blob/main/README.md) | [中文](https://github.com/JunLiangWangX/BootsJS/blob/main/README(zh).md)
 
 BootsJS 是一个致力于扩展原生 JavaScript 功能的库，旨在解决 JavaScript 原生不支持的常见数据结构、方法和常用算法。
 
@@ -63,10 +63,4 @@ priorityQueue.length
 ```
 
 ## 所有特性
-
-| 特性 | 介绍 | 示例 | 详情 |
-| ---- | ---- | ---- | ---- |
-|      |      |      |      |
-|      |      |      |      |
-|      |      |      |      |
 

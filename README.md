@@ -1,6 +1,6 @@
 # BootsJS
 
-[EN](./README.md) | [中文](./README(zh).md)
+[EN](https://github.com/JunLiangWangX/BootsJS/blob/main/README.md) | [中文](https://github.com/JunLiangWangX/BootsJS/blob/main/README(zh).md)
 
 BootsJS is a library dedicated to extending the capabilities of native JavaScript, aiming to address common data structures, methods, and frequently used algorithms that are not natively supported in JavaScript.
 
@@ -63,9 +63,3 @@ priorityQueue.length
 ```
 
 ## All Features
-
-| Features | Introduce | Example | Detail |
-| -------- | --------- | ------- | ------ |
-|          |           |         |        |
-|          |           |         |        |
-|          |           |         |        |
