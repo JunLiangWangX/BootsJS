@@ -23,7 +23,7 @@ jobs:
       - run: npm run test
       
       - if: ${{ github.event_name == 'push' && success() }}
-      - uses: JS-DevTools/npm-publish@v3
+        uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_TOKEN }}
           
