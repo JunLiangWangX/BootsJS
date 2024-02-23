@@ -1,0 +1,33 @@
+name: DevDeploy
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+            fetch-depth: 0
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+            node-version: 18.x
+      - run: npm i
+      - run: npm run build
+      - run: npm run test
+      
+      - if: ${{ github.event_name == 'push' && success() }}
+        name: Publish
+        uses: selenehyun/gh-push@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          COMMIT_FILES: dist/*
+          REPO_FULLNAME: JunLiangWangX/BootsJS
+          BRANCH: dist
+          
