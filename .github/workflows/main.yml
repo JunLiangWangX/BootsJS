@@ -21,6 +21,7 @@ jobs:
       - run: npm i
       - run: npm run build
       - run: npm run test
+      - run: npm version minor
       
       - if: ${{ github.event_name == 'push' && success() }}
         uses: JS-DevTools/npm-publish@v3
