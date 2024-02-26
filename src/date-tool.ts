@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-26 10:36:11
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-02-26 21:33:09
+ * @LastEditTime: 2024-02-26 21:35:51
  */
 
 /**
@@ -36,12 +36,12 @@ interface DateTime {
  * // -------- Global Import(全局引入)
  * const BootsJS = require('boots-js'); // Node
  * import BootsJS = from 'boots-js' // Es6 Module
- * BootsJS.DateTool.dateFormater(new Date(),'YYYY-MM-DD hh:mm:ss');
+ * BootsJS.DateTool.dateFormater(new Date(),'YYYY-MM-DD HH:mm:ss');
  * 
  * // -------- Import on Demand(按需引入)
  * const { DateTool } = require('boots-js/date-tool'); // Node
  * import { DateTool } = from 'boots-js/date-tool' // Es6 Module
- * DateTool.dateFormater(new Date(),'YYYY-MM-DD hh:mm:ss');
+ * DateTool.dateFormater(new Date(),'YYYY-MM-DD HH:mm:ss');
  *  ```
  */
 export class DateTool {
@@ -52,9 +52,9 @@ export class DateTool {
   /**
    * @description: Format date and time.(格式化日期与时间)
    * @param {string|number|Date} date Specify date and time, support timestamp/date character/Date object, default is current date.(指定日期时间，支持时间戳/日期字符/Date对象，默认为当前日期)
-   * @param {string} formater Specify the date and time format, default is YYYY-MM-DD hh:mm:ss.(指定日期和时间的格式，默认为YYYY-MM-DD hh:mm:ss)
+   * @param {string} formater Specify the date and time format, default is YYYY-MM-DD HH:mm:ss.(指定日期和时间的格式，默认为YYYY-MM-DD HH:mm:ss)
    */
-  static dateFormater(date: string | number | Date = new Date(), formater: string = 'YYYY-MM-DD hh:mm:ss'): String {
+  static dateFormater(date: string | number | Date = new Date(), formater: string = 'YYYY-MM-DD HH:mm:ss'): String {
     let tempDate = date ? new Date(date) : new Date(),
       year = tempDate.getFullYear(),
       month = (tempDate.getMonth() + 1),
@@ -68,7 +68,7 @@ export class DateTool {
       .replace(/YY/g, year.toString().substr(2, 2))
       .replace(/MM/g, (month < 10 ? '0' : '') + month)
       .replace(/DD/g, (day < 10 ? '0' : '') + day)
-      .replace(/hh/g, (hour < 10 ? '0' : '') + hour)
+      .replace(/HH/g, (hour < 10 ? '0' : '') + hour)
       .replace(/mm/g, (minute < 10 ? '0' : '') + minute)
       .replace(/ss/g, (second < 10 ? '0' : '') + second)
   }

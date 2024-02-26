@@ -5,14 +5,14 @@ const BootsJS=require('../dist/index');
 test('test DateTool class', () => {
     expect(DateTool.dateFormater('Mon Feb 26 2024','YYYY-MM-DD')).toBe('2024-02-26');
     expect(DateTool.dateFormater('2024/2/26','YYYY-MM-DD')).toBe('2024-02-26');
-    expect(DateTool.dateFormater(1708917102083,'YYYY-MM-DD hh:mm:ss')).toBe('2024-02-26 11:11:42');
-    expect(DateTool.dateFormater('2024/2/26 11:11:42','YYYY/MM/DD/hh/mm/ss')).toBe('2024/02/26/11/11/42');
-    expect(DateTool.dateFormater(new Date(1708917102083),'YYYY/MM/DD/hh/mm/ss')).toBe('2024/02/26/11/11/42');
+    expect(DateTool.dateFormater(1708917102083,'YYYY-MM-DD HH:mm:ss')).toBe('2024-02-26 11:11:42');
+    expect(DateTool.dateFormater('2024/2/26 11:11:42','YYYY/MM/DD/HH/mm/ss')).toBe('2024/02/26/11/11/42');
+    expect(DateTool.dateFormater(new Date(1708917102083),'YYYY/MM/DD/HH/mm/ss')).toBe('2024/02/26/11/11/42');
     expect(BootsJS.DateTool.dateFormater('Mon Feb 26 2024','YYYY-MM-DD')).toBe('2024-02-26');
     expect(BootsJS.DateTool.dateFormater('2024/2/26','YYYY-MM-DD')).toBe('2024-02-26');
-    expect(BootsJS.DateTool.dateFormater(1708917102083,'YYYY-MM-DD hh:mm:ss')).toBe('2024-02-26 11:11:42');
-    expect(BootsJS.DateTool.dateFormater('2024/2/26 11:11:42','YYYY/MM/DD/hh/mm/ss')).toBe('2024/02/26/11/11/42');
-    expect(BootsJS.DateTool.dateFormater(new Date(1708917102083),'YYYY/MM/DD/hh/mm/ss')).toBe('2024/02/26/11/11/42');
+    expect(BootsJS.DateTool.dateFormater(1708917102083,'YYYY-MM-DD HH:mm:ss')).toBe('2024-02-26 11:11:42');
+    expect(BootsJS.DateTool.dateFormater('2024/2/26 11:11:42','YYYY/MM/DD/HH/mm/ss')).toBe('2024/02/26/11/11/42');
+    expect(BootsJS.DateTool.dateFormater(new Date(1708917102083),'YYYY/MM/DD/HH/mm/ss')).toBe('2024/02/26/11/11/42');
 
     expect(DateTool.isLeapYear(2040)).toBe(true);
     expect(DateTool.isLeapYear(2000)).toBe(true);
