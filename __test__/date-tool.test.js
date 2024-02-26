@@ -4,12 +4,11 @@ const BootsJS = require('../dist/index');
 
 describe('test DateTool class', () => {
     beforeAll(() => {
-        jest.useFakeTimers('modern');
-        jest.setSystemTime(new Date('2024-02-26T11:11:42.083Z'));
+        process.env.TZ = 'Asia/Shanghai'; // 将时区设置为中国北京
     });
 
     afterAll(() => {
-        jest.useRealTimers();
+        process.env.TZ = undefined; // 恢复时区到原始值
     });
     it('test DateTool class', () => {
         expect(DateTool.dateFormater('Mon Feb 26 2024', 'YYYY-MM-DD')).toBe('2024-02-26');
