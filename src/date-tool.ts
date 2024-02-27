@@ -3,9 +3,32 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-26 10:36:11
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-02-27 21:27:34
+ * @LastEditTime: 2024-02-27 21:30:52
  */
 
+/**
+ * DateUnitEnum(日期单位枚举)
+ */
+enum DateUnitEnum {
+  all,
+  year,
+  month,
+  day,
+  hour,
+  minute,
+  second
+}
+/**
+ * DateTime Object(日期时间对象)
+ */
+interface DateTime {
+  years: number,
+  months: number,
+  days: number,
+  hours: number,
+  minutes: number,
+  seconds: number,
+}
 /**
  * Some tools for working with date and time(一些处理日期时间的工具)
  * 
@@ -152,27 +175,4 @@ export class DateTool {
 
     return newDate;
   }
-}
-/**
- * DateUnitEnum(日期单位枚举)
- */
-enum DateUnitEnum {
-  all,
-  year,
-  month,
-  day,
-  hour,
-  minute,
-  second
-}
-/**
- * DateTime Object(日期时间对象)
- */
-interface DateTime {
-  years: number,
-  months: number,
-  days: number,
-  hours: number,
-  minutes: number,
-  seconds: number,
 }
