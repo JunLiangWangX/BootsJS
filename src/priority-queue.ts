@@ -1,11 +1,14 @@
 /*
- * @Description: priority queue(优先级队列)
+ * @Description: priority queue.(优先级队列)
  * @Author: JunLiangWang
  * @Date: 2024-02-21 14:40:51
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-02-23 15:24:00
+ * @LastEditTime: 2024-02-27 22:15:37
  */
 
+/**
+ * queue item object(队列项对象)
+ */
 interface queueItem {
   /**
    * Enqueued elements(入队的元素)
@@ -16,6 +19,7 @@ interface queueItem {
    */
   priority: number;
 }
+
 /**
  * 优先级队列
  * 
@@ -35,35 +39,54 @@ export class PriorityQueue {
   #isAsc: boolean;
   #heap: any[];
   /**
-   * @description: constructor(构造函数)
-   * @param {*} isAscOrder Whether to sort in ascending order, the default is descending order(是否升序排序,默认降序)
-   */
+   * @description: Constructor.(构造函数)
+   * @param {*} isAscOrder Whether to sort in ascending order, the default is descending order.(是否升序排序,默认降序)
+   * @example
+   * let priorityQueue = new PriorityQueue();
+   */  
   constructor(isAscOrder: boolean = false) {
     this.#isAsc = isAscOrder;
     this.#heap = [];
   }
   /**
-   * @description: current number of queue elements(当前队列元素数量)
-   */
+   * @description: Current number of queue elements.(当前队列元素数量)
+   * @example
+   * let priorityQueue = new PriorityQueue();
+   * priorityQueue.length  //0
+   */  
   get length(): number {
     return this.#heap.length;
   }
   /**
-   * @description: Is the queue empty(当前队列是否为空)
-   */
+   * @description: Is the queue empty.(当前队列是否为空)
+   * @example
+   * let priorityQueue = new PriorityQueue();
+   * priorityQueue.isEmpty  //true
+   */ 
   get isEmpty(): boolean {
     return this.length === 0;
   }
   /**
-   * @description: Get the top element of the queue(获取队顶元素)
+   * @description: Get the top element of the queue.(获取队顶元素)
+   * @example
+   * let priorityQueue = new PriorityQueue();
+   * priorityQueue.enqueue('1', 1)
+   * priorityQueue.top  //{element:'1',priority:1}
    */
   get top(): queueItem {
     return this.#heap[0];
   }
   /**
-   * @description: Add elements to the queue and sort them according to priority(将元素添加到队列中并根据优先级排序)
+   * @description: Add elements to the queue and sort them according to priority.(将元素添加到队列中并根据优先级排序)
    * @param {*} element   元素
    * @param {*} priority  优先级
+   * @example
+   * let priorityQueue = new PriorityQueue();
+   * priorityQueue.enqueue('1', 1)
+   * priorityQueue.enqueue({
+   *   a:'1',
+   *   b:'2'
+   * }, 2)
    */
   enqueue(element: any, priority: number) {
     this.#heap.push({
@@ -73,7 +96,12 @@ export class PriorityQueue {
     this.#heapifyUp();
   }
   /**
-   * @description: Dequeue the highest or lowest priority element(将优先级最高或最低的元素出队)
+   * @description: Dequeue the highest or lowest priority element.(将优先级最高或最低的元素出队)
+   * @example
+   * let priorityQueue = new PriorityQueue();
+   * priorityQueue.enqueue('1', 1)
+   * priorityQueue.enqueue('1', 5)
+   * priorityQueue.dequeue()  //{element:'1',priority:5}
    */
   dequeue(): queueItem | undefined {
     if (this.isEmpty) return undefined;

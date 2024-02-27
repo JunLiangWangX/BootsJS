@@ -1,9 +1,9 @@
 /*
- * @Description: Some tools for working with date and time(一些处理日期时间的工具)
+ * @Description: Some tools for working with date and time.(一些处理日期时间的工具)
  * @Author: JunLiangWang
  * @Date: 2024-02-26 10:36:11
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-02-27 21:52:46
+ * @LastEditTime: 2024-02-27 22:08:40
  */
 
 /**

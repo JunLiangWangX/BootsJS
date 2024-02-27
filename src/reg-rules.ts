@@ -1,9 +1,9 @@
 /*
- * @Description: Some common regular expression patterns(一些常见的正则表达式规则)
+ * @Description: Some common regular expression patterns.(一些常见的正则表达式规则)
  * @Author: JunLiangWang
  * @Date: 2024-02-23 20:49:02
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-02-27 22:06:35
+ * @LastEditTime: 2024-02-27 22:08:29
  */
 
 /**
