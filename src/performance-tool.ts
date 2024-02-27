@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-27 14:18:34
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-02-27 21:25:38
+ * @LastEditTime: 2024-02-27 21:32:14
  */
 
 /**
@@ -158,11 +158,16 @@ export class PerformanceTool {
     else return arg
   }
 }
-
+/**
+ * cache options object(缓存选项对象)
+ */
 interface MemoizeOptions {
   maxCacheSize: number,
   expirationTime: number
 }
+/**
+ * cache item object(缓存项对象)
+ */
 interface CacheItem {
   result: any,
   timestamp: number
