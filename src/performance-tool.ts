@@ -12,12 +12,12 @@
  * ```ts
  * // -------- Global Import(全局引入)
  * const BootsJS = require('boots-js'); // Node
- * import BootsJS = from 'boots-js' // Es6 Module
+ * import BootsJS from 'boots-js' // Es6 Module
  * BootsJS.PerformanceTool.debounce(test);
  * 
  * // -------- Import on Demand(按需引入)
  * const { PerformanceTool } = require('boots-js/performance-tool'); // Node
- * import { PerformanceTool } = from 'boots-js/performance-tool' // Es6 Module
+ * import { PerformanceTool } from 'boots-js/performance-tool' // Es6 Module
  * PerformanceTool.debounce(test);
  *  ```
  */

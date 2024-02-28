@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-21 14:40:51
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-02-27 22:15:37
+ * @LastEditTime: 2024-02-28 16:46:09
  */
 
 /**
@@ -26,12 +26,12 @@ interface queueItem {
  * ```ts
  * // -------- Global Import(全局引入)
  * const BootsJS = require('boots-js'); // Node
- * import BootsJS = from 'boots-js' // Es6 Module
+ * import BootsJS from 'boots-js' // Es6 Module
  * let ascPriorityQueue = new BootsJS.PriorityQueue(true);
  * 
  * // -------- Import on Demand(按需引入)
  * const { PriorityQueue } = require('boots-js/priority-queue'); // Node
- * import { PriorityQueue } = from 'boots-js/priority-queue' // Es6 Module
+ * import { PriorityQueue } from 'boots-js/priority-queue' // Es6 Module
  * let priorityQueue = new PriorityQueue();
  *  ```
  */

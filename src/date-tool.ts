@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-26 10:36:11
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-02-27 22:08:40
+ * @LastEditTime: 2024-02-28 16:45:51
  */
 
 /**
@@ -35,12 +35,12 @@ interface DateTime {
  * ```ts
  * // -------- Global Import(全局引入)
  * const BootsJS = require('boots-js'); // Node
- * import BootsJS = from 'boots-js' // Es6 Module
+ * import BootsJS from 'boots-js' // Es6 Module
  * BootsJS.DateTool.dateFormater(new Date(),'YYYY-MM-DD HH:mm:ss');
  * 
  * // -------- Import on Demand(按需引入)
  * const { DateTool } = require('boots-js/date-tool'); // Node
- * import { DateTool } = from 'boots-js/date-tool' // Es6 Module
+ * import { DateTool } from 'boots-js/date-tool' // Es6 Module
  * DateTool.dateFormater(new Date(),'YYYY-MM-DD HH:mm:ss');
  *  ```
  */

@@ -12,12 +12,12 @@
  * ```ts
  * // -------- Global Import(全局引入)
  * const BootsJS = require('boots-js'); // Node
- * import BootsJS = from 'boots-js' // Es6 Module
+ * import BootsJS from 'boots-js' // Es6 Module
  * BootsJS.RegRules.IDCardRule.test('12948392023');
  * 
  * // -------- Import on Demand(按需引入)
  * const { RegRules } = require('boots-js/reg-rules'); // Node
- * import { RegRules } = from 'boots-js/reg-rules' // Es6 Module
+ * import { RegRules } from 'boots-js/reg-rules' // Es6 Module
  * RegRules.IDCardRule.test('12948392023');
  *  ```
  */

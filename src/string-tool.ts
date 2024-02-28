@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-28 15:00:37
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-02-28 15:24:52
+ * @LastEditTime: 2024-02-28 16:46:26
  */
 
 /**
@@ -12,12 +12,12 @@
  * ```ts
  * // -------- Global Import(全局引入)
  * const BootsJS = require('boots-js'); // Node
- * import BootsJS = from 'boots-js' // Es6 Module
+ * import BootsJS from 'boots-js' // Es6 Module
  * BootsJS.StringTool.dashNameToUpperCamelCaseName('string-tool')
  * 
  * // -------- Import on Demand(按需引入)
  * const { StringTool } = require('boots-js/string-tool'); // Node
- * import { StringTool } = from 'boots-js/string-tool' // Es6 Module
+ * import { StringTool } from 'boots-js/string-tool' // Es6 Module
  * StringTool.dashNameToUpperCamelCaseName('string-tool')
  *  ```
  */
