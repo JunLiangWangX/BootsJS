@@ -2,7 +2,7 @@ const { PerformanceTool } = require('../dist/performance-tool');
 const BootsJS = require('../dist/index');
 
 
-test('test PriorityQueue class', () => {
+test('test PerformanceTool class', () => {
     let a = 0
     function add(nv) {
         a += nv
