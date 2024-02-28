@@ -1,4 +1,4 @@
-![logo](./resource/logo.png)
+# ![logo](./resource/logo.png)
 
 [EN](https://github.com/JunLiangWangX/BootsJS/blob/main/README.md) | [中文](https://github.com/JunLiangWangX/BootsJS/blob/main/README(zh).md)
 
