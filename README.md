@@ -56,7 +56,7 @@ let ascPriorityQueue = new BootsJS.PriorityQueue(true);
 ascPriorityQueue.enqueue('1', 1)
 ascPriorityQueue.length
 // Import on Demand
-import { PriorityQueue } = from 'boots-js/priority-queue'
+import { PriorityQueue }  from 'boots-js/priority-queue'
 let priorityQueue = new PriorityQueue();
 priorityQueue.enqueue('1', 1)
 priorityQueue.length
