@@ -8,5 +8,5 @@ test('test StringTool class', () => {
     expect(BootsJS.StringTool.trimLeft(' StringTool')).toBe('StringTool');
     expect(BootsJS.StringTool.trimRight('StringTool ')).toBe('StringTool');
     expect(BootsJS.StringTool.trimSide(' StringTool ')).toBe('StringTool');
-    expect(BootsJS.StringTool.trimAll(' String Tool ')).toBe('string-StringTool');
+    expect(BootsJS.StringTool.trimAll(' String Tool ')).toBe('StringTool');
 });
