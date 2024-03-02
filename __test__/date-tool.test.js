@@ -28,7 +28,7 @@ test('test DateTool class', () => {
     expect(DateTool.getDaysInMonth(2025, 2)).toBe(28);
     expect(DateTool.getDaysInMonth(2025, 8)).toBe(31);
 
-    expect(DateTool.getDateDiff('2024/1/26', '2025/1/26', DateTool.dateUnitEnum.day)).toBe(366);
+    expect(DateTool.getDateDiff('2024/1/26', '2025/1/26', DateTool.dateUnitEnum.day)).toBe(36611);
     expect(DateTool.getDateDiff('2024/1/26', '2025/1/26', DateTool.dateUnitEnum.month)).toBe(12);
     expect(DateTool.getDateDiff('2025/6/19', '2025/9/18', DateTool.dateUnitEnum.month)).toBe(2);
     expect(DateTool.getDateDiff('2025/6/19', '2025/9/18', DateTool.dateUnitEnum.year)).toBe(0);
