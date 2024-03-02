@@ -9,19 +9,18 @@ Before you start contributing, please make sure your local environment is proper
 
 ## Contribution Process
 
-1. Fork the dev branch of this repository to your GitHub account.
+1. Fork the main branch of this repository to your GitHub account.
 2. Create a new branch for your contributions. It is recommended to use a descriptive name for the branch.
 3. Make your modifications and work on the branch.
 4. If you add new content, import your additions in the src/index.ts file and write test cases for your additions in the _*test*_ directory.
 5. Commit your changes. Make sure your commit message is clear, concise, and follows the code submission guidelines (refer to the guidelines below).
-6. Submit a Pull Request to the dev branch of the original repository.
+6. Submit a Pull Request to the main branch of the original repository.
 7. Wait for code review and feedback. Make any necessary modifications and adjustments as required.
-8. Once your contributions are approved, they will be merged into the dev branch.
+8. Once your contributions are approved, they will be merged into the main branch.
 
 ## Version Control and Branch Management
 
 - The main branch is used for stable releases.
-- The dev branch is used for current development work.
 - The gh-pages branch is used for publishing project documentation.
 
 ## Submission Requirements
