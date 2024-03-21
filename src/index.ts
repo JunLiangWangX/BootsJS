@@ -3,3 +3,4 @@ export { RegRules } from './reg-rules';
 export { DateTool } from './date-tool';
 export { PerformanceTool } from './performance-tool';
 export { StringTool } from './string-tool';
+export { ObjectTool } from './object-tool';
