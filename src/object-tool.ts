@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-03-21 20:15:10
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-03-21 22:30:00
+ * @LastEditTime: 2024-03-25 17:47:40
  */
 
 /**
@@ -34,38 +34,59 @@ export class ObjectTool {
   static type(val: any): string {
     return Object.prototype.toString.call(val).split(" ")[1].slice(0, -1);
   }
+
+  static deepClone(obj: any): any {
+    let type = this.type(obj);
+    if (type in PrimitiveTypeEnum) return obj;
+    if (type in TypedArrayEnum) return new obj.constructor(obj);
+  }
+
+  static isEqual(obj1: any, obj2: any): boolean {
+    if (obj1 === obj2) return true;
+    let type1 = this.type(obj1), type2 = this.type(obj2);
+    if (type1 !== type2) return false;
+    // if (PrimitiveTypeEnum.includes(type1)) return obj1 === obj2;
+    if (type1 in TypedArrayEnum) {
+      if (obj1.length !== obj2.length) return false;
+      for (let i = 0; i < obj1.length; i++) if (obj1[i] !== obj2[i]) return false;
+      return true;
+    }
+    return false;
+  }
 }
 
 /**
  * Primitive type enum(原始类型枚举)
  */
-type PrimitiveTypeEnum =
-  | "Number"
-  | "String"
-  | "Boolean"
-  | "Null"
-  | "Undefined"
-  | "Symbol"
-  | "BigInt";
+enum PrimitiveTypeEnum {
+  'Number',
+  'String',
+  'Boolean',
+  'Null',
+  'Undefined',
+  'Symbol',
+  'BigInt'
+};
+
 /**
  * TypedArray type enum(数值数组类型枚举)
  */
-type TypedArrayEnum =
-  | "ArrayBuffer"
-  | "Int8Array"
-  | "Int16Array"
-  | "Int32Array"
-  | "Uint8Array"
-  | "Uint16Array"
-  | "Uint32Array"
-  | "Float32Array"
-  | "Float64Array"
-  | "BigInt64Array"
-  | "BigUint64Array";
+enum TypedArrayEnum {
+  "Int8Array",
+  "Int16Array",
+  "Int32Array",
+  "Uint8Array",
+  "Uint16Array",
+  "Uint32Array",
+  "Float32Array",
+  "Float64Array",
+  "BigInt64Array",
+  "BigUint64Array"
+};
 /**
  * Array type enum(数组类型枚举)
  */
-type ArrayTypeEnum = "Array" | TypedArrayEnum;
+const ArrayTypeEnum = ["Array", "ArrayBuffer", 'DataView'];
 /**
  * Map type enum(Map类型枚举)
  */
@@ -81,8 +102,4 @@ type OtherTypeEnum = "Object" | "Function" | "WeakRef" | "Date" | "RegExp";
 /**
  * Type Enum(类型枚举)
  */
-type TypeEnum = PrimitiveTypeEnum | ArrayTypeEnum | OtherTypeEnum;
-// todo
-// 判断类型
-// 值比对
-// 大数/小数精确计算
+//type TypeEnum = PrimitiveTypeEnum | ArrayTypeEnum | OtherTypeEnum;
