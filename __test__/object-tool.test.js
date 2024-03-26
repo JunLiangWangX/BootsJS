@@ -2,7 +2,7 @@ const { ObjectTool } = require('../dist/object-tool');
 const BootsJS = require('../dist/index');
 
 
-test('test DateTool class', () => {
+test('test DateTool class', async () => {
     expect(ObjectTool.type(123)).toBe('Number');
     expect(ObjectTool.type(true)).toBe('Boolean');
     expect(ObjectTool.type('String')).toBe('String');
@@ -35,6 +35,7 @@ test('test DateTool class', () => {
     map.set("true",4)
     map.set(13,4)
 
+      
     
     set1.add(true)
     set1.add(13)
@@ -63,7 +64,7 @@ test('test DateTool class', () => {
                 set:set,
                 obj:obj,
                 weakRef:weakRef,
-                fn:fn
+                fn:fn,
             }
         },
         number2:1,
@@ -106,7 +107,10 @@ test('test DateTool class', () => {
                 set:set1,
                 obj:obj_1,
                 weakRef:weakRef,
-                fn:fn
+                fn:fn,
+                obj3:{
+
+                }
             }
         }
     }
@@ -115,10 +119,31 @@ test('test DateTool class', () => {
         b:'123',
         c:obj4
     }
-    console.info(ObjectTool.argToKey(obj4))
-    console.info(ObjectTool.argToKey(obj2))
 
     expect(ObjectTool.argToKey(obj1)===ObjectTool.argToKey(obj2)).toBe(true);
     expect(ObjectTool.argToKey(obj1)===ObjectTool.argToKey(obj3)).toBe(false);
 
+
+    testObj={
+        a:'123',
+        b:123,
+        c:true,
+        d:new Map(),
+    }
+    testObj2={
+        a:testObj,
+        c:function(){},
+    }
+    testObj3={
+        a:testObj2,
+        c:true
+    }
+
+    let test4=ObjectTool.deepClone(testObj3)
+    console.info(test4)
+    expect(test4===testObj3).toBe(false);
+    expect(test4.a===testObj3.a).toBe(false);
+    expect(test4.a.a===testObj3.a.a).toBe(false);
+    expect(test4.a.a.d===testObj3.a.a.d).toBe(false);
+    expect(test4.a.c===testObj3.a.c).toBe(true);
 });

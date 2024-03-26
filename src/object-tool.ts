@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-03-21 20:15:10
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-03-26 18:03:40
+ * @LastEditTime: 2024-03-26 22:33:29
  */
 
 /**
@@ -35,6 +35,8 @@ export class ObjectTool {
     return Object.prototype.toString.call(obj).split(" ")[1].slice(0, -1);
   }
 
+  // clone如argTokey处理，weakRef,proxy// 完成优化工作
+  // 加入proxy实现深拷贝
   static deepClone(obj: any): any {
     let type = this.type(obj);
     if (type in NumericTypeEnum) return new obj.constructor(obj);
@@ -48,92 +50,106 @@ export class ObjectTool {
       for (const item of obj) tempSet.add(this.deepClone(item));
       return tempSet;
     }
-    return obj
+    if (type === MapType){
+      let tempMap=new Map()
+      for (const key of obj.keys()) {
+        tempMap.set(this.deepClone(key),this.deepClone(obj.get(key)))
+      }
+      return tempMap
+    }
+    if (type === ObjectType){
+      let tempObj:any={}
+      Object.keys(obj).forEach((key) => {
+        tempObj[key]=this.deepClone(obj[key]);
+      });
+      return tempObj
+    }
+    if (type === ArrayBufferType){
+      return new Int8Array(new Int8Array(obj)).buffer
+    }
+    if (type === DataViewType){
+      return new DataView(new Int8Array(new Int8Array(obj.buffer)).buffer)
+    }
+    return obj;
   }
 
   static isEqual(obj1: any, obj2: any): boolean {
     if (obj1 === obj2) return true;
-    let type1 = this.type(obj1), type2 = this.type(obj2);
+    let type1 = this.type(obj1),
+      type2 = this.type(obj2);
     if (type1 !== type2) return false;
-    if (type1 in NumericTypeEnum) return obj1.valueOf().toString() === obj2.valueOf().toString();
+    if (type1 in NumericTypeEnum)
+      return obj1.valueOf().toString() === obj2.valueOf().toString();
     if (type1 === ArrayType) {
       if (obj1.length !== obj2.length) return false;
-      for (let i = 0; i < obj2.length; i++)if (this.isEqual(obj1[i], obj2[i]) === false) return false
-      return true
+      for (let i = 0; i < obj2.length; i++)
+        if (this.isEqual(obj1[i], obj2[i]) === false) return false;
+      return true;
     }
     if (type1 === SetType) {
-      let tempArray1 = Array.from(obj1), tempArray2 = Array.from(obj2);
-      tempArray1.sort(); tempArray2.sort();
-      if (obj1.length !== obj2.length) return false;
-      for (let i = 0; i < obj2.length; i++)if (this.isEqual(obj1[i], obj2[i]) === false) return false
-      return true
+      return this.argToKey(obj1)===this.argToKey(obj2);
     }
     return false;
   }
+  
+  // 支持的类型：原始类型，TypedArray，Array,Set，Map，Object，Function，Date,RegExp
+  // arraybuffer,dataview,weakref(按照引用类型)，proxy（按照代理的类型）
   static argToKey(arg: any, visited = new Set<any>()): string {
     let type = Object.prototype.toString.call(arg).split(" ")[1].slice(0, -1);
-    if (visited.has(arg)) return '[Circular Reference]';
+    if (visited.has(arg)) return "[Circular Reference]";
     visited.add(arg);
     if (type in NumericTypeEnum || type === FunctionType) return arg.toString();
-    if (type === ArrayBufferType) return new Int8Array(arg).toString();
-    if (type === DataViewType) return new Int8Array(arg.buffer).toString();
-    if (type === ObjectType) {
-      let sortArray: string[] = [];
-      let argList: string[] = [];
-      Object.keys(arg).forEach((key) => {
-        sortArray.push(key);
-      });
-      sortArray.sort();
-      for (let item of sortArray) {
-        argList.push(item);
-        argList.push(this.argToKey(arg[item], visited));
+    switch (type) {
+      case ArrayBufferType:
+        return new Int8Array(arg).toString();
+      case DataViewType:
+        return new Int8Array(arg.buffer).toString();
+      case WeakRefType:
+        return type + ":{" + this.argToKey(arg.deref(), visited) + "}";
+      case ObjectType: {
+        let sortArray: string[] = [];
+        let argList: string[] = [];
+        Object.keys(arg).forEach((key) => {
+          sortArray.push(key);
+        });
+        sortArray.sort();
+        for (let item of sortArray) {
+          argList.push(item);
+          argList.push(this.argToKey(arg[item], visited));
+        }
+        visited.delete(arg);
+        return "{" + argList.join(":") + "}";
       }
-      visited.delete(arg);
-      return '{' + argList.join(':') + '}';
-    }
-    if (type === WeakRefType) return type + ':{' + this.argToKey(arg.deref(), visited) + '}';
-    if (type === ArrayType || type === SetType) {
-      let strList: string[] = [];
-      for (let item of arg) strList.push(this.argToKey(item, visited));
-      if(type === SetType)strList.sort()
-      visited.delete(arg);
-      return type + ':[' + strList.join(',') + ']';
-    }
-    if (type === MapType) {
-      let sortArray: string[] = [];
-      let keyMap = new Map();
-      let argList: string[] = [];
-      for (const key of arg.keys()) {
-        let genKey = this.argToKey(key, visited);
-        sortArray.push(genKey);
-        keyMap.set(genKey, arg.get(key));
+      case ArrayType:
+      case SetType: {
+        let strList: string[] = [];
+        for (let item of arg) strList.push(this.argToKey(item, visited));
+        if (type === SetType) strList.sort();
+        visited.delete(arg);
+        return type + ":[" + strList.join(",") + "]";
       }
-      sortArray.sort();
-      for (let item of sortArray) {
-        argList.push(item);
-        argList.push(this.argToKey(keyMap.get(item), visited));
+      case MapType: {
+        let sortArray: string[] = [];
+        let keyMap = new Map();
+        let argList: string[] = [];
+        for (const key of arg.keys()) {
+          let genKey = this.argToKey(key, visited);
+          sortArray.push(genKey);
+          keyMap.set(genKey, arg.get(key));
+        }
+        sortArray.sort();
+        for (let item of sortArray) {
+          argList.push(item);
+          argList.push(this.argToKey(keyMap.get(item), visited));
+        }
+        visited.delete(arg);
+        return type + ":{" + argList.join(":") + "}";
       }
-      visited.delete(arg);
-      return type + ':{' + argList.join(':') + '}';
     }
     visited.delete(arg);
     return String(arg);
   }
 }
-
-/**
- * Primitive type enum(原始类型枚举)
- */
-enum PrimitiveTypeEnum {
-  Number = 'Number',
-  String = 'String',
-  Boolean = 'Boolean',
-  Null = 'Null',
-  Undefined = 'Undefined',
-  Symbol = 'Symbol',
-  BigInt = 'BigInt'
-};
-
 /**
  * Numeric type enum(数值类型枚举)
  */
@@ -149,17 +165,21 @@ export enum NumericTypeEnum {
   BigInt64Array = "BigInt64Array",
   BigUint64Array = "BigUint64Array",
   Date = "Date",
-  RegExp = "RegExp"
-};
+  RegExp = "RegExp",
+}
 
-const ArrayType = 'Array'
-const SetType = 'Set'
-const MapType = 'Map'
-const ObjectType = 'Object'
-const ArrayBufferType = 'ArrayBuffer'
-const DataViewType = 'DataView'
-const FunctionType = 'Function'
-const WeakRefType = 'WeakRef'
+const ArrayType = "Array";
+const SetType = "Set";
+const MapType = "Map";
+const ObjectType = "Object";
+const ArrayBufferType = "ArrayBuffer";
+const DataViewType = "DataView";
+const FunctionType = "Function";
+const WeakRefType = "WeakRef";
 
 // 无需处理的属性
-//  "WeakMap"| "WeakSet" | "Function" | "WeakRef"
+// "Proxy" | "Promise" | "WeakMap"| "WeakSet"
+
+// todo
+// 1.高性能深拷贝：proxy的实现
+// 2.array，去重
