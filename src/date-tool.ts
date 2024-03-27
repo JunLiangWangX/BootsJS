@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-26 10:36:11
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-03-27 20:36:00
+ * @LastEditTime: 2024-03-27 20:56:39
  */
 
 /**
@@ -110,7 +110,7 @@ export class DateTool {
     return daysPerMonth[month];
   }
   /**
-   * @description:Calculate the time between two dates.(计算两日期的相隔时间)
+   * Calculate the time between two dates.(计算两日期的相隔时间)
    * @param {string|number|Date} startDate Specify start date, support timestamp/date character/Date object, default is current date.(指定开始日期，支持时间戳/日期字符/Date对象，默认为当前日期)
    * @param {string|number|Date} endDate Specify end date, support timestamp/date character/Date object, default is current date.(指定结束日期，支持时间戳/日期字符/Date对象，默认为当前日期)
    * @param {DateUnit} unit Specify the calculation unit, default is days. (指定计算单位，默认为天)

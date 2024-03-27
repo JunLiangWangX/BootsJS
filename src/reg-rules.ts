@@ -23,7 +23,7 @@
  */
 export class RegRules {
     /**
-     * @description: Matches any digit from 0 to 9.(仅匹配数字的正则表达式)
+     * Matches any digit from 0 to 9.(仅匹配数字的正则表达式)
      * @example
      * RegRules.digitsRule.test('18523127384') //true
      */
@@ -31,7 +31,7 @@ export class RegRules {
         return /^\d+$/
     }
     /**
-     * @description: Matches any letter, both lowercase and uppercase.(仅匹配字母的正则表达式)
+     * Matches any letter, both lowercase and uppercase.(仅匹配字母的正则表达式)
      * @example
      * RegRules.lettersRule.test('aaaa') //true
      */
@@ -39,7 +39,7 @@ export class RegRules {
         return /^[a-zA-Z]+$/
     }
     /**
-     * @description: Matches any lowercase letter.(仅匹配小写字母的正则表达式)
+     * Matches any lowercase letter.(仅匹配小写字母的正则表达式)
      * @example
      * RegRules.lowercaseLettersRule.test('aaaa') //true
      */
@@ -47,7 +47,7 @@ export class RegRules {
         return /^[a-z]+$/
     }
     /**
-     * @description: Matches any uppercase letter.(仅匹配大写字母的正则表达式)
+     * Matches any uppercase letter.(仅匹配大写字母的正则表达式)
      * @example
      * RegRules.uppercaseLettersRule.test('ABC') //true
      */
@@ -55,7 +55,7 @@ export class RegRules {
         return /^[A-Z]+$/
     }
     /**
-     * @description: Matches any letter or digit.(仅匹配字母或数字的正则表达式)
+     * Matches any letter or digit.(仅匹配字母或数字的正则表达式)
      * @example
      * RegRules.digitsAndLettersRule.test('134Afsv') //true
      */
@@ -63,7 +63,7 @@ export class RegRules {
         return /^[a-zA-Z0-9]+$/
     }
     /**
-     * @description: Matches chinese Identity Card Number.(匹配身份证号码的正则表达式)
+     * Matches chinese Identity Card Number.(匹配身份证号码的正则表达式)
      * @example
      * RegRules.chineseIDCardRule.test('52052219830823283x') //true
      */
@@ -71,7 +71,7 @@ export class RegRules {
         return /\b(^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}(\d|X|x)$)\b/
     }
     /**
-     * @description: Matches Chinese Mobile Phone Number.(匹配中国手机号码的正则表达式)
+     * Matches Chinese Mobile Phone Number.(匹配中国手机号码的正则表达式)
      * @example
      * RegRules.chinesePhoneNumberRule.test('18523127384') //true
      */
@@ -79,7 +79,7 @@ export class RegRules {
         return /^(?:(?:\+|00)86)?1[3-9]\d{9}$/
     }
     /**
-     * @description: Matches email address.(匹配电子邮箱的正则表达式)
+     * Matches email address.(匹配电子邮箱的正则表达式)
      * @example
      * RegRules.emailRule.test('wjl@gmail.com') //true
      */
@@ -87,7 +87,7 @@ export class RegRules {
         return /^[\w.%+-]+@[\w.-]+\.[A-Za-z]{2,}$/
     }
     /**
-     * @description: Matches IP address.(匹配IP地址的正则表达式)
+     * Matches IP address.(匹配IP地址的正则表达式)
      * @example
      * RegRules.IPAddressRule.test('192.168.0.1') //true
      */
@@ -95,7 +95,7 @@ export class RegRules {
         return /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
     }
     /**
-     * @description: Matches file extensions of images.(匹配文件后缀为图片的正则表达式)
+     * Matches file extensions of images.(匹配文件后缀为图片的正则表达式)
      * @example
      * RegRules.imageRule.test('test.png') //true
      */
@@ -103,7 +103,7 @@ export class RegRules {
         return /\.(jpg|jpeg|png|gif|bmp|avif|webp|svg)$/
     }
     /**
-     * @description: Matches file extensions of audio.(匹配文件后缀为音频的正则表达式)
+     * Matches file extensions of audio.(匹配文件后缀为音频的正则表达式)
      * @example
      * RegRules.audioRule.test('test.mp3') //true
      */
@@ -111,7 +111,7 @@ export class RegRules {
         return /\.(mp3|wav|flac|aac|ogg|wma)$/
     }
     /**
-     * @description: Matches file extensions of video.(匹配文件后缀为视频的正则表达式)
+     * Matches file extensions of video.(匹配文件后缀为视频的正则表达式)
      * @example
      * RegRules.videoRule.test('test.mp4') //true
      */

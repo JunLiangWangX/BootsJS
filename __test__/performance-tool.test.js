@@ -26,9 +26,6 @@ test('test PerformanceTool class', () => {
     throttleAdd2(1); throttleAdd2(1); throttleAdd2(1);
     expect(num).toBe(2);
 
-    expect(PerformanceTool.generateKey(['a', 'b', 'c'])).toBe('a-b-c')
-    expect(PerformanceTool.generateKey(['a', { a: 'a', test: addNum, b: 'b' }, 'c', addNum]) == PerformanceTool.generateKey(['a', { b: 'b', a: 'a', test: addNum }, 'c', addNum])).toBe(true)
-
     let count=0
     function addCount(nv){
         count+=nv;

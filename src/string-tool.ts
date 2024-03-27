@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-28 15:00:37
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-03-04 11:28:59
+ * @LastEditTime: 2024-03-27 20:58:09
  */
 
 /**
@@ -32,7 +32,7 @@ enum TrimOptions {
  */
 export class StringTool {
   /**
-   * @description: Convert dash naming to camel case naming.(短横线命名转大写驼峰命名)
+   * Convert dash naming to camel case naming.(短横线命名转大写驼峰命名)
    * @param {string} dashName The dash name that needs to be converted.(需要转换的短横线名称)
    * @example 
    * StringTool.dashNameToUpperCamelCaseName('string-tool') //StringTool
@@ -45,7 +45,7 @@ export class StringTool {
     });
   }
   /**
-   * @description: Convert camel case naming to dash naming.(驼峰命名转短横线命名)
+   * Convert camel case naming to dash naming.(驼峰命名转短横线命名)
    * @param {string} camelCaseName The camel case name that needs to be converted.(需要转换的驼峰命名)
    * @example 
    * StringTool.camelCaseNameToDashName('StringTool') //string-tool
@@ -74,7 +74,7 @@ export class StringTool {
    */
   static trimOptions = TrimOptions;
   /**
-   * @description: Remove spaces from string.(去除字符串中的空格)
+   * Remove spaces from string.(去除字符串中的空格)
    * @param {string} str  A string that needs to be remove spaces.(需要去除空格的字符串)
    * @param {TrimOptions} trimOptions Trim options，default is all.(去除空格选项，默认为all) 
    *    - `all`: Remove all spaces from string. (去除字符串中所有空格)

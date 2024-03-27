@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-03-21 20:15:10
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-03-27 17:38:39
+ * @LastEditTime: 2024-03-27 21:03:16
  */
 
 /**
@@ -38,12 +38,10 @@ export class ObjectTool {
    * Deep clone object.(深度拷贝对象)
    * @param {any} obj Value to be copied.(需要拷贝的值)
    * @example
-   * // Supported types: primitive types, TypedArray, Array, Set, Map, Object, ArrayBuffer, DataView, Date,
-   * //                  RegExp, Symbol, Proxy(Will be treated like an object, interceptors cannot be copied)
+   * // Supported types: primitive types, TypedArray, Array, Set, Map, Object, ArrayBuffer, DataView, Date,RegExp, Symbol, Proxy(Will be treated like an object, interceptors cannot be copied)
    * // Notice:Unsupported types, such as Function, WeakRef, WeakSet, WeakMap, etc., will directly copy their references.
    * 
-   * // 支持的类型：原始类型、TypedArray、Array、Set、Map、Object、ArrayBuffer、DataView、
-   * //            Date、RegExp、Symbol、Proxy（将被视为对象，拦截器无法复制）
+   * // 支持的类型：原始类型、TypedArray、Array、Set、Map、Object、ArrayBuffer、DataView、Date、RegExp、Symbol、Proxy（将被视为对象，拦截器无法复制）
    * // 注意：不支持的类型，例如：Function、WeakRef、WeakSet、WeakMap等会直接复制其引用
    * 
    * const obj1={Number:1},obj2={Boolean:2},obj3={obj:obj1,String:'123'},
@@ -120,12 +118,10 @@ export class ObjectTool {
    * @param {any} obj1 Object to be compared 1.(需要比较的对象1)
    * @param {any} obj2 Object to be compared 2.(需要比较的对象2)
    * @example
-   * // Supported types: primitive types, TypedArray, Array, Set, Map, Object, ArrayBuffer, DataView, Date,RegExp, 
-   * //                  Symbol(Compare their descriptions), Proxy(Will be treated like an object, Interceptors cannot be compared)
+   * // Supported types: primitive types, TypedArray, Array, Set, Map, Object, ArrayBuffer, DataView, Date,RegExp, Symbol(Compare their descriptions), Proxy(Will be treated like an object, Interceptors cannot be compared)
    * // Note: Unsupported types, such as Function, WeakRef, WeakSet, WeakMap, etc., will directly compare their reference addresses.
    * 
-   * // 支持的类型：原始类型、TypedArray、Array、Set、Map、Object、ArrayBuffer、DataView、Date、
-   * //             RegExp、Symbol(比较其description)、Proxy（将被视为对象，拦截器无法比较）
+   * // 支持的类型：原始类型、TypedArray、Array、Set、Map、Object、ArrayBuffer、DataView、Date、RegExp、Symbol(比较其description)、Proxy（将被视为对象，拦截器无法比较）
    * // 注意：不支持的类型，例如：Function、WeakRef、WeakSet、WeakMap等会直接比较其引用地址
    * 
    * const testObj2={
@@ -197,13 +193,11 @@ export class ObjectTool {
   /**
    * Convert parameters to String as unique key.(将参数转换为String作为唯一key)
    * @param {any} arg Parameters that need to be converted.(需要转换的参数)
-   * @example: 
-   * // Supported types: primitive types, TypedArray, Array, Set, Map, Object, ArrayBuffer, DataView, Date,RegExp, 
-   * //                  Symbol(Compare their descriptions), Proxy(Will be treated like an object, Interceptors cannot be compared)
+   * @example 
+   * // Supported types: primitive types, TypedArray, Array, Set, Map, Object, ArrayBuffer, DataView, Date,RegExp, Symbol(Compare their descriptions), Proxy(Will be treated like an object, Interceptors cannot be compared)
    * // Note: Unsupported types, such as WeakRef, WeakSet, WeakMap, etc., will directly output the type.
    * 
-   * // 支持的类型：原始类型、TypedArray、Array、Set、Map、Object、ArrayBuffer、Function、
-   * //            DataView、Date、 RegExp、Symbol、Proxy（将被视为对象，拦截器无法输出）
+   * // 支持的类型：原始类型、TypedArray、Array、Set、Map、Object、ArrayBuffer、Function、DataView、Date、 RegExp、Symbol、Proxy（将被视为对象，拦截器无法输出）
    * // 注意：不支持的类型，例如：WeakRef、WeakSet、WeakMap等会直接输出类型
    * 
    * const testObj2={

@@ -39,7 +39,7 @@ export class PriorityQueue {
   #isAsc: boolean;
   #heap: any[];
   /**
-   * @description: Constructor.(构造函数)
+   * Constructor.(构造函数)
    * @param {*} isAscOrder Whether to sort in ascending order, the default is descending order.(是否升序排序,默认降序)
    * @example
    * let priorityQueue = new PriorityQueue();
@@ -49,7 +49,7 @@ export class PriorityQueue {
     this.#heap = [];
   }
   /**
-   * @description: Current number of queue elements.(当前队列元素数量)
+   * Current number of queue elements.(当前队列元素数量)
    * @example
    * let priorityQueue = new PriorityQueue();
    * priorityQueue.length  //0
@@ -58,7 +58,7 @@ export class PriorityQueue {
     return this.#heap.length;
   }
   /**
-   * @description: Is the queue empty.(当前队列是否为空)
+   * Is the queue empty.(当前队列是否为空)
    * @example
    * let priorityQueue = new PriorityQueue();
    * priorityQueue.isEmpty  //true
@@ -67,7 +67,7 @@ export class PriorityQueue {
     return this.length === 0;
   }
   /**
-   * @description: Get the top element of the queue.(获取队顶元素)
+   * Get the top element of the queue.(获取队顶元素)
    * @example
    * let priorityQueue = new PriorityQueue();
    * priorityQueue.enqueue('1', 1)
@@ -77,7 +77,7 @@ export class PriorityQueue {
     return this.#heap[0];
   }
   /**
-   * @description: Add elements to the queue and sort them according to priority.(将元素添加到队列中并根据优先级排序)
+   * Add elements to the queue and sort them according to priority.(将元素添加到队列中并根据优先级排序)
    * @param {*} element   元素
    * @param {*} priority  优先级
    * @example
@@ -96,7 +96,7 @@ export class PriorityQueue {
     this.#heapifyUp();
   }
   /**
-   * @description: Dequeue the highest or lowest priority element.(将优先级最高或最低的元素出队)
+   * Dequeue the highest or lowest priority element.(将优先级最高或最低的元素出队)
    * @example
    * let priorityQueue = new PriorityQueue();
    * priorityQueue.enqueue('1', 1)

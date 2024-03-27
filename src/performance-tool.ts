@@ -3,9 +3,9 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-27 14:18:34
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-02-27 21:32:14
+ * @LastEditTime: 2024-03-27 20:54:57
  */
-
+import { ObjectTool } from "./object-tool";
 /**
  * Some methods to improve performance.(一些提升性能的方法)
  * 
@@ -23,7 +23,7 @@
  */
 export class PerformanceTool {
   /**
-   * @description: Debounce function.(防抖函数)
+   * Debounce function.(防抖函数)
    * @param {Function} func Functions that require debounce.(需要防抖的函数)
    * @param {number} delay Delay，default 300ms.(延迟时间，默认300ms)
    * @param {boolean} isImmediate Whether to execute the function immediately,Default false.(是否立即执行函数，默认否)
@@ -52,7 +52,7 @@ export class PerformanceTool {
     };
   }
   /**
-   * @description: Throttle function.(节流函数)
+   * Throttle function.(节流函数)
    * @param {Function} func Functions that require debounce.(需要防抖的函数)
    * @param {number} delay  Delay，default 300ms.(延迟时间，默认300ms)
    * @example
@@ -77,20 +77,7 @@ export class PerformanceTool {
     }
   }
   /**
-   * @description: Generate keys based on function parameters and support complex parameters.(根据函数参数生成键，支持复杂参数)
-   * @param {any} args Parameter array.(参数数组)
-   * @example
-   * let key1= PerformanceTool.generateKey(['a','b','c'])
-   * console.info(key1)  //a-b-c
-   * let key2= PerformanceTool.generateKey('a',{a:'a',test:addNum,b:'b'},'c',addNum)
-   * let key3= PerformanceTool.generateKey('a',{b:'b',a:'a',test:addNum},'c',addNum)
-   * console.info(key2==key3) //true
-   */
-  static generateKey(args: any[]): string {
-    return args.map(arg => this.#argToKey(arg)).join('-');
-  }
-  /**
-   * @description: Caching function calculation results.(缓存函数的计算结果)
+   * Caching function calculation results.(缓存函数的计算结果)
    * @param {Function} func Functions that require cache.(需要缓存的函数)
    * @param {MemoizeOptions} options An object specifying the caching options.(指定缓存选项的对象)
    *    - maxCacheSize: The maximum number of cached items allowed. Defaults to Infinity. (缓存的最大数量。默认为 Infinity)
@@ -117,7 +104,7 @@ export class PerformanceTool {
     const { maxCacheSize = Infinity, expirationTime = Infinity } = options;
 
     return (...args: any[]) => {
-      const key = this.generateKey(args);
+      const key =args.map(arg => ObjectTool.argToStrKey(arg)).join('-');
       const cachedItem = cache.get(key);
       if (cachedItem) {
         if (Date.now() - cachedItem.timestamp > expirationTime) cache.delete(key);
@@ -140,22 +127,6 @@ export class PerformanceTool {
 
       return result;
     };
-  }
-  static #argToKey(arg: any): string {
-    if (typeof arg === 'function') return arg.toString()
-    else if (typeof arg === 'object' && arg !== null) {
-      let sortArray: string[] = [], argList: string[] = []
-      Object.keys(arg).forEach(key => {
-        sortArray.push(key)
-      });
-      sortArray.sort()
-      for (let item of sortArray) {
-        argList.push(item)
-        argList.push(this.#argToKey(arg[item]))
-      }
-      return '{' + argList.join(':') + '}'
-    }
-    else return arg
   }
 }
 /**
