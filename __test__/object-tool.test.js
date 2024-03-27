@@ -72,7 +72,7 @@ test('test DateTool class', async () => {
     map2.set('test',obj2)
     map2.set(obj1,obj2)
     map2.set(1,obj1)
-    
+    const date=new Date()
     const testObj2={
         BigInt64Array:new BigInt64Array([BigInt(123),BigInt(123),BigInt(123)]),
         Float64Array:new Float64Array([11,22,33,44,55]),
@@ -89,7 +89,7 @@ test('test DateTool class', async () => {
         Set:new Set([obj1,obj2,obj3,obj4]),
         Object:obj4,
         Map:map2,
-        Date:new Date(),
+        Date:date,
         ArrayBuffer:new ArrayBuffer(10),
         DataView:new DataView(new ArrayBuffer(10)),
     }
@@ -107,7 +107,7 @@ test('test DateTool class', async () => {
         Float64Array:new Float64Array([11,22,33,44,55]),
         Map:map,
         BigInt64Array:new BigInt64Array([BigInt(123),BigInt(123),BigInt(123)]),
-        Date:new Date(),
+        Date:date,
         ArrayBuffer:new ArrayBuffer(10),
         BigUint64Array:new BigUint64Array([BigInt(123),BigInt(123),BigInt(123)]),
         DataView:new DataView(new ArrayBuffer(10)),
