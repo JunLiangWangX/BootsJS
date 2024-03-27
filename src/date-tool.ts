@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-26 10:36:11
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-02-28 16:45:51
+ * @LastEditTime: 2024-03-27 20:36:00
  */
 
 /**
@@ -57,7 +57,7 @@ export class DateTool {
    */
   static dateUnitEnum = DateUnitEnum;
   /**
-   * @description: Format date and time.(格式化日期与时间)
+   * Format date and time.(格式化日期与时间)
    * @param {string|number|Date} date Specify date and time, support timestamp/date character/Date object, default is current date.(指定日期时间，支持时间戳/日期字符/Date对象，默认为当前日期)
    * @param {string} formater Specify the date and time format, default is YYYY-MM-DD HH:mm:ss.(指定日期和时间的格式，默认为YYYY-MM-DD HH:mm:ss)
    * @example 
@@ -85,7 +85,7 @@ export class DateTool {
       .replace(/ss/g, (second < 10 ? '0' : '') + second)
   }
   /**
-   * @description: Determine whether a given date is a leap year.(给定年份判断是否闰年)
+   * Determine whether a given date is a leap year.(给定年份判断是否闰年)
    * @param {number} year Specify the year.(指定年份)
    * @example 
    * DateTool.isLeapYear(2040)             //true
@@ -95,7 +95,7 @@ export class DateTool {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
   }
   /**
-   * @description: Given a date, returns the total number of days in the month.(给定日期返回当月总天数)
+   * Given a date, returns the total number of days in the month.(给定日期返回当月总天数)
    * @param {number} year Specify the year.(指定年份)
    * @param {number} month Specify the month, starting from 1.(指定月份，从1月开始)
    * @example 
@@ -168,7 +168,7 @@ export class DateTool {
     }
   }
   /**
-   * @description: Date Add/Subtract Calculator(日期加/减计算器)
+   * Date Add/Subtract Calculator(日期加/减计算器)
    * @param {string|number|Date} startDate Specify start date, support timestamp/date character/Date object, default is current date.(指定开始日期，支持时间戳/日期字符/Date对象，默认为当前日期)
    * @param {DateTime} options An object specifying the amount of years, months, days, hours, minutes, and seconds to add/subtract from the start date. (包含要添加/减去的年、月、日、小时、分钟和秒数的对象)
    *    - years: Number of years to add/subtract. Positive number for addition, negative number for subtraction. (要添加/减去的年数。正数表示添加，负数表示减去)
