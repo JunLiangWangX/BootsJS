@@ -42,7 +42,7 @@ test('test DateTool class', async () => {
     const copyObj=testObj
     let deepCopyObj=ObjectTool.deepClone(testObj)
 
-    expect(ObjectTool.argToKey(deepCopyObj)===ObjectTool.argToKey(testObj)).toBe(true);
+    expect(ObjectTool.argToStrKey(deepCopyObj)===ObjectTool.argToStrKey(testObj)).toBe(true);
     expect(copyObj.Int8Array===testObj.Int8Array).toBe(true);
     expect(deepCopyObj.Int8Array===testObj.Int8Array).toBe(false);
     expect(copyObj.Date===testObj.Date).toBe(true);
@@ -121,4 +121,9 @@ test('test DateTool class', async () => {
     expect(ObjectTool.isEqual(testObj2,ObjectTool.deepClone(testObj2))).toBe(true);
     expect(ObjectTool.isEqual(testObj2,testObj4)).toBe(false);
     expect(ObjectTool.isEqual(testObj2,testObj5)).toBe(false);
+
+    
+    expect(ObjectTool.argToStrKey(testObj2)===ObjectTool.argToStrKey(testObj3)).toBe(true);
+    expect(ObjectTool.argToStrKey(testObj2)===ObjectTool.argToStrKey(testObj4)).toBe(false);
+    expect(ObjectTool.argToStrKey(testObj2)===ObjectTool.argToStrKey(testObj5)).toBe(false);
 });

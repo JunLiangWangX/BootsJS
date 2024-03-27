@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-03-21 20:15:10
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-03-27 17:10:29
+ * @LastEditTime: 2024-03-27 17:38:39
  */
 
 /**
@@ -127,10 +127,27 @@ export class ObjectTool {
    * // 支持的类型：原始类型、TypedArray、Array、Set、Map、Object、ArrayBuffer、DataView、Date、
    * //             RegExp、Symbol(比较其description)、Proxy（将被视为对象，拦截器无法比较）
    * // 注意：不支持的类型，例如：Function、WeakRef、WeakSet、WeakMap等会直接比较其引用地址
+   * 
+   * const testObj2={
+   *     BigInt64Array:new BigInt64Array([BigInt(123),BigInt(123),BigInt(123)]),
+   *     RegExp:/1234/,
+   *     Array:new Array(...[obj1,obj2,obj3,obj4]),
+   *     Set:new Set([obj1,obj2,obj3,obj4]),
+   *     Object:obj4,
+   *     Map:map2,
+   *     Date:date,
+   *     ArrayBuffer:new ArrayBuffer(10),
+   *     DataView:new DataView(new ArrayBuffer(10)),
+   * }
+   * 
+   * ObjectTool.isEqual(testObj2,ObjectTool.deepClone(testObj2)) //true
+   * let testObj5=ObjectTool.deepClone(testObj2)
+   * testObj5.Object.obj1.String='12344'
+   * ObjectTool.isEqual(testObj2,testObj5)  //false
    */
   static isEqual(obj1: any, obj2: any): boolean {
     let that = this
-    function compare(obj1: any, obj2: any, visited1 = new Set(), visited2 = new Set()):boolean {
+    function compare(obj1: any, obj2: any, visited1 = new Set(), visited2 = new Set()): boolean {
       if (obj1 === obj2) return true;
       let type1 = that.type(obj1), type2 = that.type(obj2);
       if (type1 !== type2) return false;
@@ -155,7 +172,7 @@ export class ObjectTool {
           break;
         case SetType:
         case MapType:
-          result = that.argToKey(obj1) === that.argToKey(obj2);
+          result = that.argToStrKey(obj1) === that.argToStrKey(obj2);
           break;
         case ObjectType:
           let keys1 = Object.keys(obj1).sort(), keys2 = Object.keys(obj2).sort();
@@ -177,63 +194,106 @@ export class ObjectTool {
     return compare(obj1, obj2)
   }
 
-  // 支持的类型：原始类型，TypedArray，Array,Set，Map，Object，Function，Date,RegExp
-  // arraybuffer,dataview,weakref(按照引用类型)，proxy（按照代理的类型）
-  static argToKey(arg: any, visited = new WeakSet<any>()): string {
-    let type = Object.prototype.toString.call(arg).split(" ")[1].slice(0, -1);
-    if (visited.has(arg)) return "[Circular Reference]";
-    if (type in NumericTypeEnum || type === FunctionType) return arg.toString();
-    switch (type) {
-      case ArrayBufferType:
-        return new Int8Array(arg).toString();
-      case DataViewType:
-        return new Int8Array(arg.buffer).toString();
-      case WeakRefType:
-        return type + ":{" + this.argToKey(arg.deref(), visited) + "}";
-      case ObjectType: {
-        visited.add(arg);
-        let sortArray: string[] = [];
-        let argList: string[] = [];
-        Object.keys(arg).forEach((key) => {
-          sortArray.push(key);
-        });
-        sortArray.sort();
-        for (let item of sortArray) {
-          argList.push(item);
-          argList.push(this.argToKey(arg[item], visited));
+  /**
+   * Convert parameters to String as unique key.(将参数转换为String作为唯一key)
+   * @param {any} arg Parameters that need to be converted.(需要转换的参数)
+   * @example: 
+   * // Supported types: primitive types, TypedArray, Array, Set, Map, Object, ArrayBuffer, DataView, Date,RegExp, 
+   * //                  Symbol(Compare their descriptions), Proxy(Will be treated like an object, Interceptors cannot be compared)
+   * // Note: Unsupported types, such as WeakRef, WeakSet, WeakMap, etc., will directly output the type.
+   * 
+   * // 支持的类型：原始类型、TypedArray、Array、Set、Map、Object、ArrayBuffer、Function、
+   * //            DataView、Date、 RegExp、Symbol、Proxy（将被视为对象，拦截器无法输出）
+   * // 注意：不支持的类型，例如：WeakRef、WeakSet、WeakMap等会直接输出类型
+   * 
+   * const testObj2={
+   *     BigInt64Array:new BigInt64Array([BigInt(123),BigInt(123),BigInt(123)]),
+   *     RegExp:/1234/,
+   *     Array:new Array(...[obj1,obj2,obj3,obj4]),
+   *     Set:new Set([obj1,obj2,obj3,obj4]),
+   *     Object:obj4,
+   *     Map:map2,
+   *     Date:date,
+   *     ArrayBuffer:new ArrayBuffer(10),
+   *     DataView:new DataView(new ArrayBuffer(10)),
+   * }
+   * const testObj3={
+   *     Array:new Array(...[obj1,obj2,obj3,obj4]),
+   *     Set:new Set([obj1,obj2,obj3,obj4]),
+   *     BigInt64Array:new BigInt64Array([BigInt(123),BigInt(123),BigInt(123)]),
+   *     ArrayBuffer:new ArrayBuffer(10),
+   *     Object:obj4,
+   *     Map:map2,
+   *     Date:date,
+   *     DataView:new DataView(new ArrayBuffer(10)),
+   *     RegExp:/1234/,
+   * }
+   * 
+   * let testObj5=ObjectTool.deepClone(testObj2)
+   * testObj5.Object.obj1.String='12344'
+   * 
+   * ObjectTool.argToStrKey(testObj2)===ObjectTool.argToStrKey(testObj3) //true
+   * ObjectTool.argToStrKey(testObj2)===ObjectTool.argToStrKey(testObj5) //false
+   */
+  static argToStrKey(arg: any): string {
+    let that = this;
+    function generateKey(arg: any, visited = new Set()): string {
+      let type = that.type(arg);
+      if (visited.has(arg)) return "[Circular Reference]";
+      if (type in NumericTypeEnum || type === FunctionType || type === SymbolType) return arg.toString();
+      switch (type) {
+        case ArrayBufferType:
+          return new Int8Array(arg).toString();
+        case DataViewType:
+          return new Int8Array(arg.buffer).toString();
+        /*case WeakRefType:
+          return type + ":{" + generateKey(arg.deref(), visited) + "}";*/
+        case ObjectType: {
+          visited.add(arg);
+          let sortArray: string[] = [];
+          let argList: string[] = [];
+          Object.keys(arg).forEach((key) => {
+            sortArray.push(key);
+          });
+          sortArray.sort();
+          for (let item of sortArray) {
+            argList.push(item);
+            argList.push(generateKey(arg[item], visited));
+          }
+          visited.delete(arg);
+          return "{" + argList.join(":") + "}";
         }
-        visited.delete(arg);
-        return "{" + argList.join(":") + "}";
-      }
-      case ArrayType:
-      case SetType: {
-        visited.add(arg);
-        let strList: string[] = [];
-        for (let item of arg) strList.push(this.argToKey(item, visited));
-        if (type === SetType) strList.sort();
-        visited.delete(arg);
-        return type + ":[" + strList.join(",") + "]";
-      }
-      case MapType: {
-        visited.add(arg);
-        let sortArray: string[] = [];
-        let keyMap = new Map();
-        let argList: string[] = [];
-        for (const key of arg.keys()) {
-          let genKey = this.argToKey(key, visited);
-          sortArray.push(genKey);
-          keyMap.set(genKey, arg.get(key));
+        case ArrayType:
+        case SetType: {
+          visited.add(arg);
+          let strList: string[] = [];
+          for (let item of arg) strList.push(generateKey(item, visited));
+          if (type === SetType) strList.sort();
+          visited.delete(arg);
+          return type + ":[" + strList.join(",") + "]";
         }
-        sortArray.sort();
-        for (let item of sortArray) {
-          argList.push(item);
-          argList.push(this.argToKey(keyMap.get(item), visited));
+        case MapType: {
+          visited.add(arg);
+          let sortArray: string[] = [];
+          let keyMap = new Map();
+          let argList: string[] = [];
+          for (const key of arg.keys()) {
+            let genKey = generateKey(key, visited);
+            sortArray.push(genKey);
+            keyMap.set(genKey, arg.get(key));
+          }
+          sortArray.sort();
+          for (let item of sortArray) {
+            argList.push(item);
+            argList.push(generateKey(keyMap.get(item), visited));
+          }
+          visited.delete(arg);
+          return type + ":{" + argList.join(":") + "}";
         }
-        visited.delete(arg);
-        return type + ":{" + argList.join(":") + "}";
       }
+      return String(arg);
     }
-    return String(arg);
+    return generateKey(arg)
   }
 }
 
@@ -258,12 +318,4 @@ const ObjectType = "Object";
 const ArrayBufferType = "ArrayBuffer";
 const DataViewType = "DataView";
 const FunctionType = "Function";
-const WeakRefType = "WeakRef";
 const SymbolType = 'Symbol';
-
-// 无需处理的属性
-// "Proxy" | "Promise" | "WeakMap"| "WeakSet"
-
-// todo
-// 1.高性能深拷贝：proxy的实现
-// 2.array，去重
