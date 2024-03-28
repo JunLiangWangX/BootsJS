@@ -4,3 +4,4 @@ export { DateTool } from './date-tool';
 export { PerformanceTool } from './performance-tool';
 export { StringTool } from './string-tool';
 export { ObjectTool } from './object-tool';
+export { ArrayTool } from './array-tool';
