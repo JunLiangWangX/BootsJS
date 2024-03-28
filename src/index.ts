@@ -5,3 +5,4 @@ export { PerformanceTool } from './performance-tool';
 export { StringTool } from './string-tool';
 export { ObjectTool } from './object-tool';
 export { ArrayTool } from './array-tool';
+export { TreeTool } from './tree-tool';
