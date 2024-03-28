@@ -56,4 +56,20 @@ test('test DateTool class', () => {
     });
 
     expect(BootsJS.DateTool.dateCalculator('2024/2/12', { years: 1 }).toISOString()).toBe(new Date('2025/2/12').toISOString());
+
+    expect(DateTool.convertTimeZone(
+        1711611931754,
+        DateTool.timeZoneOffsetEnum['UTC+08:00'],
+        DateTool.timeZoneOffsetEnum['UTC+09:00']).valueOf()).toBe(1711615531754);
+    expect(DateTool.convertTimeZone(
+        1711611931754,
+        DateTool.timeZoneOffsetEnum['UTC+08:00'],
+        DateTool.timeZoneOffsetEnum['UTC-06:00']).valueOf()).toBe(1711561531754);
+    expect(DateTool.convertTimeZone(
+        1711611931754,
+        DateTool.timeZoneOffsetEnum['UTC+08:00'],
+        DateTool.timeZoneOffsetEnum['UTC±00:00']).valueOf()).toBe(1711583131754);
+
+
+
 });

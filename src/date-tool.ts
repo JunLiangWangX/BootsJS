@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-26 10:36:11
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-03-27 20:56:39
+ * @LastEditTime: 2024-03-28 16:53:33
  */
 
 /**
@@ -17,6 +17,45 @@ enum DateUnitEnum {
   hour,
   minute,
   second
+}
+/**
+ * TimeZoneOffsetEnum(时区偏移量枚举)
+ */
+enum TimeZoneOffsetEnum {
+  'UTC-12:00' = 720,
+  'UTC-11:00' = 660,
+  'UTC-10:00' = 600,
+  'UTC-09:00' = 540,
+  'UTC-08:00' = 480,
+  'UTC-07:00' = 420,
+  'UTC-06:00' = 360,
+  'UTC-05:00' = 300,
+  'UTC-04:00' = 240,
+  'UTC-03:30' = 210,
+  'UTC-03:00' = 180,
+  'UTC-02:00' = 120,
+  'UTC-01:00' = 60,
+  'UTC±00:00' = 0,
+  'UTC+01:00' = -60,
+  'UTC+02:00' = -120,
+  'UTC+03:00' = -180,
+  'UTC+03:30' = -210,
+  'UTC+04:00' = -240,
+  'UTC+04:30' = -270,
+  'UTC+05:00' = -300,
+  'UTC+05:30' = -330,
+  'UTC+05:45' = -345,
+  'UTC+06:00' = -360,
+  'UTC+06:30' = -390,
+  'UTC+07:00' = -420,
+  'UTC+08:00' = -480,
+  'UTC+08:45' = -525,
+  'UTC+09:00' = -540,
+  'UTC+09:30' = -570,
+  'UTC+10:00' = -600,
+  'UTC+10:30' = -630,
+  'UTC+11:00' = -660,
+  'UTC+12:00' = -720
 }
 /**
  * DateTime Object(日期时间对象)
@@ -90,7 +129,7 @@ export class DateTool {
    * @example 
    * DateTool.isLeapYear(2040)             //true
    * DateTool.isLeapYear(2019)             //false
-   */  
+   */
   static isLeapYear(year: number): boolean {
     return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
   }
@@ -102,7 +141,7 @@ export class DateTool {
    * DateTool.getDaysInMonth(2024, 2)            //29
    * DateTool.getDaysInMonth(2025, 2)            //28
    * DateTool.getDaysInMonth(2025, 8)            //31
-   */  
+   */
   static getDaysInMonth(year: number, month: number): number {
     if (month < 1 || month > 12) throw new Error("month out of range");
     const daysPerMonth = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -126,7 +165,7 @@ export class DateTool {
    * DateTool.getDateDiff('2024/1/26', '2025/1/26', DateTool.dateUnitEnum.month) //12
    * DateTool.getDateDiff('2025/6/19', '2025/9/18', DateTool.dateUnitEnum.year)  //0
    * DateTool.getDateDiff('2025/6/19', '2025/9/18', DateTool.dateUnitEnum.all)   //{years: 0, months: 2,days: 30,hours: 0,minutes: 0,seconds: 0}
-   */  
+   */
   static getDateDiff(startDate: string | number | Date = new Date(), endDate: string | number | Date = new Date(), unit: DateUnitEnum = DateUnitEnum.day): number | DateTime {
     const start = startDate ? new Date(startDate) : new Date(), end = endDate ? new Date(endDate) : new Date();
     if (end.getTime() < start.getTime()) throw new Error("The start date should be less than the end date");
@@ -179,7 +218,7 @@ export class DateTool {
    *    - seconds: Number of seconds to add/subtract. Positive number for addition, negative number for subtraction. (要添加/减去的秒数。正数表示添加，负数表示减去)
    * @example
    * DateTool.dateCalculator('2024/2/12', { years: 1 }).toISOString() //2025-02-12
-   */  
+   */
   static dateCalculator(startDate: string | number | Date = new Date(), options: DateTime): Date {
     const start = startDate ? new Date(startDate) : new Date();
     const {
@@ -201,4 +240,36 @@ export class DateTool {
 
     return newDate;
   }
+
+  /**
+   * @enum Time zone offset enum.(时区偏移量枚举) 
+   */
+  static timeZoneOffsetEnum = TimeZoneOffsetEnum;
+  /**
+   * Convert time zone.(转换时区)
+   * @param {string} date Give a date.(给定时间)
+   * @param {TimeZoneOffsetEnum} orginTimeZone Time zone of original time.(原始时间的时区)
+   * @param {TimeZoneOffsetEnum} timeZone Time zone to be converted.(需要转换的时区)
+   * @example
+   * DateTool.convertTimeZone(
+   *         1711611931754,
+   *         DateTool.timeZoneOffsetEnum['UTC+08:00'], 
+   *         DateTool.timeZoneOffsetEnum['UTC-06:00'])
+   * DateTool.convertTimeZone(
+   *         '2024/2/12',
+   *         DateTool.timeZoneOffsetEnum['UTC+08:00'], 
+   *         DateTool.timeZoneOffsetEnum['UTC+09:00'])
+   */  
+  static convertTimeZone(date: string | number | Date = new Date(), orginTimeZone: TimeZoneOffsetEnum, timeZone: TimeZoneOffsetEnum): Date {
+    const orginDate = date ? new Date(date) : new Date();
+    return this.dateCalculator(orginDate, {
+      years: 0,
+      months: 0,
+      days: 0,
+      hours: 0,
+      minutes:(orginTimeZone- timeZone),
+      seconds: 0
+    })
+  }
+
 }
