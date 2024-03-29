@@ -3,54 +3,107 @@ const BootsJS = require('../dist/index');
 
 
 test('test TreeTool class', () => {
-    const tree={
-        name:'中国',
-        code:'0',
-        childList:[
+    const tree = {
+        name: '中国',
+        code: '0',
+        childList: [
             {
-                name:'重庆',
-                code:'01',
-                childList:[
-                    {
-                        name:'渝北区',
-                        code:'001',
-                        childList:[]
-                    },
-                    {
-                        name:'江北区',
-                        code:'002',
-                        childList:[]
-                    },
-                    {
-                        name:'沙坪坝区',
-                        code:'003',
-                        childList:[]
-                    },
-                    {
-                        name:'大渡口区',
-                        code:'003',
-                        childList:[]
-                    },
-                ]
+                name: '重庆',
+                code: '01',
             },
             {
-                name:'四川',
-                code:'02',
+                name: '四川',
+                code: '02',
             },
             {
-                name:'广东',
-                code:'03',
+                name: '广东',
+                code: '03',
             },
         ]
     }
-    let arr=TreeTool.tree2Array(tree,'childList',{
-        generateLevel:false,
-        generateParentID:true,
-        parentIDKey:'code',
-        generateParentIDKey:'parentCode',
-        deleteAttriList:['childList']
+    let arr = TreeTool.tree2Array([tree], 'childList', {
+        isGenerateLevel: true,
+        generateLevelAttributeName: 'level',
+        isGenerateParentID: true,
+        generateParentIDAttributeName: 'parentCode',
+        nodeIDAttributeName: 'code',
+        deleteAttributeList: ['childList']
     })
-    let genTree=TreeTool.array2Tree(arr,'code','parentCode','childList',(obj)=>{
-        return !('parentCode' in obj)
+    expect(arr).toEqual(
+        [
+            { name: '中国', code: '0', level: 0 },
+            { name: '重庆', code: '01', level: 1, parentCode: '0' },
+            { name: '四川', code: '02', level: 1, parentCode: '0' },
+            { name: '广东', code: '03', level: 1, parentCode: '0' },
+        ]);
+    let genTree = TreeTool.array2Tree(arr, 'code', 'parentCode', 'childList', (node) => {
+        return !('parentCode' in node)
     })
+    expect(genTree).toEqual(
+        [
+            {
+                name: '中国',
+                code: '0',
+                level: 0,
+                childList: [
+                    { name: '重庆', code: '01', level: 1, parentCode: '0', childList: [] },
+                    { name: '四川', code: '02', level: 1, parentCode: '0', childList: [] },
+                    { name: '广东', code: '03', level: 1, parentCode: '0', childList: [] }
+                ]
+            }
+        ]);
+
+    const newtree = {
+        name: '中国',
+        code: '0',
+        childList: [
+            {
+                name: '重庆',
+                code: '01',
+            },
+            {
+                name: '四川',
+                code: '02',
+            },
+            {
+                name: '广东',
+                code: '03',
+            },
+        ]
+    }
+    let childList = TreeTool.getChildList([newtree], 'code', '0', 'childList')
+
+    expect(childList).toEqual(
+        [
+            { name: '重庆', code: '01' },
+            { name: '四川', code: '02' },
+            { name: '广东', code: '03' },
+        ]);
+
+
+    let filterList = TreeTool.filter(genTree, 'childList', (obj) => {
+        return obj.parentCode === '0'
+    })
+    expect(filterList).toEqual(
+        [
+            { name: '重庆', code: '01', level: 1, parentCode: '0', childList: [] },
+            { name: '四川', code: '02', level: 1, parentCode: '0', childList: [] },
+            { name: '广东', code: '03', level: 1, parentCode: '0', childList: [] },
+        ]);
+
+    let path = TreeTool.findPath(genTree, 'code', '03', 'childList')
+    expect(path).toEqual(
+        [
+            {
+                name: '中国',
+                code: '0',
+                level: 0,
+                childList: [
+                    { name: '重庆', code: '01', level: 1, parentCode: '0', childList: [] },
+                    { name: '四川', code: '02', level: 1, parentCode: '0', childList: [] },
+                    { name: '广东', code: '03', level: 1, parentCode: '0', childList: [] }
+                ]
+            },
+            { name: '广东', code: '03', level: 1, parentCode: '0', childList: [] }
+        ]);
 })
