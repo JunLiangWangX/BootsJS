@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-03-29 09:18:45
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-03-29 15:52:16
+ * @LastEditTime: 2024-04-02 10:28:05
  */
 
 /**
@@ -133,7 +133,7 @@ export class TreeTool {
      *          ]
      *        }
      *      ]
-     */ 
+     */
     static array2Tree(arr: Array<any>, nodeIDAttributeName: string, parentIDAttributeName: string, generateChildListAttributeName: string, judgeRootNodeFunction: (node: any) => boolean): Array<any> {
         const result: Array<any> = [], map = new Map();
         if (!Array.isArray(arr)) {
@@ -141,9 +141,16 @@ export class TreeTool {
             return [];
         }
         arr.forEach((val) => {
-            val[generateChildListAttributeName] = [];
+            val[generateChildListAttributeName] = map.has(val[nodeIDAttributeName]) ? map.get(val[nodeIDAttributeName])[generateChildListAttributeName] : [];
             if (judgeRootNodeFunction(val)) result.push(val);
-            if (map.has(val[parentIDAttributeName])) map.get(val[parentIDAttributeName])[generateChildListAttributeName].push(val)
+
+            if (!map.has(val[parentIDAttributeName])) {
+                let obj: any = {}
+                obj [generateChildListAttributeName] = []
+                map.set(val[parentIDAttributeName], obj)
+            }
+
+            map.get(val[parentIDAttributeName])[generateChildListAttributeName].push(val)
             map.set(val[nodeIDAttributeName], val);
         })
         return result
@@ -180,7 +187,7 @@ export class TreeTool {
      *        { name: '四川', code: '02' },
      *        { name: '广东', code: '03' },
      *      ]
-     */    
+     */
     static getChildList(treeList: Array<any>, nodeIDAttributeName: string, nodeID: string, childListAttributeName: string): Array<any> {
         if (!Array.isArray(treeList)) {
             console.warn(`${treeList} is not an Array!`);
@@ -264,7 +271,7 @@ export class TreeTool {
      *    ]
      * 
      * 
-     */    
+     */
     static findPath(treeList: Array<any>, nodeIDAttributeName: string, nodeID: string, childListAttributeName: string): Array<any> {
         if (!Array.isArray(treeList)) {
             console.warn(`${treeList} is not an Array!`);
