@@ -1,6 +1,6 @@
 {
   "name": "boots-js",
-  "version": "0.4.0-beta",
+  "version": "0.5.0-beta",
   "description": "BootsJS is a library dedicated to extending the capabilities of native JavaScript, aiming to address common data structures, methods, and frequently used algorithms that are not natively supported in JavaScript.",
   "main": "dist/index.js",
   "scripts": {
