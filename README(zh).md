@@ -1,8 +1,8 @@
 # ![logo](https://github.com/JunLiangWangX/BootsJS/blob/main/resource/logo.png?raw=true)
 
-[EN](https://github.com/JunLiangWangX/BootsJS/blob/main/README.md) | [中文](https://github.com/JunLiangWangX/BootsJS/blob/main/README(zh).md)
+被别人需要是一件很幸福的事情，因此有了BootsJS这个强大的JS工具库。
 
-BootsJS 是一个致力于扩展原生 JavaScript 功能的库，旨在解决 JavaScript 原生不支持的常见数据结构、方法和常用算法。
+[EN](https://github.com/JunLiangWangX/BootsJS/blob/main/README.md) | [中文](https://github.com/JunLiangWangX/BootsJS/blob/main/README(zh).md)
 
 ## 安装
 
