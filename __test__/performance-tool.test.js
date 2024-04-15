@@ -1,4 +1,4 @@
-const { PerformanceTool } = require('../dist/performance-tool');
+const  PerformanceTool  = require('../dist/performance-tool');
 const BootsJS = require('../dist/index');
 
 
