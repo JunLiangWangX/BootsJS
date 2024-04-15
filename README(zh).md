@@ -29,16 +29,13 @@ None yet
 ### CommonJS
 
 ```javascript
-// 全局导入
+// Global Import
 const BootsJS=require('boots-js');
-let ascPriorityQueue = new BootsJS.PriorityQueue(true);
-ascPriorityQueue.enqueue('1', 1)
-ascPriorityQueue.length
-// 按需导入
-const { PriorityQueue } = require('boots-js/priority-queue');
-let priorityQueue = new PriorityQueue();
-priorityQueue.enqueue('1', 1)
-priorityQueue.length
+BootsJS.ObjectTool.type(123);
+
+// Import on Demand
+const  ObjectTool  = require('boots-js/object-tool');
+ObjectTool.type(123);
 ```
 
 ### Browser
@@ -50,16 +47,13 @@ None yet
 ### ES6 Module
 
 ```js
-// 全局导入
+// Global Import
 import BootsJS from 'boots-js'
-let ascPriorityQueue = new BootsJS.PriorityQueue(true);
-ascPriorityQueue.enqueue('1', 1)
-ascPriorityQueue.length
-// 按需导入
-import { PriorityQueue }  from 'boots-js/priority-queue'
-let priorityQueue = new PriorityQueue();
-priorityQueue.enqueue('1', 1)
-priorityQueue.length
+BootsJS.ObjectTool.type(123); //'Number'
+
+// Import on Demand
+import * as ObjectTool  from 'boots-js/object-tool' // Es6 Module
+ObjectTool.type(123); //'Number'
 ```
 
 ## 所有特性

@@ -31,14 +31,11 @@ None yet
 ```javascript
 // Global Import
 const BootsJS=require('boots-js');
-let ascPriorityQueue = new BootsJS.PriorityQueue(true);
-ascPriorityQueue.enqueue('1', 1)
-ascPriorityQueue.length
+BootsJS.ObjectTool.type(123);
+
 // Import on Demand
-const { PriorityQueue } = require('boots-js/priority-queue');
-let priorityQueue = new PriorityQueue();
-priorityQueue.enqueue('1', 1)
-priorityQueue.length
+const  ObjectTool  = require('boots-js/object-tool');
+ObjectTool.type(123);
 ```
 
 ### Browser
@@ -52,14 +49,11 @@ None yet
 ```js
 // Global Import
 import BootsJS from 'boots-js'
-let ascPriorityQueue = new BootsJS.PriorityQueue(true);
-ascPriorityQueue.enqueue('1', 1)
-ascPriorityQueue.length
+BootsJS.ObjectTool.type(123); //'Number'
+
 // Import on Demand
-import { PriorityQueue }  from 'boots-js/priority-queue'
-let priorityQueue = new PriorityQueue();
-priorityQueue.enqueue('1', 1)
-priorityQueue.length
+import * as ObjectTool  from 'boots-js/object-tool' // Es6 Module
+ObjectTool.type(123); //'Number'
 ```
 
 ## All Features

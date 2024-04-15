@@ -1,8 +1,9 @@
-const { ObjectTool } = require('../dist/object-tool');
+const  ObjectTool  = require('../dist/object-tool');
 const BootsJS = require('../dist/index');
 
 
 test('test ObjectTool class', async () => {
+    
     expect(ObjectTool.type(123)).toBe('Number');
     expect(ObjectTool.type(true)).toBe('Boolean');
     expect(ObjectTool.type('String')).toBe('String');

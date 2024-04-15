@@ -1,4 +1,4 @@
-const { StringTool } = require('../dist/string-tool');
+const  StringTool  = require('../dist/string-tool');
 const BootsJS=require('../dist/index');
 
 

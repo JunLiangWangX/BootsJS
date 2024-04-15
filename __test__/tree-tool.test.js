@@ -1,4 +1,4 @@
-const { TreeTool } = require('../dist/tree-tool');
+const  TreeTool  = require('../dist/tree-tool');
 const BootsJS = require('../dist/index');
 
 

@@ -1,4 +1,4 @@
-const { ArrayTool } = require('../dist/array-tool');
+const  ArrayTool  = require('../dist/array-tool');
 const BootsJS = require('../dist/index');
 
 

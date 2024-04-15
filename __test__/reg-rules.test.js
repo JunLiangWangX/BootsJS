@@ -1,4 +1,4 @@
-const { RegRules } = require('../dist/reg-rules');
+const  RegRules  = require('../dist/reg-rules');
 const BootsJS=require('../dist/index');
 
 
