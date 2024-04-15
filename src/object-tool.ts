@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-03-21 20:15:10
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-04-15 16:35:32
+ * @LastEditTime: 2024-04-15 22:22:45
  */
 
 /**
@@ -281,6 +281,81 @@ export function argToStrKey(arg: any): string {
   }
   return generateKey(arg)
 }
+
+/**
+ * 待加入循环引用
+ */
+export function deepMerge(obj1: any, obj2: any, arrayMergeModeEnum: ArrayMergeModeEnum = ArrayMergeModeEnum.ReplaceMerge): any {
+  if (obj1 === obj2) return obj1;
+  const type1 = type(obj1), type2 = type(obj2);
+  if (type1 !== type2
+    || type1 === NumericTypeEnum.Date
+    || type1 === NumericTypeEnum.RegExp
+  ) return obj1;
+  if (type1 in NumericTypeEnum && arrayMergeModeEnum !== ArrayMergeModeEnum.ReplaceMerge) {
+    let arr1 = Array.from(obj1), arr2 = Array.from(obj2)
+    if (arrayMergeModeEnum === ArrayMergeModeEnum.CompareMerge) {
+      arr2.forEach((val: any) => {
+        if (!arr1.includes(val)) arr1.push(val)
+      })
+    }
+    obj1 = new obj1.constructor([...arr1, ...arr2])
+
+  }
+  switch (type1) {
+    case ArrayType:
+      if (arrayMergeModeEnum === ArrayMergeModeEnum.IncrementalMerge) {
+        obj1 = obj1.concat(obj2)
+      }
+      else if (arrayMergeModeEnum === ArrayMergeModeEnum.CompareMerge) {
+        obj2.forEach((val: any) => {
+          if (!obj1.includes(val)) obj1.push(val)
+        })
+      }
+      break;
+    case ObjectType:
+      Object.keys(obj2).forEach((key: string) => {
+        if (key in obj1) obj1[key] = deepMerge(obj1[key], obj2[key])
+        else obj1[key] = obj2[key]
+      })
+      break;
+    case MapType:
+      for (let key of obj2.keys()) {
+        if (obj1.has(key)) obj1.set(key, deepMerge(obj1.get(key), obj2.get(key)))
+        else obj1.set(key, obj2.get(key))
+      }
+      break;
+    case SetType:
+      obj1 = new Set([...obj1, ...obj2]);
+      break;
+  }
+  return obj1
+}
+/**
+ *  Array merge mode enum.(数组合并模式枚举)
+ */
+enum ArrayMergeModeEnum {
+  /**
+   * Incremental merging, array splicing merging.(增量合并，数组拼接合并)
+   */
+  IncrementalMerge,
+  /**
+   * Replace  merge, directly use the left array.(替换合并，直接使用左边数组)
+   */
+  ReplaceMerge,
+  /**
+   * Compare merge, Deeply compare the contents of two arrays and merge them.(比较合并，深度比较两数组内容合并)
+   */
+  CompareMerge
+
+}
+/**
+ * @enum Array merge mode enum.(数组合并模式枚举)
+ *    - `IncrementalMerge`: Incremental merging, array splicing merging.(增量合并，数组拼接合并)
+ *    - `ReplaceMerge`: Replace  merge, directly use the left array.(替换合并，直接使用左边数组)
+ *    - `CompareMerge`: Compare merge, Deeply compare the contents of two arrays and merge them.(比较合并，深度比较两数组内容合并)
+ */
+export const arrayMergeModeEnum = ArrayMergeModeEnum
 
 enum NumericTypeEnum {
   Int8Array = "Int8Array",

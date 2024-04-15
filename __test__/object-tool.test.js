@@ -127,4 +127,28 @@ test('test ObjectTool class', async () => {
     expect(ObjectTool.argToStrKey(testObj2)===ObjectTool.argToStrKey(testObj3)).toBe(true);
     expect(ObjectTool.argToStrKey(testObj2)===ObjectTool.argToStrKey(testObj4)).toBe(false);
     expect(ObjectTool.argToStrKey(testObj2)===ObjectTool.argToStrKey(testObj5)).toBe(false);
+
+
+    expect(ObjectTool.deepMerge({a:1},{b:1})).toEqual({
+        a:1,
+        b:1
+    })
+    expect(ObjectTool.deepMerge({a:{
+        a:1,
+        b:1
+    }},{a:{
+        c:1,
+        d:1
+    }})).toEqual({
+        a:{
+            a:1,
+            b:1,
+            c:1,
+            d:1
+        }
+    })
+
+    expect(ObjectTool.deepMerge([1,2,3],[4,5,6])).toEqual([1,2,3])
+    expect(ObjectTool.deepMerge([1,2,3],[3,4],ObjectTool.arrayMergeModeEnum.IncrementalMerge)).toEqual([1,2,3,3,4])
+    expect(ObjectTool.deepMerge([1,2,3],[3,4],ObjectTool.arrayMergeModeEnum.CompareMerge)).toEqual([1,2,3,4])
 });
