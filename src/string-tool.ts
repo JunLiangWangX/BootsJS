@@ -3,16 +3,32 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-28 15:00:37
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-04-15 16:37:54
+ * @LastEditTime: 2024-04-16 11:34:17
  */
 
 /**
- * TrimOptions(去除空格选项)
+ * @enum Trim options enum.(去除空格选项枚举)   
+ *    - `all`: Remove all spaces from string. (去除字符串中所有空格)
+ *    - `side`: Remove leading and trailing spaces from string. (去除字符串左右两端空格)
+ *    - `leading`: Remove spaces leading spaces from string. (去除字符串前导空格)
+ *    - `trailing`: Remove spaces trailing spaces from string. (去除字符串尾部空格)
  */
-enum TrimOptions {
+export enum TrimOptions {
+  /**
+   * Remove all spaces from string. (去除字符串中所有空格)
+   */
   all,
+  /**
+   * Remove leading and trailing spaces from string. (去除字符串左右两端空格)
+   */
   side,
+  /**
+   * Remove spaces leading spaces from string. (去除字符串前导空格)
+   */
   leading,
+  /**
+   * Remove spaces trailing spaces from string. (去除字符串尾部空格)
+   */
   trailing
 }
 /**
@@ -47,15 +63,6 @@ export function camelCaseNameToDashName(camelCaseName: string): string {
     return '-' + letter.toLowerCase();
   });
 }
-
-/**
- * @enum Trim options enum.(去除空格选项枚举)   
- *    - `all`: Remove all spaces from string. (去除字符串中所有空格)
- *    - `side`: Remove leading and trailing spaces from string. (去除字符串左右两端空格)
- *    - `leading`: Remove spaces leading spaces from string. (去除字符串前导空格)
- *    - `trailing`: Remove spaces trailing spaces from string. (去除字符串尾部空格)
- */
-export const trimOptions = TrimOptions;
 /**
  * Remove spaces from string.(去除字符串中的空格)
  * @param {string} str  A string that needs to be remove spaces.(需要去除空格的字符串)

@@ -27,11 +27,11 @@ test('test DateTool class', () => {
     expect(DateTool.getDaysInMonth(2025, 2)).toBe(28);
     expect(DateTool.getDaysInMonth(2025, 8)).toBe(31);
 
-    expect(DateTool.getDateDiff('2024/1/26', '2025/1/26', DateTool.dateUnitEnum.day)).toBe(366);
-    expect(DateTool.getDateDiff('2024/1/26', '2025/1/26', DateTool.dateUnitEnum.month)).toBe(12);
-    expect(DateTool.getDateDiff('2025/6/19', '2025/9/18', DateTool.dateUnitEnum.month)).toBe(2);
-    expect(DateTool.getDateDiff('2025/6/19', '2025/9/18', DateTool.dateUnitEnum.year)).toBe(0);
-    expect(DateTool.getDateDiff('2025/6/19', '2025/9/18', DateTool.dateUnitEnum.all)).toEqual({
+    expect(DateTool.getDateDiff('2024/1/26', '2025/1/26', DateTool.DateUnitEnum.day)).toBe(366);
+    expect(DateTool.getDateDiff('2024/1/26', '2025/1/26', DateTool.DateUnitEnum.month)).toBe(12);
+    expect(DateTool.getDateDiff('2025/6/19', '2025/9/18', DateTool.DateUnitEnum.month)).toBe(2);
+    expect(DateTool.getDateDiff('2025/6/19', '2025/9/18', DateTool.DateUnitEnum.year)).toBe(0);
+    expect(DateTool.getDateDiff('2025/6/19', '2025/9/18', DateTool.DateUnitEnum.all)).toEqual({
         years: 0,
         months: 2,
         days: 30,
@@ -39,13 +39,13 @@ test('test DateTool class', () => {
         minutes: 0,
         seconds: 0,
     });
-    expect(DateTool.getDateDiff('2025/8/18 23:00', '2025/8/19 21:00', DateTool.dateUnitEnum.hour)).toBe(22);
-    expect(DateTool.getDateDiff('2025/8/18 23:19', '2025/8/19 21:00', DateTool.dateUnitEnum.hour)).toBe(21);
-    expect(DateTool.getDateDiff('2025/8/18 23:19', '2025/8/19 21:00', DateTool.dateUnitEnum.minute)).toBe(1301);
-    expect(DateTool.getDateDiff('2024/3/25', '2030/2/1', DateTool.dateUnitEnum.year)).toBe(5);
-    expect(DateTool.getDateDiff('2024/2/2', '2030/1/1', DateTool.dateUnitEnum.month)).toBe(70);
-    expect(DateTool.getDateDiff('2024/2/12', '2030/3/10', DateTool.dateUnitEnum.day)).toBe(2218);
-    expect(DateTool.getDateDiff('2024/2/12', '2030/3/10', DateTool.dateUnitEnum.all)).toEqual({
+    expect(DateTool.getDateDiff('2025/8/18 23:00', '2025/8/19 21:00', DateTool.DateUnitEnum.hour)).toBe(22);
+    expect(DateTool.getDateDiff('2025/8/18 23:19', '2025/8/19 21:00', DateTool.DateUnitEnum.hour)).toBe(21);
+    expect(DateTool.getDateDiff('2025/8/18 23:19', '2025/8/19 21:00', DateTool.DateUnitEnum.minute)).toBe(1301);
+    expect(DateTool.getDateDiff('2024/3/25', '2030/2/1', DateTool.DateUnitEnum.year)).toBe(5);
+    expect(DateTool.getDateDiff('2024/2/2', '2030/1/1', DateTool.DateUnitEnum.month)).toBe(70);
+    expect(DateTool.getDateDiff('2024/2/12', '2030/3/10', DateTool.DateUnitEnum.day)).toBe(2218);
+    expect(DateTool.getDateDiff('2024/2/12', '2030/3/10', DateTool.DateUnitEnum.all)).toEqual({
         years: 6,
         months: 0,
         days: 26,
@@ -58,16 +58,16 @@ test('test DateTool class', () => {
 
     expect(BootsJS.DateTool.convertTimeZone(
         1711611931754,
-        BootsJS.DateTool.timeZoneOffsetEnum['UTC+08:00'],
-        BootsJS.DateTool.timeZoneOffsetEnum['UTC+09:00']).valueOf()).toBe(1711615531754);
+        BootsJS.DateTool.TimeZoneOffsetEnum['UTC+08:00'],
+        BootsJS.DateTool.TimeZoneOffsetEnum['UTC+09:00']).valueOf()).toBe(1711615531754);
     expect(BootsJS.DateTool.convertTimeZone(
         1711611931754,
-        BootsJS.DateTool.timeZoneOffsetEnum['UTC+08:00'],
-        BootsJS.DateTool.timeZoneOffsetEnum['UTC-06:00']).valueOf()).toBe(1711561531754);
+        BootsJS.DateTool.TimeZoneOffsetEnum['UTC+08:00'],
+        BootsJS.DateTool.TimeZoneOffsetEnum['UTC-06:00']).valueOf()).toBe(1711561531754);
     expect(BootsJS.DateTool.convertTimeZone(
         1711611931754,
-        BootsJS.DateTool.timeZoneOffsetEnum['UTC+08:00'],
-        BootsJS. DateTool.timeZoneOffsetEnum['UTC±00:00']).valueOf()).toBe(1711583131754);
+        BootsJS.DateTool.TimeZoneOffsetEnum['UTC+08:00'],
+        BootsJS. DateTool.TimeZoneOffsetEnum['UTC±00:00']).valueOf()).toBe(1711583131754);
 
 
 

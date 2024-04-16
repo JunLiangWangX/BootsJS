@@ -3,25 +3,53 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-26 10:36:11
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-04-15 16:34:41
+ * @LastEditTime: 2024-04-16 11:31:41
  */
 
 /**
- * DateUnitEnum(日期单位枚举)
+ * @enum Date unit enum.(日期单位枚举)
+ *    - `all`: Returns the time difference in years, months, days, hours, minutes, and seconds. (返回年、月、日、小时、分钟和秒的时间差)
+ *    - `year`: Returns the time difference in years. (返回年的时间差)
+ *    - `month`: Returns the time difference in months. (返回月的时间差)
+ *    - `day`: Returns the time difference in days. (返回天的时间差)
+ *    - `hour`: Returns the time difference in hours. (返回小时的时间差)
+ *    - `minute`: Returns the time difference in minutes. (返回分钟的时间差)
+ *    - `second`: Returns the time difference in seconds. (返回秒的时间差)
  */
-enum DateUnitEnum {
+export enum DateUnitEnum {
+  /**
+   * Returns the time difference in years, months, days, hours, minutes, and seconds. (返回年、月、日、小时、分钟和秒的时间差)
+   */
   all,
+  /**
+   * Returns the time difference in years. (返回年的时间差)
+   */
   year,
+  /**
+   * Returns the time difference in months. (返回月的时间差)
+   */
   month,
+  /**
+   * Returns the time difference in days. (返回天的时间差)
+   */
   day,
+  /**
+   * Returns the time difference in hours. (返回小时的时间差)
+   */
   hour,
+  /**
+   * Returns the time difference in minutes. (返回分钟的时间差)
+   */
   minute,
+  /**
+   * Returns the time difference in seconds. (返回秒的时间差)
+   */
   second
 }
 /**
- * TimeZoneOffsetEnum(时区偏移量枚举)
+ * @enum Time zone offset enum.(时区偏移量枚举) 
  */
-enum TimeZoneOffsetEnum {
+export enum TimeZoneOffsetEnum {
   'UTC-12:00' = 720,
   'UTC-11:00' = 660,
   'UTC-10:00' = 600,
@@ -68,18 +96,6 @@ interface DateTime {
   minutes: number,
   seconds: number,
 }
-
-/**
- * @enum Date unit enum.(日期单位枚举)   
- *    - `all`: Returns the time difference in years, months, days, hours, minutes, and seconds. (返回年、月、日、小时、分钟和秒的时间差)
- *    - `year`: Returns the time difference in years. (返回年的时间差)
- *    - `month`: Returns the time difference in months. (返回月的时间差)
- *    - `day`: Returns the time difference in days. (返回天的时间差)
- *    - `hour`: Returns the time difference in hours. (返回小时的时间差)
- *    - `minute`: Returns the time difference in minutes. (返回分钟的时间差)
- *    - `second`: Returns the time difference in seconds. (返回秒的时间差)
- */
-export const dateUnitEnum = DateUnitEnum;
 /**
  * Format date and time.(格式化日期与时间)
  * @param {string|number|Date} date Specify date and time, support timestamp/date character/Date object, default is current date.(指定日期时间，支持时间戳/日期字符/Date对象，默认为当前日期)
@@ -240,10 +256,6 @@ export function dateCalculator(startDate: string | number | Date = new Date(), o
 
   return newDate;
 }
-/**
- * @enum Time zone offset enum.(时区偏移量枚举) 
- */
-export const timeZoneOffsetEnum = TimeZoneOffsetEnum;
 /**
  * Convert time zone.(转换时区)
  * @param {string} date Give a date.(给定时间)
