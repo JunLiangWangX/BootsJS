@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-03-21 20:15:10
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-04-15 22:22:45
+ * @LastEditTime: 2024-04-16 11:22:51
  */
 
 /**
@@ -283,58 +283,101 @@ export function argToStrKey(arg: any): string {
 }
 
 /**
- * 待加入循环引用
+ * Deep merge obj2 to obj1.(深度合并obj2到obj1)
+ * @param {any} obj1 
+ * @param {any} obj2
+ * @param {*} arrayMergeModeEnum Array merging mode.(数组合并模式)
+ *    - ReplaceMerge: Replace merge, directly use the left array，this value is the default.(替换合并，直接使用左边数组，该值为默认值)
+ *    - IncrementalMerge: Incremental merging, array splicing merging.(增量合并，数组拼接合并)
+ *    - CompareMerge: Compare merge, Deeply compare the contents of two arrays and merge them.(比较合并，深度比较两数组内容合并)
+ * @example
+ * // Note: Comparing reference types during merging is based on address comparison, not usage value comparison!
+ * // 注意：合并中比较引用类型都是进行地址比对，并未对使用值比对！
+ * 
+ * const  ObjectTool  = require('boots-js/object-tool'); // Node
+ * import * as ObjectTool  from 'boots-js/object-tool' // Es6 Module
+ * 
+ * // ReplaceMerge(替换合并)
+ * ObjectTool.deepMerge([1,2,3],[4,5,6]) // [1,2,3]
+ * // IncrementalMerge(增量合并)
+ * ObjectTool.deepMerge([1,2,3],[3,4],ObjectTool.ArrayMergeModeEnum.IncrementalMerge) // [1,2,3,3,4]
+ * // CompareMerge(比较合并)
+ * ObjectTool.deepMerge([1,2,3],[3,4],ObjectTool.ArrayMergeModeEnum.CompareMerge)     // [1,2,3,4]
+ *  
  */
-export function deepMerge(obj1: any, obj2: any, arrayMergeModeEnum: ArrayMergeModeEnum = ArrayMergeModeEnum.ReplaceMerge): any {
-  if (obj1 === obj2) return obj1;
-  const type1 = type(obj1), type2 = type(obj2);
-  if (type1 !== type2
-    || type1 === NumericTypeEnum.Date
-    || type1 === NumericTypeEnum.RegExp
-  ) return obj1;
-  if (type1 in NumericTypeEnum && arrayMergeModeEnum !== ArrayMergeModeEnum.ReplaceMerge) {
-    let arr1 = Array.from(obj1), arr2 = Array.from(obj2)
+export function deepMerge(obj1: any, obj2: any, arrayMergeModeEnum = ArrayMergeModeEnum.ReplaceMerge): any {
+  function mergeTypedArray(typeArray1: Int8Array, typeArray2: Int8Array): Array<number> {
+    let arr1 = Array.from(typeArray1), arr2 = Array.from(typeArray2)
     if (arrayMergeModeEnum === ArrayMergeModeEnum.CompareMerge) {
       arr2.forEach((val: any) => {
         if (!arr1.includes(val)) arr1.push(val)
       })
+      return arr1
     }
-    obj1 = new obj1.constructor([...arr1, ...arr2])
-
+    else return arr1.concat(arr2)
   }
-  switch (type1) {
-    case ArrayType:
-      if (arrayMergeModeEnum === ArrayMergeModeEnum.IncrementalMerge) {
-        obj1 = obj1.concat(obj2)
-      }
-      else if (arrayMergeModeEnum === ArrayMergeModeEnum.CompareMerge) {
-        obj2.forEach((val: any) => {
-          if (!obj1.includes(val)) obj1.push(val)
+  function recursion(obj1: any, obj2: any, visited1 = new WeakSet(), visited2 = new WeakSet()) {
+    if (obj1 === obj2) return obj1;
+    const type1 = type(obj1), type2 = type(obj2);
+    if (type1 !== type2
+      || type1 === NumericTypeEnum.Date
+      || type1 === NumericTypeEnum.RegExp
+    ) return obj1;
+    if (type1 in NumericTypeEnum && arrayMergeModeEnum !== ArrayMergeModeEnum.ReplaceMerge) {
+      let mergeArr = mergeTypedArray(obj1, obj2)
+      obj1 = new obj1.constructor(mergeArr)
+    }
+    if (visited1.has(obj1) || visited2.has(obj2)) return obj1;
+    visited1.add(obj1);
+    visited2.add(obj2);
+    switch (type1) {
+      case ArrayType:
+        if (arrayMergeModeEnum === ArrayMergeModeEnum.IncrementalMerge) {
+          obj1 = obj1.concat(obj2)
+        }
+        else if (arrayMergeModeEnum === ArrayMergeModeEnum.CompareMerge) {
+          obj2.forEach((val: any) => {
+            if (!obj1.includes(val)) obj1.push(val)
+          })
+        }
+        break;
+      case ObjectType:
+        Object.keys(obj2).forEach((key: string) => {
+          if (key in obj1) obj1[key] = recursion(obj1[key], obj2[key])
+          else obj1[key] = obj2[key]
         })
-      }
-      break;
-    case ObjectType:
-      Object.keys(obj2).forEach((key: string) => {
-        if (key in obj1) obj1[key] = deepMerge(obj1[key], obj2[key])
-        else obj1[key] = obj2[key]
-      })
-      break;
-    case MapType:
-      for (let key of obj2.keys()) {
-        if (obj1.has(key)) obj1.set(key, deepMerge(obj1.get(key), obj2.get(key)))
-        else obj1.set(key, obj2.get(key))
-      }
-      break;
-    case SetType:
-      obj1 = new Set([...obj1, ...obj2]);
-      break;
+        break;
+      case MapType:
+        for (let key of obj2.keys()) {
+          if (obj1.has(key)) obj1.set(key, recursion(obj1.get(key), obj2.get(key)))
+          else obj1.set(key, obj2.get(key))
+        }
+        break;
+      case SetType:
+        obj1 = new Set([...obj1, ...obj2]);
+        break;
+      case ArrayBufferType:
+        if (arrayMergeModeEnum !== ArrayMergeModeEnum.ReplaceMerge)
+          obj1 = new Int8Array(mergeTypedArray(new Int8Array(obj1), new Int8Array(obj2))).buffer
+        break;
+      case DataViewType:
+        if (arrayMergeModeEnum !== ArrayMergeModeEnum.ReplaceMerge)
+          obj1 = new DataView(new Int8Array(mergeTypedArray(new Int8Array(obj1.buffer), new Int8Array(obj2.buffer))).buffer)
+        break;
+    }
+    visited1.delete(obj1)
+    visited2.delete(obj2)
+    return obj1
   }
-  return obj1
+  return recursion(obj1, obj2)
 }
 /**
  *  Array merge mode enum.(数组合并模式枚举)
+ *    - `IncrementalMerge`: Incremental merging, array splicing merging.(增量合并，数组拼接合并)
+ *    - `ReplaceMerge`: Replace  merge, directly use the left array.(替换合并，直接使用左边数组)
+ *    - `CompareMerge`: Compare merge, Deeply compare the contents of two arrays and merge them.(比较合并，深度比较两数组内容合并)
  */
-enum ArrayMergeModeEnum {
+export enum ArrayMergeModeEnum {
   /**
    * Incremental merging, array splicing merging.(增量合并，数组拼接合并)
    */
@@ -349,14 +392,6 @@ enum ArrayMergeModeEnum {
   CompareMerge
 
 }
-/**
- * @enum Array merge mode enum.(数组合并模式枚举)
- *    - `IncrementalMerge`: Incremental merging, array splicing merging.(增量合并，数组拼接合并)
- *    - `ReplaceMerge`: Replace  merge, directly use the left array.(替换合并，直接使用左边数组)
- *    - `CompareMerge`: Compare merge, Deeply compare the contents of two arrays and merge them.(比较合并，深度比较两数组内容合并)
- */
-export const arrayMergeModeEnum = ArrayMergeModeEnum
-
 enum NumericTypeEnum {
   Int8Array = "Int8Array",
   Int16Array = "Int16Array",

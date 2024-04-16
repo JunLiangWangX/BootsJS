@@ -81,7 +81,7 @@ test('test ObjectTool class', async () => {
         Uint16Array:new Uint16Array([11111,22222,3323,4444,4455]),
         Int16Array:new Int16Array([11,22,33,44,55]),
         Int8Array:new Int8Array([1,2,3,4,5]),
-        Uint8Array:new Uint8Array([1111,2222,3333,4444,5555]),
+        Uint8Array:new Uint8Array([1,2,3,4,5]),
         Int32Array:new Int32Array([111,222,333,444,555]),
         Float32Array:new Float32Array([11,22,33,44,55]),
         BigUint64Array:new BigUint64Array([BigInt(123),BigInt(123),BigInt(123)]),
@@ -101,7 +101,7 @@ test('test ObjectTool class', async () => {
         Int16Array:new Int16Array([11,22,33,44,55]),
         Array:new Array(...[obj1,obj2,obj3,obj4]),
         Uint16Array:new Uint16Array([11111,22222,3323,4444,4455]),
-        Uint8Array:new Uint8Array([1111,2222,3333,4444,5555]),
+        Uint8Array:new Uint8Array([1,2,3,4,5]),
         Set:new Set([obj4,obj3,obj2,obj1]),
         Int32Array:new Int32Array([111,222,333,444,555]),
         Object:obj4,
@@ -147,8 +147,35 @@ test('test ObjectTool class', async () => {
             d:1
         }
     })
-
-    expect(ObjectTool.deepMerge([1,2,3],[4,5,6])).toEqual([1,2,3])
-    expect(ObjectTool.deepMerge([1,2,3],[3,4],ObjectTool.arrayMergeModeEnum.IncrementalMerge)).toEqual([1,2,3,3,4])
-    expect(ObjectTool.deepMerge([1,2,3],[3,4],ObjectTool.arrayMergeModeEnum.CompareMerge)).toEqual([1,2,3,4])
+    expect(ObjectTool.deepMerge({
+        a:'1',
+        arr1:[1,23],
+        b:{
+            ba:2,
+            bb:false,
+            bc:[1,2,{a:1}]
+        }
+    },{
+        arr1:[1,23],
+        b:{
+            bc:[1,2,{a:1},3,4],
+            bd:{a:1}
+        },
+        c:false,
+    },ObjectTool.ArrayMergeModeEnum.CompareMerge)).toEqual({
+        a:'1',
+        arr1:[1,23],
+        b:{
+            ba:2,
+            bb:false,
+            bc:[1,2,{a:1},{a:1},3,4],
+            bd:{a:1}
+        },
+        c:false,
+    })
+    
+     expect(ObjectTool.deepMerge([1,2,3],[4,5,6])).toEqual([1,2,3])
+     expect(ObjectTool.deepMerge([1,2,3],[3,4],ObjectTool.ArrayMergeModeEnum.IncrementalMerge)).toEqual([1,2,3,3,4])
+     expect(ObjectTool.deepMerge([1,2,3],[3,4],ObjectTool.ArrayMergeModeEnum.CompareMerge)).toEqual([1,2,3,4])
+    
 });
