@@ -324,3 +324,11 @@ const tree2ArrayDefaultOptions: Tree2ArrayOptions = {
     nodeIDAttributeName: "id",
     deleteAttributeList: [],
 }
+
+export default {
+    tree2Array,
+    array2Tree,
+    getChildList,
+    filter,
+    findPath
+}

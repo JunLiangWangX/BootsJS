@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-26 10:36:11
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-04-16 11:31:41
+ * @LastEditTime: 2024-07-22 22:05:19
  */
 
 /**
@@ -284,4 +284,16 @@ export function convertTimeZone(date: string | number | Date = new Date(), orgin
     minutes: (orginTimeZone - timeZone),
     seconds: 0
   })
+}
+
+
+export default{
+  DateUnitEnum,
+  TimeZoneOffsetEnum,
+  dateFormater,
+  isLeapYear,
+  getDaysInMonth,
+  getDateDiff,
+  dateCalculator,
+  convertTimeZone
 }

@@ -1,5 +1,5 @@
-const  ArrayTool  = require('../dist/array-tool');
-const BootsJS = require('../dist/index');
+const  ArrayTool  = require('../dist/cjs/array-tool');
+const BootsJS = require('../dist/cjs/index');
 
 
 test('test ArrayTool class', () => {

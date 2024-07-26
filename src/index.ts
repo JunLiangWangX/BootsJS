@@ -1,4 +1,24 @@
-export { PriorityQueue } from './priority-queue';
+import PriorityQueue from './priority-queue';
+import  RegRules from './reg-rules';
+import DateTool from './date-tool';
+import PerformanceTool from './performance-tool';
+import StringTool from './string-tool';
+import ObjectTool from './object-tool';
+import ArrayTool from './array-tool';
+import TreeTool from './tree-tool';
+
+export default{
+    PriorityQueue,
+    RegRules,
+    DateTool,
+    PerformanceTool,
+    StringTool,
+    ObjectTool,
+    ArrayTool,
+    TreeTool
+}
+
+// export { PriorityQueue } from './priority-queue';
 /**
  * Some common regular expression patterns.(一些常见的正则表达式规则)
  * 
@@ -14,7 +34,7 @@ export { PriorityQueue } from './priority-queue';
  * RegRules.IDCardRule.test('12948392023');
  *  ```
  */
-export * as RegRules from './reg-rules';
+// export * as RegRules from './reg-rules';
 /**
  * Some tools for working with date and time.(一些处理日期时间的工具)
  * 
@@ -30,7 +50,7 @@ export * as RegRules from './reg-rules';
  * DateTool.dateFormater(new Date(),'YYYY-MM-DD HH:mm:ss');
  *  ```
  */
-export * as DateTool from './date-tool';
+// export * as DateTool from './date-tool';
 /**
  * Some methods to improve performance.(一些提升性能的方法)
  * 
@@ -46,7 +66,7 @@ export * as DateTool from './date-tool';
  * PerformanceTool.debounce(test);
  *  ```
  */
-export * as PerformanceTool from './performance-tool';
+// export * as PerformanceTool from './performance-tool';
 /**
  * Some methods of processing strings.(一些处理字符串的方法)
  * 
@@ -62,7 +82,7 @@ export * as PerformanceTool from './performance-tool';
  * StringTool.dashNameToUpperCamelCaseName('string-tool')
  *  ```
  */
-export * as StringTool from './string-tool';
+// export * as StringTool from './string-tool';
 /**
  * Some tools for working with Object.(一些处理对象的工具)
  *
@@ -78,7 +98,7 @@ export * as StringTool from './string-tool';
  * ObjectTool.type(123); //'Number'
  *  ```
  */
-export * as ObjectTool from './object-tool';
+// export * as ObjectTool from './object-tool';
 /**
  * Some tools for working with array.(一些处理数组的工具)
  * 
@@ -94,7 +114,7 @@ export * as ObjectTool from './object-tool';
  * ArrayTool.removeDuplicates([1,2,3,1]);
  *  ```
  */
-export * as ArrayTool from './array-tool';
+// export * as ArrayTool from './array-tool';
 /**
  * Some tools for working with tree.(一些处理树的工具)
  *
@@ -110,4 +130,4 @@ export * as ArrayTool from './array-tool';
  * TreeTool.tree2Array(tree,'childList',options)
  *  ```
  */
-export * as TreeTool from './tree-tool';
+// export * as TreeTool from './tree-tool';

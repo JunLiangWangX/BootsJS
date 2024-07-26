@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-21 14:40:51
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-02-28 16:46:09
+ * @LastEditTime: 2024-07-22 22:19:10
  */
 
 /**
@@ -35,7 +35,7 @@ interface queueItem {
  * let priorityQueue = new PriorityQueue();
  *  ```
  */
-export class PriorityQueue {
+export default class PriorityQueue {
   #isAsc: boolean;
   #heap: any[];
   /**

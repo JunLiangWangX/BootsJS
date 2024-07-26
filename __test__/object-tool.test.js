@@ -1,5 +1,5 @@
-const  ObjectTool  = require('../dist/object-tool');
-const BootsJS = require('../dist/index');
+const  ObjectTool  = require('../dist/cjs/object-tool');
+const BootsJS = require('../dist/cjs/index');
 
 
 test('test ObjectTool class', async () => {

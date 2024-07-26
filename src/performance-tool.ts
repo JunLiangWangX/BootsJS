@@ -135,3 +135,10 @@ interface CacheItem {
   result: any,
   timestamp: number
 }
+
+
+export default {
+  debounce,
+  throttle,
+  memoize
+}

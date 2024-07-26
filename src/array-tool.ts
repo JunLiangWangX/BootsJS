@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-03-28 11:01:41
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-04-15 16:34:20
+ * @LastEditTime: 2024-07-22 23:06:58
  */
 import { argToStrKey } from "./object-tool";
 
@@ -44,4 +44,8 @@ export function removeDuplicates(arr: Array<any>, isCompareValue: boolean = fals
         }
     })
     return result
+}
+
+export default {
+    removeDuplicates
 }

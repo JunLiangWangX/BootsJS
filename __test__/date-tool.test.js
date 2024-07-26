@@ -1,5 +1,5 @@
-const  DateTool = require('../dist/date-tool');
-const BootsJS = require('../dist/index');
+const  DateTool = require('../dist/cjs/date-tool');
+const BootsJS = require('../dist/cjs/index');
 
 test('test DateTool class', () => {
     expect(DateTool.dateFormater('Mon Feb 26 2024', 'YYYY-MM-DD')).toBe('2024-02-26');

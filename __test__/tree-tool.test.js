@@ -1,5 +1,5 @@
-const  TreeTool  = require('../dist/tree-tool');
-const BootsJS = require('../dist/index');
+const  TreeTool  = require('../dist/cjs/tree-tool');
+const BootsJS = require('../dist/cjs/index');
 
 
 test('test TreeTool class', () => {

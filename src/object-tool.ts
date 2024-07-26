@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-03-21 20:15:10
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-04-16 11:22:51
+ * @LastEditTime: 2024-07-22 22:16:44
  */
 
 /**
@@ -414,3 +414,13 @@ const ArrayBufferType = "ArrayBuffer";
 const DataViewType = "DataView";
 const FunctionType = "Function";
 const SymbolType = 'Symbol';
+
+
+export default {
+  type,
+  deepClone,
+  isEqual,
+  argToStrKey,
+  deepMerge,
+  ArrayMergeModeEnum
+}

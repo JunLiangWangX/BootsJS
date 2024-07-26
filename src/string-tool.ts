@@ -105,3 +105,10 @@ function checkIsString(str: any): boolean {
 
   return false
 }
+
+export default {
+  TrimOptions,
+  dashNameToUpperCamelCaseName,
+  camelCaseNameToDashName,
+  trim
+}

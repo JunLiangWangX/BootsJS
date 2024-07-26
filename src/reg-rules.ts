@@ -114,3 +114,19 @@ export const audioRule = /\.(mp3|wav|flac|aac|ogg|wma)$/
  * RegRules.videoRule.test('test.mp4') //true
  */
 export const videoRule = /\.(mp4|mov|avi|mkv|wmv|webm)$/
+
+
+export default {
+    videoRule,
+    audioRule,
+    imageRule,
+    IPAddressRule,
+    emailRule,
+    chinesePhoneNumberRule,
+    chineseIDCardRule,
+    digitsAndLettersRule,
+    uppercaseLettersRule,
+    lowercaseLettersRule,
+    lettersRule,
+    digitsRule
+}

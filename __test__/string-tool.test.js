@@ -1,5 +1,5 @@
-const  StringTool  = require('../dist/string-tool');
-const BootsJS=require('../dist/index');
+const  StringTool  = require('../dist/cjs/string-tool');
+const BootsJS=require('../dist/cjs/index');
 
 
 test('test StringTool class', () => {

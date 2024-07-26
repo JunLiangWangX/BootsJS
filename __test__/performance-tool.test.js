@@ -1,5 +1,5 @@
-const  PerformanceTool  = require('../dist/performance-tool');
-const BootsJS = require('../dist/index');
+const  PerformanceTool  = require('../dist/cjs/performance-tool');
+const BootsJS = require('../dist/cjs/index');
 
 
 test('test PerformanceTool class', () => {
