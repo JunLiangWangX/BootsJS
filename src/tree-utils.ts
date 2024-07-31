@@ -1,9 +1,18 @@
-/*
- * @Description: Some utils for working with tree.(一些处理树的工具)
- * @Author: JunLiangWang
- * @Date: 2024-03-29 09:18:45
- * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-07-31 15:45:28
+/**
+ * utils for working with tree.(一些处理树的工具)
+ * 
+ * ```ts
+ * // -------- Global Import(全局引入)
+ * const BootsJS = require('boots-js/cjs'); // CommandJS
+ * import BootsJS from 'boots-js' // Es6 Module
+ * BootsJS.TreeUtils.tree2Array(tree,'childList',options)
+ *
+ * // -------- Import on Demand(按需引入)
+ * const  TreeUtils  = require('boots-js/cjs/tree-utils'); // CommandJS
+ * import TreeUtils  from 'boots-js/tree-utils' // Es6 Module
+ * TreeUtils.tree2Array(tree,'childList',options)
+ *  ```
+ * @module
  */
 
 /**
@@ -18,8 +27,8 @@
  *    - nodeIDAttributeName: Attribute name of node ID.(节点ID的属性名称)
  *    - deleteAttributeList: pecify the attribute in the node to be deleted.(指定删除节点中的属性)
  * @example
- * const  TreeUtil  = require('boots-js/tree-util'); // Node
- * import * as TreeUtil  from 'boots-js/tree-util' // Es6 Module
+ * const  TreeUtils  = require('boots-js/cjs/tree-utils'); // CommandJS
+ * import TreeUtils  from 'boots-js/tree-utils' // Es6 Module
  * 
  *    const tree = {
  *        name: '中国',
@@ -39,7 +48,7 @@
  *            },
  *        ]
  *    } 
- *    let arr = TreeUtil.tree2Array([tree], 'childList', {
+ *    let arr = TreeUtils.tree2Array([tree], 'childList', {
  *        isGenerateLevel: true,
  *        generateLevelAttributeName:'level',
  *        isGenerateParentID: true,
@@ -98,8 +107,8 @@ export function tree2Array(treeList: Array<any>, childListAttributeName: string,
  * @param {string} generateChildListAttributeName Specify the attribute name of the child node in the tree.(指定树中存放子节点的属性名)
  * @param {Function} judgeRootNodeFunction Function to determine whether a node is the root node.(判断节点是否为根节点的方法)
  * @example
- * const  TreeUtil  = require('boots-js/tree-util'); // Node
- * import * as TreeUtil  from 'boots-js/tree-util' // Es6 Module
+ * const  TreeUtils  = require('boots-js/cjs/tree-utils'); // CommandJS
+ * import TreeUtils  from 'boots-js/tree-utils' // Es6 Module
  * 
  *    const arr = [
  *        { name: '中国', code: '0' , level:0 },
@@ -107,7 +116,7 @@ export function tree2Array(treeList: Array<any>, childListAttributeName: string,
  *        { name: '四川', code: '02', level:1 , parentCode: '0' },
  *        { name: '广东', code: '03', level:1 , parentCode: '0' },
  *    ]
- *    let genTree = TreeUtil.array2Tree(arr, 'code', 'parentCode', 'childList', (node) => {
+ *    let genTree = TreeUtils.array2Tree(arr, 'code', 'parentCode', 'childList', (node) => {
  *        return !('parentCode' in node)
  *    })
  *    console.info(genTree)
@@ -152,8 +161,8 @@ export function array2Tree(arr: Array<any>, nodeIDAttributeName: string, parentI
  * @param {string} nodeID Specify the ID of the node whose child nodes need to be obtained.(指定需要获取其子节点的节点的ID)
  * @param {string} childListAttributeName The attribute name of the child node stored in the tree.(树中存放子节点的属性名)
  * @example 
- * const  TreeUtil  = require('boots-js/tree-util'); // Node
- * import * as TreeUtil  from 'boots-js/tree-util' // Es6 Module
+ * const  TreeUtils  = require('boots-js/cjs/tree-utils'); // CommandJS
+ * import TreeUtils  from 'boots-js/tree-utils' // Es6 Module
  * 
  *    const tree = {
  *        name: '中国',
@@ -173,7 +182,7 @@ export function array2Tree(arr: Array<any>, nodeIDAttributeName: string, parentI
  *            },
  *        ]
  *    } 
- *    let arr = TreeUtil.getChildList([tree], 'code', '0', 'childList')
+ *    let arr = TreeUtils.getChildList([tree], 'code', '0', 'childList')
  *    console.info(arr)
  *      [
  *        { name: '重庆', code: '01' },
@@ -211,8 +220,8 @@ export function getChildList(treeList: Array<any>, nodeIDAttributeName: string, 
  *    - nodeIDAttributeName: Attribute name of node ID.(节点ID的属性名称)
  *    - deleteAttributeList: pecify the attribute in the node to be deleted.(指定删除节点中的属性)
  * @example
- * const  TreeUtil  = require('boots-js/tree-util'); // Node
- * import * as TreeUtil  from 'boots-js/tree-util' // Es6 Module
+ * const  TreeUtils  = require('boots-js/cjs/tree-utils'); // CommandJS
+ * import TreeUtils  from 'boots-js/tree-utils' // Es6 Module
  * 
  *    const tree = {
  *          name: '中国',
@@ -224,7 +233,7 @@ export function getChildList(treeList: Array<any>, nodeIDAttributeName: string, 
  *            { name: '广东', code: '03', level:1, parentCode: '0', childList: [] }
  *          ]
  *    }
- *    let arr = TreeUtil.filter([tree], 'childList', (obj) => {
+ *    let arr = TreeUtils.filter([tree], 'childList', (obj) => {
  *        return obj.parentCode === '0'
  *    })
  *    console.info(arr)
@@ -244,8 +253,8 @@ export function filter(treeList: Array<any>, childListAttributeName: string, fil
  * @param {string} nodeID Specify the node ID whose path needs to be obtained.(指定需要获取路径的节点ID)
  * @param {string} childListAttributeName The attribute name of the child node stored in the tree.(树中存放子节点的属性名)
  * @example 
- * const  TreeUtil  = require('boots-js/tree-util'); // Node
- * import * as TreeUtil  from 'boots-js/tree-util' // Es6 Module
+ * const  TreeUtils  = require('boots-js/cjs/tree-utils'); // CommandJS
+ * import TreeUtils  from 'boots-js/tree-utils' // Es6 Module
  * 
  *    const tree = {
  *          name: '中国',
@@ -257,7 +266,7 @@ export function filter(treeList: Array<any>, childListAttributeName: string, fil
  *            { name: '广东', code: '03', level:1, parentCode: '0', childList: [] }
  *          ]
  *    }
- *    let path = TreeUtil.findPath([tree],'code','03','childList')
+ *    let path = TreeUtils.findPath([tree],'code','03','childList')
  *    console.info(path)
  *    [
  *        {

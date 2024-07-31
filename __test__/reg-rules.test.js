@@ -1,5 +1,5 @@
 const  RegRules  = require('../dist/cjs/reg-rules');
-const BootsJS=require('../dist/cjs/index');
+const BootsJS=require('../dist/cjs');
 
 
 test('test RegRules class', () => {

@@ -30,11 +30,11 @@ https://unpkg.com/boots-js@latest/umd/index.js
 
 ```javascript
 // 全局导入
-const BootsJS=require('boots-js/cjs/index');
-BootsJS.ObjectUtil.type(123);
+const BootsJS=require('boots-js/cjs');
+BootsJS.ObjectUtils.type(123);
 // 按需导入
-const  ObjectUtil  = require('boots-js/cjs/object-util');
-ObjectUtil.type(123);
+const  ObjectUtils  = require('boots-js/cjs/object-utils');
+ObjectUtils.type(123);
 ```
 
 ### Browser
@@ -48,10 +48,10 @@ None yet
 ```js
 // 全局导入
 import BootsJS from 'boots-js'
-BootsJS.ObjectUtil.type(123);
+BootsJS.ObjectUtils.type(123);
 // 按需导入
-import  ObjectUtil  from 'boots-js/object-util' 
-ObjectUtil.type(123);
+import  ObjectUtils  from 'boots-js/object-utils' 
+ObjectUtils.type(123);
 ```
 
 ## 所有特性

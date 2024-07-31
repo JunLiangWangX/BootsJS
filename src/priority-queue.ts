@@ -1,9 +1,18 @@
-/*
- * @Description: priority queue.(优先级队列)
- * @Author: JunLiangWang
- * @Date: 2024-02-21 14:40:51
- * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-07-22 22:19:10
+/**
+ * priority queue.(优先级队列)
+ * 
+ * ```ts
+ * // -------- Global Import(全局引入)
+ * const BootsJS = require('boots-js/cjs'); // CommandJS
+ * import BootsJS from 'boots-js' // Es6 Module
+ * let ascPriorityQueue = new BootsJS.PriorityQueue(true);
+ * 
+ * // -------- Import on Demand(按需引入)
+ * const  PriorityQueue  = require('boots-js/cjs/priority-queue'); // CommandJS
+ * import  PriorityQueue  from 'boots-js/priority-queue' // Es6 Module
+ * let priorityQueue = new PriorityQueue();
+ *  ```
+ * @module
  */
 
 /**
@@ -19,22 +28,6 @@ interface queueItem {
    */
   priority: number;
 }
-
-/**
- * 优先级队列
- * 
- * ```ts
- * // -------- Global Import(全局引入)
- * const BootsJS = require('boots-js'); // Node
- * import BootsJS from 'boots-js' // Es6 Module
- * let ascPriorityQueue = new BootsJS.PriorityQueue(true);
- * 
- * // -------- Import on Demand(按需引入)
- * const { PriorityQueue } = require('boots-js/priority-queue'); // Node
- * import { PriorityQueue } from 'boots-js/priority-queue' // Es6 Module
- * let priorityQueue = new PriorityQueue();
- *  ```
- */
 export default class PriorityQueue {
   #isAsc: boolean;
   #heap: any[];

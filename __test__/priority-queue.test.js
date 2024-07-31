@@ -1,5 +1,5 @@
 const PriorityQueue  = require('../dist/cjs/priority-queue');
-const BootsJS=require('../dist/cjs/index');
+const BootsJS=require('../dist/cjs');
 
 
 test('test PriorityQueue class', () => {
