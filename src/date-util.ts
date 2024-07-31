@@ -1,9 +1,9 @@
 /*
- * @Description: Some tools for working with date and time.(一些处理日期时间的工具)
+ * @Description: Some utils for working with date and time.(一些处理日期时间的工具)
  * @Author: JunLiangWang
  * @Date: 2024-02-26 10:36:11
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-07-22 22:05:19
+ * @LastEditTime: 2024-07-31 15:43:52
  */
 
 /**
@@ -101,13 +101,13 @@ interface DateTime {
  * @param {string|number|Date} date Specify date and time, support timestamp/date character/Date object, default is current date.(指定日期时间，支持时间戳/日期字符/Date对象，默认为当前日期)
  * @param {string} formater Specify the date and time format, default is YYYY-MM-DD HH:mm:ss.(指定日期和时间的格式，默认为YYYY-MM-DD HH:mm:ss)
  * @example 
- * const  DateTool  = require('boots-js/date-tool'); // Node
- * import * as DateTool  from 'boots-js/date-tool' // Es6 Module
+ * const  DateUtil  = require('boots-js/date-util'); // Node
+ * import * as DateUtil  from 'boots-js/date-util' // Es6 Module
  * 
- * DateTool.dateFormater('Mon Feb 26 2024', 'YYYY-MM-DD')             //2024-02-26
- * DateTool.dateFormater('2024/2/26', 'YYYY-MM-DD')                   //2024-02-26
- * DateTool.dateFormater(1708917102083, 'YYYY-MM-DD HH:mm:ss')        //'2024-02-26 11:11:42'
- * DateTool.dateFormater('2024/2/26 11:11:42', 'YYYY/MM/DD/HH/mm/ss') //'2024/02/26/11/11/42';
+ * DateUtil.dateFormater('Mon Feb 26 2024', 'YYYY-MM-DD')             //2024-02-26
+ * DateUtil.dateFormater('2024/2/26', 'YYYY-MM-DD')                   //2024-02-26
+ * DateUtil.dateFormater(1708917102083, 'YYYY-MM-DD HH:mm:ss')        //'2024-02-26 11:11:42'
+ * DateUtil.dateFormater('2024/2/26 11:11:42', 'YYYY/MM/DD/HH/mm/ss') //'2024/02/26/11/11/42';
  */
 export function dateFormater(date: string | number | Date = new Date(), formater: string = 'YYYY-MM-DD HH:mm:ss'): String {
   let tempDate = date ? new Date(date) : new Date(),
@@ -131,11 +131,11 @@ export function dateFormater(date: string | number | Date = new Date(), formater
  * Determine whether a given date is a leap year.(给定年份判断是否闰年)
  * @param {number} year Specify the year.(指定年份)
  * @example 
- * const  DateTool  = require('boots-js/date-tool'); // Node
- * import * as DateTool  from 'boots-js/date-tool' // Es6 Module
+ * const  DateUtil  = require('boots-js/date-util'); // Node
+ * import * as DateUtil  from 'boots-js/date-util' // Es6 Module
  * 
- * DateTool.isLeapYear(2040)             //true
- * DateTool.isLeapYear(2019)             //false
+ * DateUtil.isLeapYear(2040)             //true
+ * DateUtil.isLeapYear(2019)             //false
  */
 export function isLeapYear(year: number): boolean {
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
@@ -145,12 +145,12 @@ export function isLeapYear(year: number): boolean {
  * @param {number} year Specify the year.(指定年份)
  * @param {number} month Specify the month, starting from 1.(指定月份，从1月开始)
  * @example 
- * const  DateTool  = require('boots-js/date-tool'); // Node
- * import * as DateTool  from 'boots-js/date-tool' // Es6 Module
+ * const  DateUtil  = require('boots-js/date-util'); // Node
+ * import * as DateUtil  from 'boots-js/date-util' // Es6 Module
  * 
- * DateTool.getDaysInMonth(2024, 2)            //29
- * DateTool.getDaysInMonth(2025, 2)            //28
- * DateTool.getDaysInMonth(2025, 8)            //31
+ * DateUtil.getDaysInMonth(2024, 2)            //29
+ * DateUtil.getDaysInMonth(2025, 2)            //28
+ * DateUtil.getDaysInMonth(2025, 8)            //31
  */
 export function getDaysInMonth(year: number, month: number): number {
   if (month < 1 || month > 12) throw new Error("month out of range");
@@ -171,13 +171,13 @@ export function getDaysInMonth(year: number, month: number): number {
  *    - `dateUnitEnum.minute`: Returns the time difference in minutes. (返回分钟的时间差)
  *    - `dateUnitEnum.second`: Returns the time difference in seconds. (返回秒的时间差)
  * @example 
- * const  DateTool  = require('boots-js/date-tool'); // Node
- * import * as DateTool  from 'boots-js/date-tool' // Es6 Module
+ * const  DateUtil  = require('boots-js/date-util'); // Node
+ * import * as DateUtil  from 'boots-js/date-util' // Es6 Module
  * 
- * DateTool.getDateDiff('2024/1/26', '2025/1/26', DateTool.dateUnitEnum.day)   //366
- * DateTool.getDateDiff('2024/1/26', '2025/1/26', DateTool.dateUnitEnum.month) //12
- * DateTool.getDateDiff('2025/6/19', '2025/9/18', DateTool.dateUnitEnum.year)  //0
- * DateTool.getDateDiff('2025/6/19', '2025/9/18', DateTool.dateUnitEnum.all)   //{years: 0, months: 2,days: 30,hours: 0,minutes: 0,seconds: 0}
+ * DateUtil.getDateDiff('2024/1/26', '2025/1/26', DateUtil.dateUnitEnum.day)   //366
+ * DateUtil.getDateDiff('2024/1/26', '2025/1/26', DateUtil.dateUnitEnum.month) //12
+ * DateUtil.getDateDiff('2025/6/19', '2025/9/18', DateUtil.dateUnitEnum.year)  //0
+ * DateUtil.getDateDiff('2025/6/19', '2025/9/18', DateUtil.dateUnitEnum.all)   //{years: 0, months: 2,days: 30,hours: 0,minutes: 0,seconds: 0}
  */
 export function getDateDiff(startDate: string | number | Date = new Date(), endDate: string | number | Date = new Date(), unit: DateUnitEnum = DateUnitEnum.day): number | DateTime {
   const start = startDate ? new Date(startDate) : new Date(), end = endDate ? new Date(endDate) : new Date();
@@ -230,10 +230,10 @@ export function getDateDiff(startDate: string | number | Date = new Date(), endD
  *    - minutes: Number of minutes to add/subtract. Positive number for addition, negative number for subtraction. (要添加/减去的分钟数。正数表示添加，负数表示减去)
  *    - seconds: Number of seconds to add/subtract. Positive number for addition, negative number for subtraction. (要添加/减去的秒数。正数表示添加，负数表示减去)
  * @example
- * const  DateTool  = require('boots-js/date-tool'); // Node
- * import * as DateTool  from 'boots-js/date-tool' // Es6 Module
+ * const  DateUtil  = require('boots-js/date-util'); // Node
+ * import * as DateUtil  from 'boots-js/date-util' // Es6 Module
  * 
- * DateTool.dateCalculator('2024/2/12', { years: 1 }).toISOString() //2025-02-12
+ * DateUtil.dateCalculator('2024/2/12', { years: 1 }).toISOString() //2025-02-12
  */
 export function dateCalculator(startDate: string | number | Date = new Date(), options: DateTime): Date {
   const start = startDate ? new Date(startDate) : new Date();
@@ -262,17 +262,17 @@ export function dateCalculator(startDate: string | number | Date = new Date(), o
  * @param {TimeZoneOffsetEnum} orginTimeZone Time zone of original time.(原始时间的时区)
  * @param {TimeZoneOffsetEnum} timeZone Time zone to be converted.(需要转换的时区)
  * @example
- * const  DateTool  = require('boots-js/date-tool'); // Node
- * import * as DateTool  from 'boots-js/date-tool' // Es6 Module
+ * const  DateUtil  = require('boots-js/date-util'); // Node
+ * import * as DateUtil  from 'boots-js/date-util' // Es6 Module
  * 
- * DateTool.convertTimeZone(
+ * DateUtil.convertTimeZone(
  *         1711611931754,
- *         DateTool.timeZoneOffsetEnum['UTC+08:00'], 
- *         DateTool.timeZoneOffsetEnum['UTC-06:00'])
- * DateTool.convertTimeZone(
+ *         DateUtil.timeZoneOffsetEnum['UTC+08:00'], 
+ *         DateUtil.timeZoneOffsetEnum['UTC-06:00'])
+ * DateUtil.convertTimeZone(
  *         '2024/2/12',
- *         DateTool.timeZoneOffsetEnum['UTC+08:00'], 
- *         DateTool.timeZoneOffsetEnum['UTC+09:00'])
+ *         DateUtil.timeZoneOffsetEnum['UTC+08:00'], 
+ *         DateUtil.timeZoneOffsetEnum['UTC+09:00'])
  */
 export function convertTimeZone(date: string | number | Date = new Date(), orginTimeZone: TimeZoneOffsetEnum, timeZone: TimeZoneOffsetEnum): Date {
   const orginDate = date ? new Date(date) : new Date();
@@ -287,6 +287,9 @@ export function convertTimeZone(date: string | number | Date = new Date(), orgin
 }
 
 
+/**
+ * @ignore
+ */
 export default{
   DateUnitEnum,
   TimeZoneOffsetEnum,

@@ -1,21 +1,21 @@
 import PriorityQueue from './priority-queue';
 import  RegRules from './reg-rules';
-import DateTool from './date-tool';
-import PerformanceTool from './performance-tool';
-import StringTool from './string-tool';
-import ObjectTool from './object-tool';
-import ArrayTool from './array-tool';
-import TreeTool from './tree-tool';
+import DateUtil from './date-util';
+import PerformanceUtil from './performance-util';
+import StringUtil from './string-util';
+import ObjectUtil from './object-util';
+import ArrayUtil from './array-util';
+import TreeUtil from './tree-util';
 
 export default{
     PriorityQueue,
     RegRules,
-    DateTool,
-    PerformanceTool,
-    StringTool,
-    ObjectTool,
-    ArrayTool,
-    TreeTool
+    DateUtil,
+    PerformanceUtil,
+    StringUtil,
+    ObjectUtil,
+    ArrayUtil,
+    TreeUtil
 }
 
 // export { PriorityQueue } from './priority-queue';
@@ -36,21 +36,21 @@ export default{
  */
 // export * as RegRules from './reg-rules';
 /**
- * Some tools for working with date and time.(一些处理日期时间的工具)
+ * Some utils for working with date and time.(一些处理日期时间的工具)
  * 
  * ```ts
  * // -------- Global Import(全局引入)
  * const BootsJS = require('boots-js'); // Node
  * import BootsJS from 'boots-js' // Es6 Module
- * BootsJS.DateTool.dateFormater(new Date(),'YYYY-MM-DD HH:mm:ss');
+ * BootsJS.DateUtil.dateFormater(new Date(),'YYYY-MM-DD HH:mm:ss');
  * 
  * // -------- Import on Demand(按需引入)
- * const  DateTool  = require('boots-js/date-tool'); // Node
- * import * as DateTool  from 'boots-js/date-tool' // Es6 Module
- * DateTool.dateFormater(new Date(),'YYYY-MM-DD HH:mm:ss');
+ * const  DateUtil  = require('boots-js/date-util'); // Node
+ * import * as DateUtil  from 'boots-js/date-util' // Es6 Module
+ * DateUtil.dateFormater(new Date(),'YYYY-MM-DD HH:mm:ss');
  *  ```
  */
-// export * as DateTool from './date-tool';
+// export * as DateUtil from './date-util';
 /**
  * Some methods to improve performance.(一些提升性能的方法)
  * 
@@ -58,15 +58,15 @@ export default{
  * // -------- Global Import(全局引入)
  * const BootsJS = require('boots-js'); // Node
  * import BootsJS from 'boots-js' // Es6 Module
- * BootsJS.PerformanceTool.debounce(test);
+ * BootsJS.PerformanceUtil.debounce(test);
  * 
  * // -------- Import on Demand(按需引入)
- * const  PerformanceTool  = require('boots-js/performance-tool'); // Node
- * import * as PerformanceTool  from 'boots-js/performance-tool' // Es6 Module
- * PerformanceTool.debounce(test);
+ * const  PerformanceUtil  = require('boots-js/performance-util'); // Node
+ * import * as PerformanceUtil  from 'boots-js/performance-util' // Es6 Module
+ * PerformanceUtil.debounce(test);
  *  ```
  */
-// export * as PerformanceTool from './performance-tool';
+// export * as PerformanceUtil from './performance-util';
 /**
  * Some methods of processing strings.(一些处理字符串的方法)
  * 
@@ -74,60 +74,60 @@ export default{
  * // -------- Global Import(全局引入)
  * const BootsJS = require('boots-js'); // Node
  * import BootsJS from 'boots-js' // Es6 Module
- * BootsJS.StringTool.dashNameToUpperCamelCaseName('string-tool')
+ * BootsJS.StringUtil.dashNameToUpperCamelCaseName('string-util')
  * 
  * // -------- Import on Demand(按需引入)
- * const  StringTool  = require('boots-js/string-tool'); // Node
- * import  * as StringTool  from 'boots-js/string-tool' // Es6 Module
- * StringTool.dashNameToUpperCamelCaseName('string-tool')
+ * const  StringUtil  = require('boots-js/string-util'); // Node
+ * import  * as StringUtil  from 'boots-js/string-util' // Es6 Module
+ * StringUtil.dashNameToUpperCamelCaseName('string-util')
  *  ```
  */
-// export * as StringTool from './string-tool';
+// export * as StringUtil from './string-util';
 /**
- * Some tools for working with Object.(一些处理对象的工具)
+ * Some utils for working with Object.(一些处理对象的工具)
  *
  * ```ts
  * // -------- Global Import(全局引入)
  * const BootsJS = require('boots-js'); // Node
  * import BootsJS from 'boots-js' // Es6 Module
- * BootsJS.ObjectTool.type(123); //'Number'
+ * BootsJS.ObjectUtil.type(123); //'Number'
  *
  * // -------- Import on Demand(按需引入)
- * const  ObjectTool  = require('boots-js/object-tool'); // Node
- * import * as ObjectTool  from 'boots-js/object-tool' // Es6 Module
- * ObjectTool.type(123); //'Number'
+ * const  ObjectUtil  = require('boots-js/object-util'); // Node
+ * import * as ObjectUtil  from 'boots-js/object-util' // Es6 Module
+ * ObjectUtil.type(123); //'Number'
  *  ```
  */
-// export * as ObjectTool from './object-tool';
+// export * as ObjectUtil from './object-util';
 /**
- * Some tools for working with array.(一些处理数组的工具)
+ * Some utils for working with array.(一些处理数组的工具)
  * 
  * ```ts
  * // -------- Global Import(全局引入)
  * const BootsJS = require('boots-js'); // Node
  * import BootsJS from 'boots-js' // Es6 Module
- * BootsJS.ArrayTool.removeDuplicates([1,2,3,1]);
+ * BootsJS.ArrayUtil.removeDuplicates([1,2,3,1]);
  * 
  * // -------- Import on Demand(按需引入)
- * const  ArrayTool  = require('boots-js/array-tool'); // Node
- * import * as ArrayTool  from 'boots-js/array-tool' // Es6 Module
- * ArrayTool.removeDuplicates([1,2,3,1]);
+ * const  ArrayUtil  = require('boots-js/array-util'); // Node
+ * import * as ArrayUtil  from 'boots-js/array-util' // Es6 Module
+ * ArrayUtil.removeDuplicates([1,2,3,1]);
  *  ```
  */
-// export * as ArrayTool from './array-tool';
+// export * as ArrayUtil from './array-util';
 /**
- * Some tools for working with tree.(一些处理树的工具)
+ * Some utils for working with tree.(一些处理树的工具)
  *
  * ```ts
  * // -------- Global Import(全局引入)
  * const BootsJS = require('boots-js'); // Node
  * import BootsJS from 'boots-js' // Es6 Module
- * BootsJS.TreeTool.tree2Array(tree,'childList',options)
+ * BootsJS.TreeUtil.tree2Array(tree,'childList',options)
  *
  * // -------- Import on Demand(按需引入)
- * const  TreeTool  = require('boots-js/tree-tool'); // Node
- * import * as TreeTool  from 'boots-js/tree-tool' // Es6 Module
- * TreeTool.tree2Array(tree,'childList',options)
+ * const  TreeUtil  = require('boots-js/tree-util'); // Node
+ * import * as TreeUtil  from 'boots-js/tree-util' // Es6 Module
+ * TreeUtil.tree2Array(tree,'childList',options)
  *  ```
  */
-// export * as TreeTool from './tree-tool';
+// export * as TreeUtil from './tree-util';

@@ -1,5 +1,5 @@
 /*
- * @Description: Some tools for working with Object.(一些处理对象的工具)
+ * @Description: Some utils for working with Object.(一些处理对象的工具)
  * @Author: JunLiangWang
  * @Date: 2024-03-21 20:15:10
  * @LastEditors: JunLiangWang
@@ -10,13 +10,13 @@
  * Determine parameter type.(判断给定参数类型)
  * @param {*} obj Need to determine the type of value.(需要判断类型的值)
  * @example
- * const  ObjectTool  = require('boots-js/object-tool'); // Node
- * import * as ObjectTool  from 'boots-js/object-tool' // Es6 Module
+ * const  ObjectUtil  = require('boots-js/object-util'); // Node
+ * import * as ObjectUtil  from 'boots-js/object-util' // Es6 Module
  * 
- * ObjectTool.type(new Array()); //'Array'
- * ObjectTool.type('123'); //'String'
- * ObjectTool.type(true); //'Boolean'
- * ObjectTool.type(new Map()); //'Map'
+ * ObjectUtil.type(new Array()); //'Array'
+ * ObjectUtil.type('123'); //'String'
+ * ObjectUtil.type(true); //'Boolean'
+ * ObjectUtil.type(new Map()); //'Map'
  */
 export function type(obj: any): string {
   return Object.prototype.toString.call(obj).split(" ")[1].slice(0, -1);
@@ -31,8 +31,8 @@ export function type(obj: any): string {
  * // 支持的类型：原始类型、TypedArray、Array、Set、Map、Object、ArrayBuffer、DataView、Date、RegExp、Symbol、Proxy（将被视为对象，拦截器无法复制）
  * // 注意：不支持的类型，例如：Function、WeakRef、WeakSet、WeakMap等会直接复制其引用
  * 
- * const  ObjectTool  = require('boots-js/object-tool'); // Node
- * import * as ObjectTool  from 'boots-js/object-tool' // Es6 Module
+ * const  ObjectUtil  = require('boots-js/object-util'); // Node
+ * import * as ObjectUtil  from 'boots-js/object-util' // Es6 Module
  * 
  * const obj1={Number:1},obj2={Boolean:2},obj3={obj:obj1,String:'123'},
  * const testObj={
@@ -48,7 +48,7 @@ export function type(obj: any): string {
  *    Function:fun
  * }
  * 
- * let deepCopyObj=ObjectTool.deepClone(testObj)
+ * let deepCopyObj=ObjectUtil.deepClone(testObj)
  * deepCopyObj.Int8Array===testObj.Int8Array //false
  * deepCopyObj.Date===testObj.Date //false
  * deepCopyObj.Object.obj1.obj===testObj.Object.obj1.obj //false
@@ -113,8 +113,8 @@ export function deepClone(obj: any): any {
  * // 支持的类型：原始类型、TypedArray、Array、Set、Map、Object、ArrayBuffer、DataView、Date、RegExp、Symbol(比较其description)、Proxy（将被视为对象，拦截器无法比较）
  * // 注意：不支持的类型，例如：Function、WeakRef、WeakSet、WeakMap等会直接比较其引用地址
  * 
- * const  ObjectTool  = require('boots-js/object-tool'); // Node
- * import * as ObjectTool  from 'boots-js/object-tool' // Es6 Module
+ * const  ObjectUtil  = require('boots-js/object-util'); // Node
+ * import * as ObjectUtil  from 'boots-js/object-util' // Es6 Module
  * 
  * const testObj2={
  *     BigInt64Array:new BigInt64Array([BigInt(123),BigInt(123),BigInt(123)]),
@@ -128,10 +128,10 @@ export function deepClone(obj: any): any {
  *     DataView:new DataView(new ArrayBuffer(10)),
  * }
  * 
- * ObjectTool.isEqual(testObj2,ObjectTool.deepClone(testObj2)) //true
- * let testObj5=ObjectTool.deepClone(testObj2)
+ * ObjectUtil.isEqual(testObj2,ObjectUtil.deepClone(testObj2)) //true
+ * let testObj5=ObjectUtil.deepClone(testObj2)
  * testObj5.Object.obj1.String='12344'
- * ObjectTool.isEqual(testObj2,testObj5)  //false
+ * ObjectUtil.isEqual(testObj2,testObj5)  //false
  */
 export function isEqual(obj1: any, obj2: any): boolean {
   function compare(obj1: any, obj2: any, visited1 = new Set(), visited2 = new Set()): boolean {
@@ -190,8 +190,8 @@ export function isEqual(obj1: any, obj2: any): boolean {
  * // 支持的类型：原始类型、TypedArray、Array、Set、Map、Object、ArrayBuffer、Function、DataView、Date、 RegExp、Symbol、Proxy（将被视为对象，拦截器无法输出）
  * // 注意：不支持的类型，例如：WeakRef、WeakSet、WeakMap等会直接输出类型
  * 
- * const  ObjectTool  = require('boots-js/object-tool'); // Node
- * import * as ObjectTool  from 'boots-js/object-tool' // Es6 Module
+ * const  ObjectUtil  = require('boots-js/object-util'); // Node
+ * import * as ObjectUtil  from 'boots-js/object-util' // Es6 Module
  * 
  * const testObj2={
  *     BigInt64Array:new BigInt64Array([BigInt(123),BigInt(123),BigInt(123)]),
@@ -216,11 +216,11 @@ export function isEqual(obj1: any, obj2: any): boolean {
  *     RegExp:/1234/,
  * }
  * 
- * let testObj5=ObjectTool.deepClone(testObj2)
+ * let testObj5=ObjectUtil.deepClone(testObj2)
  * testObj5.Object.obj1.String='12344'
  * 
- * ObjectTool.argToStrKey(testObj2)===ObjectTool.argToStrKey(testObj3) //true
- * ObjectTool.argToStrKey(testObj2)===ObjectTool.argToStrKey(testObj5) //false
+ * ObjectUtil.argToStrKey(testObj2)===ObjectUtil.argToStrKey(testObj3) //true
+ * ObjectUtil.argToStrKey(testObj2)===ObjectUtil.argToStrKey(testObj5) //false
  */
 export function argToStrKey(arg: any): string {
   function generateKey(arg: any, visited = new Set()): string {
@@ -294,15 +294,15 @@ export function argToStrKey(arg: any): string {
  * // Note: Comparing reference types during merging is based on address comparison, not usage value comparison!
  * // 注意：合并中比较引用类型都是进行地址比对，并未对使用值比对！
  * 
- * const  ObjectTool  = require('boots-js/object-tool'); // Node
- * import * as ObjectTool  from 'boots-js/object-tool' // Es6 Module
+ * const  ObjectUtil  = require('boots-js/object-util'); // Node
+ * import * as ObjectUtil  from 'boots-js/object-util' // Es6 Module
  * 
  * // ReplaceMerge(替换合并)
- * ObjectTool.deepMerge([1,2,3],[4,5,6]) // [1,2,3]
+ * ObjectUtil.deepMerge([1,2,3],[4,5,6]) // [1,2,3]
  * // IncrementalMerge(增量合并)
- * ObjectTool.deepMerge([1,2,3],[3,4],ObjectTool.ArrayMergeModeEnum.IncrementalMerge) // [1,2,3,3,4]
+ * ObjectUtil.deepMerge([1,2,3],[3,4],ObjectUtil.ArrayMergeModeEnum.IncrementalMerge) // [1,2,3,3,4]
  * // CompareMerge(比较合并)
- * ObjectTool.deepMerge([1,2,3],[3,4],ObjectTool.ArrayMergeModeEnum.CompareMerge)     // [1,2,3,4]
+ * ObjectUtil.deepMerge([1,2,3],[3,4],ObjectUtil.ArrayMergeModeEnum.CompareMerge)     // [1,2,3,4]
  *  
  */
 export function deepMerge(obj1: any, obj2: any, arrayMergeModeEnum = ArrayMergeModeEnum.ReplaceMerge): any {
@@ -416,6 +416,9 @@ const FunctionType = "Function";
 const SymbolType = 'Symbol';
 
 
+/**
+ * @ignore
+ */
 export default {
   type,
   deepClone,

@@ -1,15 +1,15 @@
-const  ObjectTool  = require('../dist/cjs/object-tool');
+const  ObjectUtil  = require('../dist/cjs/object-util');
 const BootsJS = require('../dist/cjs/index');
 
 
-test('test ObjectTool class', async () => {
+test('test ObjectUtil class', async () => {
     
-    expect(ObjectTool.type(123)).toBe('Number');
-    expect(ObjectTool.type(true)).toBe('Boolean');
-    expect(ObjectTool.type('String')).toBe('String');
-    expect(ObjectTool.type(new Map())).toBe('Map');
-    expect(ObjectTool.type(new Array())).toBe('Array');
-    expect(ObjectTool.type(new ArrayBuffer())).toBe('ArrayBuffer');
+    expect(ObjectUtil.type(123)).toBe('Number');
+    expect(ObjectUtil.type(true)).toBe('Boolean');
+    expect(ObjectUtil.type('String')).toBe('String');
+    expect(ObjectUtil.type(new Map())).toBe('Map');
+    expect(ObjectUtil.type(new Array())).toBe('Array');
+    expect(ObjectUtil.type(new ArrayBuffer())).toBe('ArrayBuffer');
 
 
     const obj1={Number:1},obj2={Boolean:2},obj3={obj:obj1,String:'123'},
@@ -41,9 +41,9 @@ test('test ObjectTool class', async () => {
     }
     testObj.Object.testObj=testObj
     const copyObj=testObj
-    let deepCopyObj=ObjectTool.deepClone(testObj)
+    let deepCopyObj=ObjectUtil.deepClone(testObj)
 
-    expect(ObjectTool.argToStrKey(deepCopyObj)===ObjectTool.argToStrKey(testObj)).toBe(true);
+    expect(ObjectUtil.argToStrKey(deepCopyObj)===ObjectUtil.argToStrKey(testObj)).toBe(true);
     expect(copyObj.Int8Array===testObj.Int8Array).toBe(true);
     expect(deepCopyObj.Int8Array===testObj.Int8Array).toBe(false);
     expect(copyObj.Date===testObj.Date).toBe(true);
@@ -114,26 +114,26 @@ test('test ObjectTool class', async () => {
         DataView:new DataView(new ArrayBuffer(10)),
         Float32Array:new Float32Array([11,22,33,44,55]),
     }
-    let testObj4=ObjectTool.deepClone(testObj2)
+    let testObj4=ObjectUtil.deepClone(testObj2)
     testObj4.Array=new Array(...[obj2,obj1,obj3,obj4])
-    let testObj5=ObjectTool.deepClone(testObj2)
+    let testObj5=ObjectUtil.deepClone(testObj2)
     testObj5.Object.obj1.String='12344'
-    expect(ObjectTool.isEqual(testObj2,testObj3)).toBe(true);
-    expect(ObjectTool.isEqual(testObj2,ObjectTool.deepClone(testObj2))).toBe(true);
-    expect(ObjectTool.isEqual(testObj2,testObj4)).toBe(false);
-    expect(ObjectTool.isEqual(testObj2,testObj5)).toBe(false);
+    expect(ObjectUtil.isEqual(testObj2,testObj3)).toBe(true);
+    expect(ObjectUtil.isEqual(testObj2,ObjectUtil.deepClone(testObj2))).toBe(true);
+    expect(ObjectUtil.isEqual(testObj2,testObj4)).toBe(false);
+    expect(ObjectUtil.isEqual(testObj2,testObj5)).toBe(false);
 
     
-    expect(ObjectTool.argToStrKey(testObj2)===ObjectTool.argToStrKey(testObj3)).toBe(true);
-    expect(ObjectTool.argToStrKey(testObj2)===ObjectTool.argToStrKey(testObj4)).toBe(false);
-    expect(ObjectTool.argToStrKey(testObj2)===ObjectTool.argToStrKey(testObj5)).toBe(false);
+    expect(ObjectUtil.argToStrKey(testObj2)===ObjectUtil.argToStrKey(testObj3)).toBe(true);
+    expect(ObjectUtil.argToStrKey(testObj2)===ObjectUtil.argToStrKey(testObj4)).toBe(false);
+    expect(ObjectUtil.argToStrKey(testObj2)===ObjectUtil.argToStrKey(testObj5)).toBe(false);
 
 
-    expect(ObjectTool.deepMerge({a:1},{b:1})).toEqual({
+    expect(ObjectUtil.deepMerge({a:1},{b:1})).toEqual({
         a:1,
         b:1
     })
-    expect(ObjectTool.deepMerge({a:{
+    expect(ObjectUtil.deepMerge({a:{
         a:1,
         b:1
     }},{a:{
@@ -147,7 +147,7 @@ test('test ObjectTool class', async () => {
             d:1
         }
     })
-    expect(ObjectTool.deepMerge({
+    expect(ObjectUtil.deepMerge({
         a:'1',
         arr1:[1,23],
         b:{
@@ -162,7 +162,7 @@ test('test ObjectTool class', async () => {
             bd:{a:1}
         },
         c:false,
-    },ObjectTool.ArrayMergeModeEnum.CompareMerge)).toEqual({
+    },ObjectUtil.ArrayMergeModeEnum.CompareMerge)).toEqual({
         a:'1',
         arr1:[1,23],
         b:{
@@ -174,8 +174,8 @@ test('test ObjectTool class', async () => {
         c:false,
     })
     
-     expect(ObjectTool.deepMerge([1,2,3],[4,5,6])).toEqual([1,2,3])
-     expect(ObjectTool.deepMerge([1,2,3],[3,4],ObjectTool.ArrayMergeModeEnum.IncrementalMerge)).toEqual([1,2,3,3,4])
-     expect(ObjectTool.deepMerge([1,2,3],[3,4],ObjectTool.ArrayMergeModeEnum.CompareMerge)).toEqual([1,2,3,4])
+     expect(ObjectUtil.deepMerge([1,2,3],[4,5,6])).toEqual([1,2,3])
+     expect(ObjectUtil.deepMerge([1,2,3],[3,4],ObjectUtil.ArrayMergeModeEnum.IncrementalMerge)).toEqual([1,2,3,3,4])
+     expect(ObjectUtil.deepMerge([1,2,3],[3,4],ObjectUtil.ArrayMergeModeEnum.CompareMerge)).toEqual([1,2,3,4])
     
 });

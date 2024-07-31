@@ -3,7 +3,7 @@
  * @Author: JunLiangWang
  * @Date: 2024-02-23 20:49:02
  * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-04-15 16:37:19
+ * @LastEditTime: 2024-07-31 15:32:54
  */
 
 /**
@@ -116,6 +116,9 @@ export const audioRule = /\.(mp3|wav|flac|aac|ogg|wma)$/
 export const videoRule = /\.(mp4|mov|avi|mkv|wmv|webm)$/
 
 
+/**
+ * @ignore
+ */
 export default {
     videoRule,
     audioRule,
