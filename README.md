@@ -21,7 +21,7 @@ yarn add boots-js
 **cdn:**
 
 ```
-None yet
+https://unpkg.com/boots-js@latest/umd/index.js
 ```
 
 ## Usage
@@ -30,12 +30,11 @@ None yet
 
 ```javascript
 // Global Import
-const BootsJS=require('boots-js');
-BootsJS.ObjectTool.type(123);
-
+const BootsJS=require('boots-js/cjs');
+BootsJS.ObjectUtils.type(123);
 // Import on Demand
-const  ObjectTool  = require('boots-js/object-tool');
-ObjectTool.type(123);
+const  ObjectUtils  = require('boots-js/cjs/object-utils');
+ObjectUtils.type(123);
 ```
 
 ### Browser
@@ -49,11 +48,10 @@ None yet
 ```js
 // Global Import
 import BootsJS from 'boots-js'
-BootsJS.ObjectTool.type(123); //'Number'
-
+BootsJS.ObjectUtils.type(123);
 // Import on Demand
-import * as ObjectTool  from 'boots-js/object-tool' // Es6 Module
-ObjectTool.type(123); //'Number'
+import  ObjectUtils  from 'boots-js/object-utils' 
+ObjectUtils.type(123);
 ```
 
 ## All Features

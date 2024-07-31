@@ -21,7 +21,7 @@ yarn add boots-js
 **cdn:**
 
 ```
-None yet
+https://unpkg.com/boots-js@latest/umd/index.js
 ```
 
 ## 使用
@@ -29,13 +29,12 @@ None yet
 ### CommonJS
 
 ```javascript
-// Global Import
-const BootsJS=require('boots-js');
-BootsJS.ObjectTool.type(123);
-
-// Import on Demand
-const  ObjectTool  = require('boots-js/object-tool');
-ObjectTool.type(123);
+// 全局导入
+const BootsJS=require('boots-js/cjs');
+BootsJS.ObjectUtils.type(123);
+// 按需导入
+const  ObjectUtils  = require('boots-js/cjs/object-utils');
+ObjectUtils.type(123);
 ```
 
 ### Browser
@@ -47,13 +46,12 @@ None yet
 ### ES6 Module
 
 ```js
-// Global Import
+// 全局导入
 import BootsJS from 'boots-js'
-BootsJS.ObjectTool.type(123); //'Number'
-
-// Import on Demand
-import * as ObjectTool  from 'boots-js/object-tool' // Es6 Module
-ObjectTool.type(123); //'Number'
+BootsJS.ObjectUtils.type(123);
+// 按需导入
+import  ObjectUtils  from 'boots-js/object-utils' 
+ObjectUtils.type(123);
 ```
 
 ## 所有特性

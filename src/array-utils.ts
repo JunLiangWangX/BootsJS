@@ -1,26 +1,35 @@
-/*
- * @Description: Some tools for working with array.(一些处理数组的工具)
- * @Author: JunLiangWang
- * @Date: 2024-03-28 11:01:41
- * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-04-15 16:34:20
+/**
+ * utils for working with array.(一些处理数组的工具)
+ * 
+ * ```ts
+ * // -------- Global Import(全局引入)
+ * const BootsJS = require('boots-js/cjs'); // CommandJS
+ * import BootsJS from 'boots-js' // Es6 Module
+ * BootsJS.ArrayUtils.removeDuplicates([1,2,3,1]);
+ * 
+ * // -------- Import on Demand(按需引入)
+ * const  ArrayUtils  = require('boots-js/cjs/array-utils'); // CommandJS
+ * import  ArrayUtils  from 'boots-js/array-utils' // Es6 Module
+ * ArrayUtils.removeDuplicates([1,2,3,1]);
+ *  ```
+ * @module
  */
-import { argToStrKey } from "./object-tool";
+import { argToStrKey } from "./object-utils";
 
 /**
  * Remove duplicate values ​​from array.(数组去除重复值)
  * @param {Array} arr Given an array.(给定数组)
  * @param {boolean} isCompareValue Whether to perform value comparison for elements of reference type.(对于引用类型的元素是否进行值比对)
  * @example
- * const  ArrayTool  = require('boots-js/array-tool'); // Node
- * import * as ArrayTool  from 'boots-js/array-tool' // Es6 Module
+ * const  ArrayUtils  = require('boots-js/cjs/array-utils'); // CommandJS
+ * import  ArrayUtils  from 'boots-js/array-utils' // Es6 Module
  * 
  * const test1={a:'1'},test2={a:'1'},
  * arr1=[test1,test2,test1],
  * arr2=[1,2,3,1,4];
- * ArrayTool.removeDuplicates(arr1) // [{a:'1'},{a:'1'}]
- * ArrayTool.removeDuplicates(arr1,true) // [{a:'1'}]
- * ArrayTool.removeDuplicates(arr2) //[1,2,3,4];
+ * ArrayUtils.removeDuplicates(arr1) // [{a:'1'},{a:'1'}]
+ * ArrayUtils.removeDuplicates(arr1,true) // [{a:'1'}]
+ * ArrayUtils.removeDuplicates(arr2) //[1,2,3,4];
  */
 export function removeDuplicates(arr: Array<any>, isCompareValue: boolean = false): Array<any> {
     if (!Array.isArray(arr)) {
@@ -44,4 +53,11 @@ export function removeDuplicates(arr: Array<any>, isCompareValue: boolean = fals
         }
     })
     return result
+}
+
+/**
+ * @ignore
+ */
+export default {
+    removeDuplicates
 }

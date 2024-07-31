@@ -1,32 +1,11 @@
 const path = require('path');
 const findExportFiles = require('./utils/find-export-files');
-const TerserPlugin = require('terser-webpack-plugin');
+const { merge } = require('webpack-merge');
 
-
-module.exports = {
+const baseConfig = {
     mode: 'none',
     entry: {
-        index: {
-            import: './src/index.ts',
-            library: {
-                name: 'BootsJS',
-                type: 'umd',
-                umdNamedDefine: true,
-            },
-        },
         ...findExportFiles(__dirname, './src')
-    },
-    output: {
-        filename: '[name].js',
-        path: path.resolve(__dirname, './dist'),
-        clean: true,
-        library: {
-            root: 'BootsJS',
-            amd: 'BootsJS',
-            commonjs: '[name]',
-        },
-        libraryTarget: 'umd',
-        globalObject: 'this',
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
@@ -50,9 +29,38 @@ module.exports = {
             }
         ]
     },
-    optimization: {
-        minimizer: [
-            new TerserPlugin(),
-        ],
-    },
 }
+const esmConfig = merge(baseConfig, {
+    output: {
+        filename: '[name].js',
+        path: path.resolve(__dirname, 'dist'),
+        library: {
+            type: 'module',
+        },
+    },
+    experiments: {
+        outputModule: true,
+    },
+});
+
+const cjsConfig = merge(baseConfig, {
+    output: {
+        filename: '[name].js',
+        path: path.resolve(__dirname, './dist/cjs/'),
+        library: {
+            type: 'commonjs2',
+            export:'default'
+        },
+        //globalObject: 'this',
+    },
+});
+
+const umdConfig = merge(baseConfig, {
+    output: {
+        filename: '[name].js',
+        path: path.resolve(__dirname, './dist/umd/'),
+        libraryTarget: 'umd',
+        globalObject: 'this',
+    }
+});
+module.exports = [cjsConfig, esmConfig, umdConfig];

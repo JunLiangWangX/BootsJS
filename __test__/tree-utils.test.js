@@ -1,8 +1,8 @@
-const  TreeTool  = require('../dist/tree-tool');
-const BootsJS = require('../dist/index');
+const  TreeUtils  = require('../dist/cjs/tree-utils');
+const BootsJS = require('../dist/cjs/index');
 
 
-test('test TreeTool class', () => {
+test('test TreeUtils class', () => {
     const tree = {
         name: '中国',
         code: '0',
@@ -21,7 +21,7 @@ test('test TreeTool class', () => {
             },
         ]
     }
-    let arr = TreeTool.tree2Array([tree], 'childList', {
+    let arr = BootsJS.TreeUtils.tree2Array([tree], 'childList', {
         isGenerateLevel: true,
         generateLevelAttributeName: 'level',
         isGenerateParentID: true,
@@ -36,7 +36,7 @@ test('test TreeTool class', () => {
             { name: '四川', code: '02', level: 1, parentCode: '0' },
             { name: '广东', code: '03', level: 1, parentCode: '0' },
         ]);
-    let genTree = TreeTool.array2Tree(arr, 'code', 'parentCode', 'childList', (node) => {
+    let genTree = TreeUtils.array2Tree(arr, 'code', 'parentCode', 'childList', (node) => {
         return !('parentCode' in node)
     })
     expect(genTree).toEqual(
@@ -71,7 +71,7 @@ test('test TreeTool class', () => {
             },
         ]
     }
-    let childList = TreeTool.getChildList([newtree], 'code', '0', 'childList')
+    let childList = BootsJS.TreeUtils.getChildList([newtree], 'code', '0', 'childList')
 
     expect(childList).toEqual(
         [
@@ -81,7 +81,7 @@ test('test TreeTool class', () => {
         ]);
 
 
-    let filterList = TreeTool.filter(genTree, 'childList', (obj) => {
+    let filterList = TreeUtils.filter(genTree, 'childList', (obj) => {
         return obj.parentCode === '0'
     })
     expect(filterList).toEqual(
@@ -91,7 +91,7 @@ test('test TreeTool class', () => {
             { name: '广东', code: '03', level: 1, parentCode: '0', childList: [] },
         ]);
 
-    let path = TreeTool.findPath(genTree, 'code', '03', 'childList')
+    let path = TreeUtils.findPath(genTree, 'code', '03', 'childList')
     expect(path).toEqual(
         [
             {

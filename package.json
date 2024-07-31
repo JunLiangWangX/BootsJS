@@ -1,8 +1,8 @@
 {
   "name": "boots-js",
-  "version": "0.8.0-beta",
+  "version": "0.9.0-beta",
   "description": "BootsJS is a library dedicated to extending the capabilities of native JavaScript, aiming to address common data structures, methods, and frequently used algorithms that are not natively supported in JavaScript.",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "npx webpack --mode=production",
     "test": "npx jest",
@@ -45,6 +45,7 @@
     "typedoc": "^0.25.8",
     "typescript": "^5.3.3",
     "webpack": "^5.90.2",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-merge": "^6.0.1"
   }
 }

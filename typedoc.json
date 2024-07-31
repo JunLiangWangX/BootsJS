@@ -1,8 +1,10 @@
 {
-    // Comments are supported, like tsconfig.json
     "hideGenerator": true,
     "entryPoints": [
-        "src/index.ts"
+        "src/*"
+    ],
+    "exclude": [
+        "**/index.ts"
     ],
     "out": "docs"
 }

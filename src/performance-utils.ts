@@ -1,25 +1,35 @@
-/*
- * @Description: Some methods to improve performance.(一些提升性能的方法)
- * @Author: JunLiangWang
- * @Date: 2024-02-27 14:18:34
- * @LastEditors: JunLiangWang
- * @LastEditTime: 2024-04-15 16:36:33
+/**
+ * utils for improve performance.(一些提升性能的方法)
+ * 
+ * ```ts
+ * // -------- Global Import(全局引入)
+ * const BootsJS = require('boots-js/cjs'); // CommandJS
+ * import BootsJS from 'boots-js' // Es6 Module
+ * BootsJS.PerformanceUtils.debounce(test);
+ * 
+ * // -------- Import on Demand(按需引入)
+ * const  PerformanceUtils  = require('boots-js/cjs/performance-utils'); // CommandJS
+ * import PerformanceUtils  from 'boots-js/performance-utils' // Es6 Module
+ * PerformanceUtils.debounce(test);
+ *  ```
+ * @module
  */
-import { argToStrKey } from "./object-tool";
+
+import { argToStrKey } from "./object-utils";
 /**
  * Debounce function.(防抖函数)
  * @param {Function} func Functions that require debounce.(需要防抖的函数)
  * @param {number} delay Delay，default 300ms.(延迟时间，默认300ms)
  * @param {boolean} isImmediate Whether to execute the function immediately,Default false.(是否立即执行函数，默认否)
  * @example 
- * const  PerformanceTool  = require('boots-js/performance-tool'); // Node
- * import * as PerformanceTool  from 'boots-js/performance-tool' // Es6 Module
+ * const  PerformanceUtils  = require('boots-js/cjs/performance-utils'); // CommandJS
+ * import PerformanceUtils  from 'boots-js/performance-utils' // Es6 Module
  * 
  * let num=0
  * function add(nv){
  *    num+=nv
  * }
- * const debounceAdd=PerformanceTool.debounce(add);
+ * const debounceAdd=PerformanceUtils.debounce(add);
  * debounceAdd(1);
  * debounceAdd(1);
  * debounceAdd(1);
@@ -43,14 +53,14 @@ export function debounce(func: Function, delay: number = 300, isImmediate: boole
  * @param {Function} func Functions that require debounce.(需要防抖的函数)
  * @param {number} delay  Delay，default 300ms.(延迟时间，默认300ms)
  * @example
- * const  PerformanceTool  = require('boots-js/performance-tool'); // Node
- * import * as PerformanceTool  from 'boots-js/performance-tool' // Es6 Module
+ * const  PerformanceUtils  = require('boots-js/cjs/performance-utils'); // CommandJS
+ * import PerformanceUtils  from 'boots-js/performance-utils' // Es6 Module
  * 
  * let num=0
  * function add(nv){
  *    num+=nv
  * }
- * const throttleAdd=PerformanceTool.throttle(add);
+ * const throttleAdd=PerformanceUtils.throttle(add);
  * throttleAdd(1);
  * throttleAdd(1);
  * throttleAdd(1);
@@ -73,15 +83,15 @@ export function throttle(func: Function, delay: number = 300): Function {
  *    - maxCacheSize: The maximum number of cached items allowed. Defaults to Infinity. (缓存的最大数量。默认为 Infinity)
  *    - expirationTime: The time in milliseconds after which a cached item expires. Defaults to Infinity. (缓存项过期时间，以毫秒为单位。默认为 Infinity)
  * @example
- * const  PerformanceTool  = require('boots-js/performance-tool'); // Node
- * import * as PerformanceTool  from 'boots-js/performance-tool' // Es6 Module
+ * const  PerformanceUtils  = require('boots-js/cjs/performance-utils'); // CommandJS
+ * import PerformanceUtils  from 'boots-js/performance-utils' // Es6 Module
  * 
  * let count=0
  * function addCount(nv){
  *    count+=nv;
  *    return count 
  * }
- * const memoizeAdd=PerformanceTool.memoize(addCount,{
+ * const memoizeAdd=PerformanceUtils.memoize(addCount,{
  *    expirationTime:2000
  * })
  * memoizeAdd(1);memoizeAdd(1);memoizeAdd(1);
@@ -134,4 +144,14 @@ interface MemoizeOptions {
 interface CacheItem {
   result: any,
   timestamp: number
+}
+
+
+/**
+ * @ignore
+ */
+export default {
+  debounce,
+  throttle,
+  memoize
 }
