@@ -1,4 +1,6 @@
 /*
+!cjs/
+!umd/
 !*.js
 !*.ts
 !README.md
