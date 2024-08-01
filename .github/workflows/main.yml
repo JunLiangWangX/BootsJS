@@ -29,19 +29,10 @@ jobs:
         run: mv ./dist/* ./
           
       - if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' && success() }}
-        name: npm versioning
-        id: npmVersioning
-        uses: pengyanb/npm-versioning-action@v1
+        name: Publish NPM
+        uses: JS-DevTools/npm-publish@v3
         with:
-         release-branch: "master" 
-         package-json-path: "./package.json"
-         update-version: true
-
-      - if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' && success() }}
-        name: npm publish
-        run:  npm publish ./ --tag ${{ steps.npmVersioning.outputs.tag }} --dry-run true
-        env:
-         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          token: ${{ secrets.NPM_TOKEN }}
           
       - if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' && success() }}
         name: Generate Doc
