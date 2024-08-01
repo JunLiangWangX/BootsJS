@@ -39,8 +39,13 @@ ObjectUtils.type(123);
 
 ### Browser
 
-```
-None yet
+```html
+// Global Import
+<script src="https://unpkg.com/boots-js@latest/umd/index.js"></script>
+<script>BootsJS.ObjectUtils.type(123);</script>
+// Import on Demand
+<script src="https://unpkg.com/boots-js@latest/umd/object-utils.js"></script>
+<script>ObjectUtils.type(123);</script>
 ```
 
 ### ES6 Module
