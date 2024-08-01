@@ -1,0 +1,8 @@
+/*
+!cjs/
+!umd/
+!/*.js
+!/*.ts
+!README.md
+!LICENSE
+!package.json
