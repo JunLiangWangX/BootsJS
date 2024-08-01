@@ -1,7 +1,6 @@
 const path = require('path');
 const findExportFiles = require('./utils/find-export-files');
 const { merge } = require('webpack-merge');
-
 const baseConfig = {
     mode: 'none',
     entry: {
@@ -28,7 +27,7 @@ const baseConfig = {
                     }, 'ts-loader']
             }
         ]
-    },
+    }
 }
 const esmConfig = merge(baseConfig, {
     output: {
