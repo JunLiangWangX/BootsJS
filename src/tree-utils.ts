@@ -1,6 +1,6 @@
 /**
  * utils for working with tree.(一些处理树的工具)
- * 
+ *
  * ```ts
  * // -------- Global Import(全局引入)
  * const BootsJS = require('boots-js/cjs'); // CommandJS
@@ -29,7 +29,7 @@
  * @example
  * const  TreeUtils  = require('boots-js/cjs/tree-utils'); // CommandJS
  * import TreeUtils  from 'boots-js/tree-utils' // Es6 Module
- * 
+ *
  *    const tree = {
  *        name: '中国',
  *        code: '0',
@@ -47,7 +47,7 @@
  *                code: '03',
  *            },
  *        ]
- *    } 
+ *    }
  *    let arr = TreeUtils.tree2Array([tree], 'childList', {
  *        isGenerateLevel: true,
  *        generateLevelAttributeName:'level',
@@ -65,39 +65,43 @@
  *      ]
  */
 export function tree2Array(treeList: Array<any>, childListAttributeName: string, options: Tree2ArrayOptions = tree2ArrayDefaultOptions): Array<any> {
-    if (!Array.isArray(treeList)) {
-        console.warn(`${treeList} is not an Array!`);
-        return treeList;
-    }
-    let {
-        isGenerateLevel = false,
-        generateLevelAttributeName = "level",
-        isGenerateParentID = false,
-        generateParentIDAttributeName = "parentID",
-        nodeIDAttributeName = "id",
-        deleteAttributeList = [],
-    } = options, quene = [...treeList], result = [], level = 0;
-    while (quene.length > 0) {
-        let length = quene.length;
-        while (length-- > 0) {
-            const node = quene.pop(), childList = node[childListAttributeName];
-            if (Array.isArray(childList)) {
-                childList.forEach((val: any) => {
-                    if (isGenerateParentID) val[generateParentIDAttributeName] = node[nodeIDAttributeName]
-                    quene.unshift(val)
-                })
-            }
-            if (isGenerateLevel) node[generateLevelAttributeName] = level;
-            if (Array.isArray(deleteAttributeList)) {
-                deleteAttributeList.forEach((val) => {
-                    delete node[val]
-                })
-            }
-            result.push(node);
-        }
-        level++;
-    }
-    return result;
+	if (!Array.isArray(treeList)) {
+		console.warn(`${treeList} is not an Array!`);
+		return treeList;
+	}
+	let {
+			isGenerateLevel = false,
+			generateLevelAttributeName = 'level',
+			isGenerateParentID = false,
+			generateParentIDAttributeName = 'parentID',
+			nodeIDAttributeName = 'id',
+			deleteAttributeList = [],
+		} = options,
+		quene = [...treeList],
+		result = [],
+		level = 0;
+	while (quene.length > 0) {
+		let length = quene.length;
+		while (length-- > 0) {
+			const node = quene.pop(),
+				childList = node[childListAttributeName];
+			if (Array.isArray(childList)) {
+				childList.forEach((val: any) => {
+					if (isGenerateParentID) val[generateParentIDAttributeName] = node[nodeIDAttributeName];
+					quene.unshift(val);
+				});
+			}
+			if (isGenerateLevel) node[generateLevelAttributeName] = level;
+			if (Array.isArray(deleteAttributeList)) {
+				deleteAttributeList.forEach((val) => {
+					delete node[val];
+				});
+			}
+			result.push(node);
+		}
+		level++;
+	}
+	return result;
 }
 /**
  * Convert array to tree.(把数组转换为树)
@@ -109,7 +113,7 @@ export function tree2Array(treeList: Array<any>, childListAttributeName: string,
  * @example
  * const  TreeUtils  = require('boots-js/cjs/tree-utils'); // CommandJS
  * import TreeUtils  from 'boots-js/tree-utils' // Es6 Module
- * 
+ *
  *    const arr = [
  *        { name: '中国', code: '0' , level:0 },
  *        { name: '重庆', code: '01', level:1 , parentCode: '0' },
@@ -133,26 +137,33 @@ export function tree2Array(treeList: Array<any>, childListAttributeName: string,
  *        }
  *      ]
  */
-export function array2Tree(arr: Array<any>, nodeIDAttributeName: string, parentIDAttributeName: string, generateChildListAttributeName: string, judgeRootNodeFunction: (node: any) => boolean): Array<any> {
-    const result: Array<any> = [], map = new Map();
-    if (!Array.isArray(arr)) {
-        console.warn(`${arr} is not an Array!`);
-        return [];
-    }
-    arr.forEach((val) => {
-        val[generateChildListAttributeName] = map.has(val[nodeIDAttributeName]) ? map.get(val[nodeIDAttributeName])[generateChildListAttributeName] : [];
-        if (judgeRootNodeFunction(val)) result.push(val);
+export function array2Tree(
+	arr: Array<any>,
+	nodeIDAttributeName: string,
+	parentIDAttributeName: string,
+	generateChildListAttributeName: string,
+	judgeRootNodeFunction: (node: any) => boolean
+): Array<any> {
+	const result: Array<any> = [],
+		map = new Map();
+	if (!Array.isArray(arr)) {
+		console.warn(`${arr} is not an Array!`);
+		return [];
+	}
+	arr.forEach((val) => {
+		val[generateChildListAttributeName] = map.has(val[nodeIDAttributeName]) ? map.get(val[nodeIDAttributeName])[generateChildListAttributeName] : [];
+		if (judgeRootNodeFunction(val)) result.push(val);
 
-        if (!map.has(val[parentIDAttributeName])) {
-            let obj: any = {}
-            obj[generateChildListAttributeName] = []
-            map.set(val[parentIDAttributeName], obj)
-        }
+		if (!map.has(val[parentIDAttributeName])) {
+			let obj: any = {};
+			obj[generateChildListAttributeName] = [];
+			map.set(val[parentIDAttributeName], obj);
+		}
 
-        map.get(val[parentIDAttributeName])[generateChildListAttributeName].push(val)
-        map.set(val[nodeIDAttributeName], val);
-    })
-    return result
+		map.get(val[parentIDAttributeName])[generateChildListAttributeName].push(val);
+		map.set(val[nodeIDAttributeName], val);
+	});
+	return result;
 }
 /**
  * Get all child nodes of a node.(获取节点的所有子节点)
@@ -160,10 +171,10 @@ export function array2Tree(arr: Array<any>, nodeIDAttributeName: string, parentI
  * @param {string} nodeIDAttributeName Attribute name of node ID.(节点ID的属性名称)
  * @param {string} nodeID Specify the ID of the node whose child nodes need to be obtained.(指定需要获取其子节点的节点的ID)
  * @param {string} childListAttributeName The attribute name of the child node stored in the tree.(树中存放子节点的属性名)
- * @example 
+ * @example
  * const  TreeUtils  = require('boots-js/cjs/tree-utils'); // CommandJS
  * import TreeUtils  from 'boots-js/tree-utils' // Es6 Module
- * 
+ *
  *    const tree = {
  *        name: '中国',
  *        code: '0',
@@ -181,7 +192,7 @@ export function array2Tree(arr: Array<any>, nodeIDAttributeName: string, parentI
  *                code: '03',
  *            },
  *        ]
- *    } 
+ *    }
  *    let arr = TreeUtils.getChildList([tree], 'code', '0', 'childList')
  *    console.info(arr)
  *      [
@@ -191,21 +202,22 @@ export function array2Tree(arr: Array<any>, nodeIDAttributeName: string, parentI
  *      ]
  */
 export function getChildList(treeList: Array<any>, nodeIDAttributeName: string, nodeID: string, childListAttributeName: string): Array<any> {
-    if (!Array.isArray(treeList)) {
-        console.warn(`${treeList} is not an Array!`);
-        return treeList;
-    }
-    let quene = [...treeList];
-    while (quene.length > 0) {
-        const node = quene.pop(), childList = node[childListAttributeName];
-        if (node[nodeIDAttributeName] === nodeID) return childList;
-        if (Array.isArray(childList)) {
-            childList.forEach((val: any) => {
-                quene.unshift(val)
-            })
-        }
-    }
-    return []
+	if (!Array.isArray(treeList)) {
+		console.warn(`${treeList} is not an Array!`);
+		return treeList;
+	}
+	let quene = [...treeList];
+	while (quene.length > 0) {
+		const node = quene.pop(),
+			childList = node[childListAttributeName];
+		if (node[nodeIDAttributeName] === nodeID) return childList;
+		if (Array.isArray(childList)) {
+			childList.forEach((val: any) => {
+				quene.unshift(val);
+			});
+		}
+	}
+	return [];
 }
 /**
  * Returns all nodes that meet the condition.(返回满足条件的所有节点)
@@ -222,7 +234,7 @@ export function getChildList(treeList: Array<any>, nodeIDAttributeName: string, 
  * @example
  * const  TreeUtils  = require('boots-js/cjs/tree-utils'); // CommandJS
  * import TreeUtils  from 'boots-js/tree-utils' // Es6 Module
- * 
+ *
  *    const tree = {
  *          name: '中国',
  *          code: '0',
@@ -243,8 +255,13 @@ export function getChildList(treeList: Array<any>, nodeIDAttributeName: string, 
  *        { name: '广东', code: '03', level:1 , parentCode: '0', childList: [] },
  *      ]
  */
-export function filter(treeList: Array<any>, childListAttributeName: string, filterFunction: (value: any, index: number, array: any[]) => boolean, options: Tree2ArrayOptions = tree2ArrayDefaultOptions) {
-    return tree2Array(treeList, childListAttributeName, options).filter(filterFunction)
+export function filter(
+	treeList: Array<any>,
+	childListAttributeName: string,
+	filterFunction: (value: any, index: number, array: any[]) => boolean,
+	options: Tree2ArrayOptions = tree2ArrayDefaultOptions
+) {
+	return tree2Array(treeList, childListAttributeName, options).filter(filterFunction);
 }
 /**
  * Find the path of a node.(查找某节点的路径)
@@ -252,10 +269,10 @@ export function filter(treeList: Array<any>, childListAttributeName: string, fil
  * @param {string} nodeIDAttributeName Attribute name of node ID.(节点ID的属性名称)
  * @param {string} nodeID Specify the node ID whose path needs to be obtained.(指定需要获取路径的节点ID)
  * @param {string} childListAttributeName The attribute name of the child node stored in the tree.(树中存放子节点的属性名)
- * @example 
+ * @example
  * const  TreeUtils  = require('boots-js/cjs/tree-utils'); // CommandJS
  * import TreeUtils  from 'boots-js/tree-utils' // Es6 Module
- * 
+ *
  *    const tree = {
  *          name: '中国',
  *          code: '0',
@@ -277,70 +294,70 @@ export function filter(treeList: Array<any>, childListAttributeName: string, fil
  *        },
  *        { name: '广东', code: '03', parentCode: '0', level: 1, childList: [] }
  *    ]
- * 
- * 
+ *
+ *
  */
 export function findPath(treeList: Array<any>, nodeIDAttributeName: string, nodeID: string, childListAttributeName: string): Array<any> {
-    if (!Array.isArray(treeList)) {
-        console.warn(`${treeList} is not an Array!`);
-        return treeList;
-    }
-    function DFS(nodeList: Array<any>, pathList: Array<any>): Array<any> {
-        if (!Array.isArray(nodeList)) return [];
-        for (let node of nodeList) {
-            if (node[nodeIDAttributeName] === nodeID) return [...pathList, node]
-            const result = DFS(node[childListAttributeName], [...pathList, node])
-            if (result?.length > 0) return result;
-        }
-        return [];
-    }
-    return DFS(treeList, [])
+	if (!Array.isArray(treeList)) {
+		console.warn(`${treeList} is not an Array!`);
+		return treeList;
+	}
+	function DFS(nodeList: Array<any>, pathList: Array<any>): Array<any> {
+		if (!Array.isArray(nodeList)) return [];
+		for (let node of nodeList) {
+			if (node[nodeIDAttributeName] === nodeID) return [...pathList, node];
+			const result = DFS(node[childListAttributeName], [...pathList, node]);
+			if (result?.length > 0) return result;
+		}
+		return [];
+	}
+	return DFS(treeList, []);
 }
 /**
  * Tree to array setting options.(树转数组设置选项)
  */
 interface Tree2ArrayOptions {
-    /**
-     * Whether to generate level.(是否生成层级)
-     */
-    isGenerateLevel: boolean;
-    /**
-     * Specify the attribute name of the generated level.(指定生成的层级的属性名称)
-     */
-    generateLevelAttributeName: string;
-    /**
-     * Whether to generate parent node ID.(是否生成父节点ID)
-     */
-    isGenerateParentID: boolean;
-    /**
-     * Specify the attribute name of the generated parent node ID.(指定生成的父节点ID的属性名称)
-     */
-    generateParentIDAttributeName: string;
-    /**
-     * Attribute name of node ID.(节点ID的属性名称)
-     */
-    nodeIDAttributeName: string;
-    /**
-     * Specify the attribute in the node to be deleted.(指定删除节点中的属性)
-     */
-    deleteAttributeList: Array<string>;
+	/**
+	 * Whether to generate level.(是否生成层级)
+	 */
+	isGenerateLevel: boolean;
+	/**
+	 * Specify the attribute name of the generated level.(指定生成的层级的属性名称)
+	 */
+	generateLevelAttributeName: string;
+	/**
+	 * Whether to generate parent node ID.(是否生成父节点ID)
+	 */
+	isGenerateParentID: boolean;
+	/**
+	 * Specify the attribute name of the generated parent node ID.(指定生成的父节点ID的属性名称)
+	 */
+	generateParentIDAttributeName: string;
+	/**
+	 * Attribute name of node ID.(节点ID的属性名称)
+	 */
+	nodeIDAttributeName: string;
+	/**
+	 * Specify the attribute in the node to be deleted.(指定删除节点中的属性)
+	 */
+	deleteAttributeList: Array<string>;
 }
 const tree2ArrayDefaultOptions: Tree2ArrayOptions = {
-    isGenerateLevel: false,
-    generateLevelAttributeName: "level",
-    isGenerateParentID: false,
-    generateParentIDAttributeName: "parentID",
-    nodeIDAttributeName: "id",
-    deleteAttributeList: [],
-}
+	isGenerateLevel: false,
+	generateLevelAttributeName: 'level',
+	isGenerateParentID: false,
+	generateParentIDAttributeName: 'parentID',
+	nodeIDAttributeName: 'id',
+	deleteAttributeList: [],
+};
 
 /**
  * @ignore
  */
 export default {
-    tree2Array,
-    array2Tree,
-    getChildList,
-    filter,
-    findPath
-}
+	tree2Array,
+	array2Tree,
+	getChildList,
+	filter,
+	findPath,
+};

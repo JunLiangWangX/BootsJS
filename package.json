@@ -1,11 +1,12 @@
 {
   "name": "boots-js",
-  "version": "0.9.2-beta",
+  "version": "1.0.0",
   "description": "BootsJS is a library dedicated to extending the capabilities of native JavaScript, aiming to address common data structures, methods, and frequently used algorithms that are not natively supported in JavaScript.",
   "main": "index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production npx webpack --mode=production",
     "dev": "cross-env NODE_ENV=development npx webpack --mode=development",
+    "format": "prettier --write src/",
     "test": "npx jest",
     "doc": "npx typedoc",
     "prepare": "husky"
@@ -42,6 +43,7 @@
     "cross-env": "^7.0.3",
     "husky": "^9.0.11",
     "jest": "^29.7.0",
+    "prettier": "^3.3.3",
     "terser-webpack-plugin": "^5.3.10",
     "ts-loader": "^9.5.1",
     "typedoc": "^0.25.8",
