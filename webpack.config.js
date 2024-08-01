@@ -1,11 +1,16 @@
 const path = require('path');
 const findExportFiles = require('./utils/find-export-files');
+const getLibraryName= require('./utils/get-library-name');
 const { merge } = require('webpack-merge');
+const entryFiles = findExportFiles(__dirname, './src');
+const entryNames = Object.keys(entryFiles).reduce((acc, key) => {
+    acc[key] = getLibraryName(entryFiles[key]);
+    return acc;
+}, {});
+
+
 const baseConfig = {
     mode: 'none',
-    entry: {
-        ...findExportFiles(__dirname, './src')
-    },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
     },
@@ -24,12 +29,16 @@ const baseConfig = {
                             ],
                             plugins: ['@babel/plugin-transform-runtime'],
                         },
-                    }, 'ts-loader']
+                    },
+                    'ts-loader'
+                ]
             }
         ]
     }
-}
+};
+
 const esmConfig = merge(baseConfig, {
+    entry: entryFiles,
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
@@ -43,23 +52,34 @@ const esmConfig = merge(baseConfig, {
 });
 
 const cjsConfig = merge(baseConfig, {
+    entry: entryFiles,
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, './dist/cjs/'),
         library: {
             type: 'commonjs2',
-            export:'default'
+            export: 'default'
         },
-        //globalObject: 'this',
     },
 });
 
-const umdConfig = merge(baseConfig, {
-    output: {
-        filename: '[name].js',
-        path: path.resolve(__dirname, './dist/umd/'),
-        libraryTarget: 'umd',
-        globalObject: 'this',
-    }
+const umdConfig = Object.keys(entryFiles).map(entry => {
+    return merge(baseConfig, {
+        entry: {
+            [entry]: entryFiles[entry]
+        },
+        output: {
+            filename: '[name].js',
+            path: path.resolve(__dirname, './dist/umd/'),
+            libraryTarget: 'umd',
+            library: {
+              name: entryNames[entry],
+              type: 'var',
+              export: 'default',
+            },
+            globalObject: 'this',
+        }
+    });
 });
-module.exports = [cjsConfig, esmConfig, umdConfig];
+
+module.exports = [cjsConfig, esmConfig, ...umdConfig];
